@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 363.95 449.56">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Degradado_sin_nombre_39);
+      }
+
+      .cls-2 {
+        fill: url(#Degradado_sin_nombre_22);
+      }
+
+      .cls-3 {
+        fill: #001d3d;
+      }
+
+      .cls-4 {
+        fill: url(#Degradado_sin_nombre_23);
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_23" data-name="Degradado sin nombre 23" x1="27.49" y1="188.37" x2="357.59" y2="69.15" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#001d3d"/>
+      <stop offset="1" stop-color="#003566"/>
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_22" data-name="Degradado sin nombre 22" x1="293.56" y1="284.77" x2="2.94" y2="380.64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#001d3d"/>
+      <stop offset="1" stop-color="#003566"/>
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_39" data-name="Degradado sin nombre 39" x1="2.33" y1="172.78" x2="354.09" y2="278.79" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00244a"/>
+      <stop offset=".51" stop-color="#003566"/>
+      <stop offset="1" stop-color="#002348"/>
+    </linearGradient>
+  </defs>
+  <g id="Capa_1-2" data-name="Capa 1">
+    <g>
+      <g>
+        <g>
+          <path class="cls-4" d="m363.95,59.57c0-9.88-9.28-17.13-18.87-14.73L0,130.86l182.52,48.9,181.43-45.48V59.57Z"/>
+          <path class="cls-2" d="m0,319.97v79.46c0,7.58,7.13,13.14,14.48,11.3l349.47-87.53v-3.3l-181.3-45.41L0,319.97Z"/>
+          <path class="cls-1" d="m0,212.37C0,221.74,6.38,229.91,15.47,232.19l348.48,90.96v-81.69c0-9.38-6.39-17.55-15.49-19.82L0,130.86v81.51Z"/>
+        </g>
+        <path class="cls-3" d="m0,88.16L234.34,29.46c16.81-4.21,13.76-28.96-3.57-28.96H12.93C5.79.5,0,6.28,0,13.42v74.73Z"/>
+      </g>
+      <circle class="cls-3" cx="267.27" cy="11.05" r="11.05"/>
+      <circle class="cls-3" cx="295.55" cy="8.34" r="8.34"/>
+      <path class="cls-3" d="m363.38,361.64l-234.34,58.7c-16.81,4.21-13.76,28.96,3.57,28.96h217.84c7.14,0,12.93-5.79,12.93-12.93v-74.73Z"/>
+      <circle class="cls-3" cx="89.53" cy="439.67" r="9.89"/>
+      <circle class="cls-3" cx="59.35" cy="443.26" r="6.3"/>
+    </g>
+  </g>
+</svg>
