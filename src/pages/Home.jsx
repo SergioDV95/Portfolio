@@ -193,7 +193,7 @@ export default function Home() {
             <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
             <img className="absolute top-[10%] lg:top-[40%] -left-[35%] z-[-1] lg:scale-[0.3] scale-[0.5]" src={imports.puntos} alt="flechas" />
             <img className="absolute top-[50%] lg:top-0 lg:right-0 lg:w-[calc(732px/1.2)] z-[-1] max-lg:scale-[1.5]" src={context.lang === "es" ? imports.procesos : imports.processes } alt="Process" />
-            <object className="w-full h-full" title="Process" name="Flow Tree" data={`/SVG/${context.lgWidth ? "Tree_desktop.svg" : "Tree+Text.svg"}`} type="image/svg+xml" />
+            <object className="w-full h-full" title="Process" name="Flow Tree" data={context.lgWidth ? imports.tree_desktop : imports.tree_mobile} type="image/svg+xml" />
          </div>
          <div id="CONTACT" className="flex relative flex-col gap-[30px] items-center px-[5%] min-h-screen">
             <figure className="relative flex justify-center items-center">

@@ -24,6 +24,8 @@ import frameworks from "/SVG/FRAMEWORKS.svg";
 import cms from "/SVG/CMS.svg";
 import db from "/SVG/DB.svg";
 import tools from "/SVG/TOOLS.svg";
+import tree_desktop from "/SVG/Tree_desktop.svg";
+import tree_mobile from "/SVG/Tree+Text.svg";
 
 export { 
    logo, 
@@ -52,4 +54,6 @@ export {
    cms,
    db,
    tools,
+   tree_desktop,
+   tree_mobile,
 };
