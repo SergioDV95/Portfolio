@@ -63,7 +63,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                   <div className="animate-pulse bg-picture p-[20%] lg:p-[20px] shadow-button w-full h-[82px] rounded-[8px] ">
                      <img
                         className="w-full h-full scale-[1.2] lg:scale-[1.5]"
-                        src={`/Portafolio/src/assets/SVG/${svgs.slice(slider.start, slider.end)[index]}`}
+                        src={`./src/assets/SVG/${svgs.slice(slider.start, slider.end)[index]}`}
                         alt="image/svg+xml"
                         onLoad={e => e.target.parentElement.classList.remove("animate-pulse")}
                      />

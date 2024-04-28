@@ -31,7 +31,7 @@ function App() {
 		<BrowserRouter>
 			<ContextProps.Provider value={{ context, setContext }}>
 				<Routes>
-					<Route path="/" element={<Layout />}>
+					<Route path="/Portfolio/" element={<Layout />}>
 						<Route index element={<Home />} />
 					</Route>
 				</Routes>
