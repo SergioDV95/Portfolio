@@ -87,7 +87,7 @@ export default function Home() {
                      <button className="buttonGlow" type="button" >
                         <a 
                            className="px-[15px] py-[10px] w-full h-full"
-                           href = {`src/assets/downloads/${context.lang === "es" ? "CV_Desarrollador.pdf" : "CV_Developer.pdf"}`}
+                           href={`/downloads/${context.lang === "es" ? "CV_Desarrollador.pdf" : "CV_Developer.pdf"}`}
                            download
                            type="application/pdf"
                         >
@@ -112,7 +112,7 @@ export default function Home() {
                      duration: 8,
                   }}
                   className="lg:relative lg:-right-[35px] box-border max-w-full" 
-                  src="/Links/laptop.png" 
+                  src="/Links/laptop.png"
                   alt="Laptop" 
                />
             </div>
@@ -126,7 +126,7 @@ export default function Home() {
             <button className="buttonGlow lg:hidden" type="button" >
                <a 
                   className="px-[15px] py-[10px] w-full h-full"
-                  href = {`src/assets/downloads/${context.lang === "es" ? "CV_Desarrollador.pdf" : "CV_Developer.pdf"}`}
+                  href = {`/downloads/${context.lang === "es" ? "CV_Desarrollador.pdf" : "CV_Developer.pdf"}`}
                   download
                   type="application/pdf"
                >
