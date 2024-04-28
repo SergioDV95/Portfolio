@@ -114,6 +114,7 @@ export default function Home() {
                   }}
                   className="lg:relative lg:-right-[35px] box-border max-w-full" 
                   src={imports.laptop}
+                  onContextMenu={e => e.preventDefault()}
                   alt="Laptop" 
                />
             </div>
@@ -127,7 +128,7 @@ export default function Home() {
             <button className="buttonGlow lg:hidden" type="button" >
                <a 
                   className="px-[15px] py-[10px] w-full h-full"
-                  href = {`/downloads/${context.lang === "es" ? "CV_Desarrollador.pdf" : "CV_Developer.pdf"}`}
+                  href={context.lang === "es" ? imports.desarrollador : imports.developer}
                   download
                   type="application/pdf"
                >
