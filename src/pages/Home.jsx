@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import Carousel from "../components/Carousel";
 import ContactMe from "../components/ContactMe";
 import { renderProjects } from "../assets/JS/functions";
+import * as imports from "../assets/JS/imports";
 
 export default function Home() {
    const { context } = useContext(ContextProps);
@@ -87,7 +88,7 @@ export default function Home() {
                      <button className="buttonGlow" type="button" >
                         <a 
                            className="px-[15px] py-[10px] w-full h-full"
-                           href={`/downloads/${context.lang === "es" ? "CV_Desarrollador.pdf" : "CV_Developer.pdf"}`}
+                           href={context.lang === "es" ? imports.desarrollador : imports.developer}
                            download
                            type="application/pdf"
                         >
@@ -99,8 +100,8 @@ export default function Home() {
                {!context.lgWidth && <div className="bg-[#FFBE00] w-[15%] h-[2px] rounded-full lg:hidden" />}
             </div>
             <div className="relative overflow-hidden">
-               <img className="absolute top-[20%] right-[20%] z-[-1] scale-[0.45] lg:scale-[0.35]" src="/png/dark/flechas_izq.png" alt="flechas" />
-               <img className="absolute top-[15%] left-[25%] z-[-1] scale-[0.5] rotate-90" src="/png/dark/puntos.png" alt="flechas" />
+               <img className="absolute top-[20%] right-[20%] z-[-1] scale-[0.45] lg:scale-[0.35]" src={imports.flechas_izq} alt="flechas" />
+               <img className="absolute top-[15%] left-[25%] z-[-1] scale-[0.5] rotate-90" src={imports.puntos} alt="flechas" />
                <motion.img 
                   layout
                   animate={{
@@ -112,7 +113,7 @@ export default function Home() {
                      duration: 8,
                   }}
                   className="lg:relative lg:-right-[35px] box-border max-w-full" 
-                  src="/Links/laptop.png"
+                  src={imports.laptop}
                   alt="Laptop" 
                />
             </div>

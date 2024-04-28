@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react"
 import ContextProps from "../assets/JS/createContext"
 import { Squash as Hamburger } from 'hamburger-react'
 import { motion } from "framer-motion"
+import { logo } from "../assets/JS/imports"
 
 export default function NavBar() {
    const { context, setContext } = useContext(ContextProps);
@@ -109,7 +110,7 @@ export default function NavBar() {
                />
             </div>
             <motion.div className="flex max-lg:flex-col gap-[30px] lg:items-center" layout variants={context.lgWidth ? "" : variants.item} style={styles.item}>
-               <object className="h-[3em] max-lg:scale-[2]" data="/SVG/Logo(1).svg" type="image/svg+xml" />
+               <object className="h-[3em] max-lg:scale-[2]" data={logo} type="image/svg+xml" />
                <h1 className="max-lg:px-[5%] font-dela max-lg:text-start text-[28px] lg:text-[34px] max-lg:mb-[10%]">SERGIO DAZA</h1>
             </motion.div>
             <div className="max-lg:h-full max-lg:px-[5%] flex max-lg:flex-col lg:gap-[30px]">
