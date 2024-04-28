@@ -1,6 +1,7 @@
 import { useState, useMemo, useContext, useEffect } from 'react'
 import { motion, AnimatePresence } from "framer-motion"
 import ContextProps from '../assets/JS/createContext';
+import * as imports from '../assets/JS/imports';
 
 export default function Carousel({ skills, slideClasses, children, startIndex, endIndex, cancelButtons }) {
    const { context } = useContext(ContextProps);
@@ -30,7 +31,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       if (!skills && !children) return;
       if (!children) {
          const selectedColors = [];
-         const svgs = ["LENGUAJES.svg", "FRAMEWORKS.svg", "CMS.svg", "DB.svg", "TOOLS.svg"];
+         const svgs = [imports.lenguajes, imports.frameworks, imports.cms, imports.db, imports.tools];
          return Object.entries(skills).slice(slider.start, slider.end).map(([key, value], index) => (
             <motion.div
                layout
@@ -63,7 +64,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                   <div className="animate-pulse bg-picture p-[20%] lg:p-[20px] shadow-button w-full h-[82px] rounded-[8px] ">
                      <img
                         className="w-full h-full scale-[1.2] lg:scale-[1.5]"
-                        src={`/SVG/${svgs.slice(slider.start, slider.end)[index]}`}
+                        src={svgs.slice(slider.start, slider.end)[index]}
                         alt="image/svg+xml"
                         onLoad={e => e.target.parentElement.classList.remove("animate-pulse")}
                      />
