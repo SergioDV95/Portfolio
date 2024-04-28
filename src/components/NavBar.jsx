@@ -95,7 +95,7 @@ export default function NavBar() {
       <header className="flex max-lg:justify-end justify-between text-end gap-[30px] w-full max-lg:p-[5%] lg:px-[5%] lg:mt-[4%] relative">
          <motion.nav 
             layout
-            className={`flex max-lg:z-50 max-lg:flex-col rounded-[8px] max-lg:gap-[2%] p-[1.5%] lg:items-center justify-center lg:justify-between font-semibold bg-navbarMobile lg:bg-navbarDesktop border-[2px] border-[#E2E2E2] box-border`}
+            className={`flex max-lg:z-50 max-lg:flex-col rounded-[8px] max-lg:gap-[2%] p-[1.5%] lg:items-center justify-center lg:justify-between 2xl:justify-around font-semibold bg-navbarMobile lg:bg-navbarDesktop border-[2px] border-[#E2E2E2] box-border`}
             variants={variants.list}
             animate={context.lgWidth ? "" : (isOpen ? "open" : "closed")}
             initial={styles.list}
@@ -111,7 +111,7 @@ export default function NavBar() {
             </div>
             <motion.div className="flex max-lg:flex-col gap-[30px] lg:items-center" layout variants={context.lgWidth ? "" : variants.item} style={styles.item}>
                <object className="h-[3em] max-lg:scale-[2]" data={logo} type="image/svg+xml" />
-               <h1 className="max-lg:px-[5%] font-dela max-lg:text-start text-[28px] lg:text-[34px] max-lg:mb-[10%]">SERGIO DAZA</h1>
+               <h1 className="max-lg:px-[5%] font-dela max-md:text-start md:text-center text-[28px] lg:text-[34px] max-md:mb-[10%]">SERGIO DAZA</h1>
             </motion.div>
             <div className="max-lg:h-full max-lg:px-[5%] flex max-lg:flex-col lg:gap-[30px]">
                <motion.select 

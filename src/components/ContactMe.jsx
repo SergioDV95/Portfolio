@@ -100,7 +100,7 @@ export default function ContactMe({ lang }) {
    const mandatory = <span className=' align-text-top cursor-help' title={lang === "es" ? "Este campo es requerido" : "This field is required"}>*</span>;
 
    return (
-      <form id='contact-form' className="w-[90%] lg:w-[30%] flex flex-col gap-[10px]">
+      <form id='contact-form' className="w-[90%] md:w-[60%] lg:w-[30%] flex flex-col gap-[10px]">
          <ul className='contactLabel flex flex-col gap-[0.5lh] lg:hidden'>
             <li className='text-[0.7em]'>{lang === "es" ? "Si alguno de los campos marcados con (?) se rellena, el otro es opcional" : "If one of the fields marked with (?) is filled out, the other is optional"}</li>
             <li className='text-[0.7em]'>{lang === "es" ? "Los campos marcados con * son requeridos" : "Fields marked with * are required"}</li>

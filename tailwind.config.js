@@ -9,12 +9,12 @@ export default {
 				dela: ["Dela Gothic One", "sans-serif"],  
 			},
 			backgroundImage: {
-				navbarDesktop: "linear-gradient(to bottom, #FFFFFF26, #FFFFFF80)",
+				navbarDesktop: "linear-gradient(#FFFFFF26, #FFFFFF80)",
 				navbarMobile: "linear-gradient(to right, #42506B 40%, #42506BE6)",
 				navbutton: "linear-gradient(to right, #41BD7526, #41BD7580)",
 				button: "linear-gradient(135deg, #FFFFFF33, #FFFFFF66)",
-				picture: "linear-gradient(to bottom, #FFFFFF66, #FFFFFF33 60%)",
-				inputs: "linear-gradient(to bottom, #FFFFFF33, #FFFFFF66)",
+				picture: "linear-gradient(#FFFFFF66, #FFFFFF33 60%)",
+				inputs: "linear-gradient(#FFFFFF33, #FFFFFF66)",
 				skills: "linear-gradient(to right, #FFFFFF33, #FFFFFF66)",
 			},
 			boxShadow: {

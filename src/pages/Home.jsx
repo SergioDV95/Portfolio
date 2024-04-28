@@ -100,8 +100,8 @@ export default function Home() {
                {!context.lgWidth && <div className="bg-[#FFBE00] w-[15%] h-[2px] rounded-full lg:hidden" />}
             </div>
             <div className="relative overflow-hidden">
-               <img className="absolute top-[20%] right-[20%] z-[-1] scale-[0.45] lg:scale-[0.35]" src={imports.flechas_izq} alt="flechas" />
-               <img className="absolute top-[15%] left-[25%] z-[-1] scale-[0.5] rotate-90" src={imports.puntos} alt="flechas" />
+               <img className="absolute top-[20%] right-[20%] 2xl:right-[35%] z-[-1] scale-[0.45] lg:scale-[0.35] 2xl:scale-[0.6] " src={imports.flechas_izq} alt="flechas" />
+               <img className="absolute top-[15%] left-[25%] 2xl:left-[35%] z-[-1] scale-[0.5] 2xl:scale-[0.6] rotate-90" src={imports.puntos} alt="flechas" />
                <motion.img 
                   layout
                   animate={{
@@ -165,7 +165,7 @@ export default function Home() {
             <img className="absolute top-[40%] z-[-1] scale-[4] lg:scale-[1.5]" src={context.lang === "es" ? imports.habilidades : imports.skills } alt="Skills" />
             <Carousel 
                skills={text.skills} 
-               slideClasses={"bg-skills min-h-[150px] border-[2px] border-slate-600 grid grid-cols-[2fr_1fr] gap-x-[10px] p-[10px] rounded-[8px] w-full box-border"} 
+               slideClasses={"bg-skills min-h-[150px] border-[2px] border-slate-600 grid grid-cols-[1.5fr_1fr] gap-x-[10px] p-[10px] rounded-[8px] w-full box-border"} 
             />
          </div>
          <div id={context.lang === "es" ? "PROYECTOS" : "PROJECTS"} className="flex relative flex-col gap-[30px] items-center px-[5%] max-lg:h-[850px] lg:min-h-screen lg:pb-[20vh]">
@@ -194,7 +194,7 @@ export default function Home() {
             <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
             <img className="absolute top-[10%] lg:top-[40%] -left-[35%] z-[-1] lg:scale-[0.3] scale-[0.5]" src={imports.puntos} alt="flechas" />
             <img className="absolute top-[50%] lg:top-0 lg:right-0 lg:w-[calc(732px/1.2)] z-[-1] max-lg:scale-[1.5]" src={context.lang === "es" ? imports.procesos : imports.processes } alt="Process" />
-            <object className="w-full h-full" title="Process" name="Flow Tree" data={context.lgWidth ? imports.tree_desktop : imports.tree_mobile} type="image/svg+xml" />
+            <object className="w-full h-full md:max-lg:w-[60%] md:max-lg:h-[60%]" title="Process" name="Flow Tree" data={context.lgWidth ? imports.tree_desktop : imports.tree_mobile} type="image/svg+xml" />
          </div>
          <div id="CONTACT" className="flex relative flex-col gap-[30px] items-center px-[5%] min-h-screen">
             <figure className="relative flex justify-center items-center">

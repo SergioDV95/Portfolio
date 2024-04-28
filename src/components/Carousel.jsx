@@ -61,9 +61,9 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                   </div>
                </div>
                <div className="flex flex-col justify-center items-center">
-                  <div className="animate-pulse bg-picture p-[20%] lg:p-[20px] shadow-button w-full h-[82px] rounded-[8px] ">
+                  <div className="animate-pulse bg-picture p-[20%] md:p-[20px] shadow-button w-full h-[82px] rounded-[8px] ">
                      <img
-                        className="w-full h-full scale-[1.2] lg:scale-[1.5]"
+                        className="w-full h-full scale-[1.2] md:scale-[1.5]"
                         src={svgs.slice(slider.start, slider.end)[index]}
                         alt="image/svg+xml"
                         onLoad={e => e.target.parentElement.classList.remove("animate-pulse")}
