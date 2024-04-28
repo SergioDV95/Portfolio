@@ -4,12 +4,12 @@
 
 @layer base {
    .light_mode {
-      background-image: url('../png/fondo_light.png');
+      background-image: url('/png/fondo_light.png');
       background-size: cover;
       background-repeat: no-repeat;
    }
    .dark_mode {
-      background-image: url('../png/fondo_dark.png');
+      background-image: url('/png/fondo_dark.png');
       background-size: cover;
       background-repeat: no-repeat;
    }

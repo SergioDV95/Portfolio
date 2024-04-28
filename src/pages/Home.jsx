@@ -18,14 +18,14 @@ export default function Home() {
       },
       projects: [
          {
-            image: "/Portfolio/src/assets/Links/Aguacate.png",
+            image: "/Links/Aguacate.png",
             name: "AGUACATE ECOMMERCE",
             description: "",
             technologies: ["HTML", "CSS"],
             link: "https://sergiodv95.github.io/Marketplace/",
          },
          {
-            image: "/Portfolio/src/assets/Links/Polar.png",
+            image: "/Links/Polar.png",
             name: "POLAR ECOMMERCE",
             description: "",
             technologies: ["Node.js", "Express.js", "React", "MongoDB"],
@@ -99,8 +99,8 @@ export default function Home() {
                {!context.lgWidth && <div className="bg-[#FFBE00] w-[15%] h-[2px] rounded-full lg:hidden" />}
             </div>
             <div className="relative overflow-hidden">
-               <img className="absolute top-[20%] right-[20%] z-[-1] scale-[0.45] lg:scale-[0.35]" src="/Portfolio/src/assets/png/dark/flechas_izq.png" alt="flechas" />
-               <img className="absolute top-[15%] left-[25%] z-[-1] scale-[0.5] rotate-90" src="/Portfolio/src/assets/png/dark/puntos.png" alt="flechas" />
+               <img className="absolute top-[20%] right-[20%] z-[-1] scale-[0.45] lg:scale-[0.35]" src="/png/dark/flechas_izq.png" alt="flechas" />
+               <img className="absolute top-[15%] left-[25%] z-[-1] scale-[0.5] rotate-90" src="/png/dark/puntos.png" alt="flechas" />
                <motion.img 
                   layout
                   animate={{
@@ -112,7 +112,7 @@ export default function Home() {
                      duration: 8,
                   }}
                   className="lg:relative lg:-right-[35px] box-border max-w-full" 
-                  src="/Portfolio/src/assets/Links/laptop.png" 
+                  src="/Links/laptop.png" 
                   alt="Laptop" 
                />
             </div>
@@ -137,12 +137,12 @@ export default function Home() {
          <div id={context.lang === "es" ? "SOBRE MI" : "ABOUT ME"} className="flex flex-col lg:grid w-fit lg:grid-cols-[1.5fr_3fr] max-lg:gap-[30px] max-lg:items-center min-h-screen">
             <div className="flex lg:justify-center">
                <figure className="relative mt-[15%] w-[175px] h-[175px] lg:scale-[1.2] rounded-full bg-picture overflow-visible">
-                  <img className="scale-[1.20] z-50 -rotate-[2deg] absolute bottom-[10%]" src="/Portfolio/src/assets/png/sergio-daza.png" alt="Yo"/>
-                  <img className="scale-[2] lg:scale-[2.2] absolute lg:-left-[25%]" src={context.lang === "es" ? "/Portfolio/src/assets/png/ES/dark/sobre_mi.png" : "/Portfolio/src/assets/png/EN/dark/about_me.png"} alt="About me" />
+                  <img className="scale-[1.20] z-50 -rotate-[2deg] absolute bottom-[10%]" src="/png/sergio-daza.png" alt="Yo"/>
+                  <img className="scale-[2] lg:scale-[2.2] absolute lg:-left-[25%]" src={context.lang === "es" ? "/png/ES/dark/sobre_mi.png" : "/png/EN/dark/about_me.png"} alt="About me" />
                </figure>
             </div>
             <div className="relative flex flex-col gap-[30px] lg:gap-[15px] max-lg:items-center">
-               {context.lgWidth && <img className="absolute w-[578] h-[10%] -top-[5%] -right-[15%]" src="/Portfolio/src/assets/png/dark/rectas_horizontales.png" alt="lines" />}
+               {context.lgWidth && <img className="absolute w-[578] h-[10%] -top-[5%] -right-[15%]" src="/png/dark/rectas_horizontales.png" alt="lines" />}
                <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
                   {context.lang === "es" ? "SOBRE MÍ" : "ABOUT ME"}
                </h1>
@@ -154,13 +154,13 @@ export default function Home() {
          </div>
          <div id={context.lang === "es" ? "HABILIDADES" : "SKILLS"} className="flex flex-col relative gap-[30px] lg:gap-[3lh] items-center max-lg:px-[5%] min-h-[65vh] lg:min-h-screen">
             <figure className="relative flex justify-center items-center">
-               <img className={`absolute ${context.lang === "es" ? "-left-[50%] lg:-left-[70%] w-[50%] lg:w-[60%]" : "-left-[100%]"} `} src="/Portfolio/src/assets/png/dark/flechas_der.png" alt="Right arrows"/>
+               <img className={`absolute ${context.lang === "es" ? "-left-[50%] lg:-left-[70%] w-[50%] lg:w-[60%]" : "-left-[100%]"} `} src="/png/dark/flechas_der.png" alt="Right arrows"/>
                <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
                   {context.lang === "es" ? "HABILIDADES" : "SKILLS"}
                </h1>
             </figure>
             <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
-            <img className="absolute top-[40%] z-[-1] scale-[4] lg:scale-[1.5]" src={context.lang === "es" ? "/Portfolio/src/assets/png/ES/dark/habilidades.png" : "/Portfolio/src/assets/png/EN/dark/skills.png" } alt="Skills" />
+            <img className="absolute top-[40%] z-[-1] scale-[4] lg:scale-[1.5]" src={context.lang === "es" ? "/png/ES/dark/habilidades.png" : "/png/EN/dark/skills.png" } alt="Skills" />
             <Carousel 
                skills={text.skills} 
                slideClasses={"bg-skills min-h-[150px] border-[2px] border-slate-600 grid grid-cols-[2fr_1fr] gap-x-[10px] p-[10px] rounded-[8px] w-full box-border"} 
@@ -168,20 +168,20 @@ export default function Home() {
          </div>
          <div id={context.lang === "es" ? "PROYECTOS" : "PROJECTS"} className="flex relative flex-col gap-[30px] items-center px-[5%] max-lg:h-[850px] lg:min-h-screen lg:pb-[20vh]">
             <figure className="relative flex justify-center items-center">
-               <img className={`absolute ${context.lang === "es" ? "-right-[50%] w-[50%]" : "-right-[60%] w-[60%]"} `} src="/Portfolio/src/assets/png/dark/flechas_der.png" alt="Right arrows"/>
+               <img className={`absolute ${context.lang === "es" ? "-right-[50%] w-[50%]" : "-right-[60%] w-[60%]"} `} src="/png/dark/flechas_der.png" alt="Right arrows"/>
                <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
                   {context.lang === "es" ? "PROYECTOS" : "PROJECTS"}
                </h1>
             </figure>
             <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
-            <img className="absolute top-[15%] lg:top-[40%] z-[-1] scale-[4] lg:scale-[2]" src={context.lang === "es" ? "/Portfolio/src/assets/png/ES/dark/proyectos.png" : "/Portfolio/src/assets/png/EN/dark/projects.png" } alt="Projects" />
+            <img className="absolute top-[15%] lg:top-[40%] z-[-1] scale-[4] lg:scale-[2]" src={context.lang === "es" ? "/png/ES/dark/proyectos.png" : "/png/EN/dark/projects.png" } alt="Projects" />
             <Carousel
                slideClasses={"max-lg:text-left max-lg:overflow-x-hidden gap-[50px] max-lg:pt-[30px] flex max-lg:flex-col items-center"}
                cancelButtons={context.lgWidth}
             >
                {renderProjects(text.projects, context.lang, context.lgWidth)}
             </Carousel>
-            {context.lgWidth && <img className="absolute w-[578px] scale-[0.8] h-[7%] bottom-0 -left-[15%]" src="/Portfolio/src/assets/png/dark/rectas_horizontales.png" alt="lines" />}
+            {context.lgWidth && <img className="absolute w-[578px] scale-[0.8] h-[7%] bottom-0 -left-[15%]" src="/png/dark/rectas_horizontales.png" alt="lines" />}
          </div>
          <div id={context.lang === "es" ? "PROCESO" : "PROCESS"} className="flex relative flex-col gap-[30px] items-center px-[5%] lg:h-[80vh] min-h-screen">
             <figure className="relative flex justify-center items-center">
@@ -190,9 +190,9 @@ export default function Home() {
                </h1>
             </figure>
             <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
-            <img className="absolute top-[10%] lg:top-[40%] -left-[35%] z-[-1] lg:scale-[0.3] scale-[0.5]" src="/Portfolio/src/assets/png/dark/puntos.png" alt="flechas" />
-            <img className="absolute top-[50%] lg:top-0 lg:right-0 lg:w-[calc(732px/1.2)] z-[-1] max-lg:scale-[1.5]" src={context.lang === "es" ? "/Portfolio/src/assets/png/ES/dark/procesos.png" : "/Portfolio/src/assets/png/EN/dark/processes.png" } alt="Process" />
-            <object className="w-full h-full" title="Process" name="Flow Tree" data={`/Portfolio/src/assets/SVG/${context.lgWidth ? "Tree_desktop.svg" : "Tree+Text.svg"}`} type="image/svg+xml" />
+            <img className="absolute top-[10%] lg:top-[40%] -left-[35%] z-[-1] lg:scale-[0.3] scale-[0.5]" src="/png/dark/puntos.png" alt="flechas" />
+            <img className="absolute top-[50%] lg:top-0 lg:right-0 lg:w-[calc(732px/1.2)] z-[-1] max-lg:scale-[1.5]" src={context.lang === "es" ? "/png/ES/dark/procesos.png" : "/png/EN/dark/processes.png" } alt="Process" />
+            <object className="w-full h-full" title="Process" name="Flow Tree" data={`/SVG/${context.lgWidth ? "Tree_desktop.svg" : "Tree+Text.svg"}`} type="image/svg+xml" />
          </div>
          <div id="CONTACT" className="flex relative flex-col gap-[30px] items-center px-[5%] min-h-screen">
             <figure className="relative flex justify-center items-center">
@@ -201,7 +201,7 @@ export default function Home() {
                </h1>
             </figure>
             <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
-            <img className="absolute top-[40%] z-[-1] max-lg:scale-[1.5] lg:w-[calc(732px/1.2)] lg:-left-[8%]" src={context.lang === "es" ? "/Portfolio/src/assets/png/ES/dark/contactame.png" : "/Portfolio/src/assets/png/EN/dark/contact.png" } alt="Contact me" />
+            <img className="absolute top-[40%] z-[-1] max-lg:scale-[1.5] lg:w-[calc(732px/1.2)] lg:-left-[8%]" src={context.lang === "es" ? "/png/ES/dark/contactame.png" : "/png/EN/dark/contact.png" } alt="Contact me" />
             <ContactMe lang={context.lang} />
          </div>
       </main>
