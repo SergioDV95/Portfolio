@@ -102,6 +102,7 @@ export default function Home() {
             <div className="relative overflow-hidden">
                <img className="absolute top-[20%] right-[20%] 2xl:right-[35%] z-[-1] scale-[0.45] lg:scale-[0.35] 2xl:scale-[0.6] " src={imports.flechas_izq} alt="flechas" />
                <img className="absolute top-[15%] left-[25%] 2xl:left-[35%] z-[-1] scale-[0.5] 2xl:scale-[0.6] rotate-90" src={imports.puntos} alt="flechas" />
+               <div className="absolute w-full h-full z-10"></div>
                <motion.img 
                   layout
                   animate={{
