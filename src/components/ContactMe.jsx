@@ -4,7 +4,6 @@ import emailjs from '@emailjs/browser';
 
 export default function ContactMe({ lang }) {
    const [input, setInput] = useState({
-      contact_number: localStorage.getItem('contact_number') || 1,
       user_name: "",
       user_email: "",
       user_phone: "",
@@ -22,6 +21,8 @@ export default function ContactMe({ lang }) {
    if (submit.current) {
       submit.current.disabled = !((input.user_email || input.user_phone) && input.subject && input.message);
    }
+
+   const contact = localStorage.getItem("contact") ? true : false;
 
    const handleInput = e => {
       setInput(input => ({
@@ -82,11 +83,11 @@ export default function ContactMe({ lang }) {
          .then(response => {
             if (response.status === 200) {
                alert(lang === "es" ? "Gracias, pronto estaré en contacto" : "Thank you, I will contact you soon");
-               localStorage.setItem('contact_number', input.contact_number + 1);
+               localStorage.setItem("contact", navigator.userAgent);
                setInput({
-                  contact_number: localStorage.getItem('contact_number'),
                   user_name: "",
                   user_email: "",
+                  user_phone: "",
                   subject: "",
                   message: ""
                });
@@ -107,6 +108,7 @@ export default function ContactMe({ lang }) {
          </ul>
          <label htmlFor='contact-name' className='contactLabel'>{lang === "es" ? "Nombre completo" : "Full name"}</label>
          <input
+            disabled={contact}
             className='contactInput'
             id="contact-name"
             form='contact-form'
@@ -122,6 +124,7 @@ export default function ContactMe({ lang }) {
          </div>
          <label htmlFor='contact-email' className='contactLabel'>Email{optional}</label>
          <input
+            disabled={contact}
             className='contactInput'
             id="contact-email"
             form='contact-form'
@@ -137,6 +140,7 @@ export default function ContactMe({ lang }) {
          </div>
          <label htmlFor='contact-phone' className='contactLabel'>{lang === "es" ? "Teléfono" : "Phone"}{optional}</label>
          <input
+            disabled={contact}
             className='contactInput'
             id="contact-phone"
             form='contact-form'
@@ -151,6 +155,7 @@ export default function ContactMe({ lang }) {
          </div>
          <label htmlFor='contact-subject' className='contactLabel'>{lang === "es" ? "Asunto" : "Subject"}{mandatory}</label>
          <input
+            disabled={contact}
             className='contactInput'
             id="contact-subject"
             form='contact-form'
@@ -167,6 +172,7 @@ export default function ContactMe({ lang }) {
          </div>
          <label htmlFor='contact-message' className='contactLabel'>{lang === "es" ? "Mensaje" : "Message"}{mandatory}</label>
          <textarea
+            disabled={contact}
             className='contactInput h-[4lh] lg:h-[6lh]'
             id="contact-message"
             form='contact-form'

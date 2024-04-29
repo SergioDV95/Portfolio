@@ -93,7 +93,7 @@
    }
 
    .contactInput {
-      @apply appearance-none bg-[#FFFFFF33] w-full h-[1.5lh] rounded-[8px] border-[2px] border-solid border-[#FFFFFF80] p-[5px] text-white
+      @apply appearance-none disabled:cursor-not-allowed disabled:opacity-50 bg-[#FFFFFF33] w-full h-[1.5lh] rounded-[8px] border-[2px] border-solid border-[#FFFFFF80] p-[5px] text-white
    }
 
    .contactInput:focus {
