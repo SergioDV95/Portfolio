@@ -41,7 +41,7 @@ export default function ContactMe({ lang }) {
          const regexList = {
             user_name: /^[a-z áéíóúñÁÉÍÓÚÑ]+$/i,
             user_email: /^[a-z0-9.-]+@[a-z0-9-]+(\.[a-z]{2,4}){1,3}$/i,
-            user_phone: /^\+[\d]{2}\d{3,4}\d{3}\d{2}\d{2}$/,
+            user_phone: /^\+[\d]{1,2}[ -\/]?\d{3,4}[ -\/]?\d{3}[ -\/]?\d{2}[ -\/]?\d{2}$/,
             subject: /^[\w áéíóúñÁÉÍÓÚÑ]+$/,
             message: /^[^<>&|]+$/
          };
@@ -142,6 +142,7 @@ export default function ContactMe({ lang }) {
          <input
             disabled={contact}
             className='contactInput'
+            placeholder={lang === "es" ? "Con prefijo (Ej.: +34)" : "With prefix (E.g.:+34)"}
             id="contact-phone"
             form='contact-form'
             title={lang === "es" ? "Número telefónico" : "Phone number"} 
