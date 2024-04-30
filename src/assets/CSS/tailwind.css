@@ -69,6 +69,16 @@
          width: calc(var(--card-width) - (var(--border-width) * 4));
       }
    }
+
+   @media screen and (min-width: 1536px) {
+      .card {
+         --card-height: 60px;
+      }
+      .card::after {
+         height: calc(var(--card-height) - (var(--border-width) * 1.5));
+         width: calc(var(--card-width) - (var(--border-width) * 2.3));
+      }
+   }
    
    .card-content {
       z-index: 3;
