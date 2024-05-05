@@ -1,11 +1,22 @@
 import { motion } from "framer-motion"
-import { Fragment } from "react";
 
 export const renderProjects = (projects, lang, lgWidth) => {
    return projects.map((project, index) => {
       const selectedColors = [];
       return (
-         <Fragment key={project.name + index}>
+         <motion.div 
+            key={project.name + index} 
+            className="max-lg:text-left max-lg:overflow-x-hidden gap-[50px] max-lg:pt-[30px] flex max-lg:flex-col items-center"
+            initial={{ 
+               x: (index % 2 == 0) ? -innerWidth / 2 : innerWidth / 2,
+            }}
+            whileInView={{
+               x: 0,
+               transition: {
+                  duration: 0.5
+               }
+            }}
+         >
             {lgWidth ? (index % 2 == 0) && <img className="scale-x-[1.2] scale-y-[1.3] lg:w-[50%]" src={project.image} alt={project.name} /> : <img className="scale-x-[1.4] scale-y-[1.5] lg:w-[50%]" src={project.image} alt={project.name} />}
             <div className="flex flex-col gap-[15px]">
                <h1 className="font-dela text-[20px] text-[#FFBE00]">{project.name}</h1>
@@ -38,7 +49,7 @@ export const renderProjects = (projects, lang, lgWidth) => {
                </div>
             </div>
             {lgWidth && (index % 2 != 0) && <img className="scale-x-[1.4] scale-y-[1.5] lg:w-[50%]" src={project.image} alt={project.name} />}
-         </Fragment>
+         </motion.div>
       )
    });
 }

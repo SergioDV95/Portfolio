@@ -1,4 +1,5 @@
-import { useState, useMemo, useContext, useEffect } from 'react'
+import React from 'react';
+import { useState, useMemo, useContext, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from "framer-motion"
 import ContextProps from '../assets/JS/createContext';
 import * as imports from '../assets/JS/imports';
@@ -11,6 +12,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       direction: "",
       currentSlide: 0
    });
+   const sliderRefs = useRef([]);
 
    useEffect(() => {
       setSlider((slider) => ({ ...slider, end: context.lgWidth ? (endIndex || 3) : 1 }))
@@ -44,7 +46,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
             >
                <div className="flex flex-col gap-1">
                   <h3>{key}:</h3>
-                  <div className="flex flex-wrap gap-[5px]">
+                  <div className="flex flex-wrap gap-[5px]" ref={sliderRefs.current[index]}>
                      {Array.isArray(value) && value.map((skill, i) => {
                         const number = Math.random();
                         if (number < 0.33 && selectedColors[selectedColors.length - 1] !== "bg-[#3E619B]") {
@@ -56,7 +58,23 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                         } else {
                            selectedColors.push("bg-[#FFBE00]");
                         }
-                        return <p key={"skill" + skill + i} className={`${selectedColors[i]} font-bold text-[12px] p-[5px] rounded-[5px] text-center`}>{skill}</p>
+                        return (
+                           <div className='relative' key={"skill" + skill + i}>
+                              <div className='w-[95%] h-[95%] box-border absolute top-0 left-0 border-[2px] border-gray-300 border-dashed rounded-[7px]' />
+                              <motion.p
+                                 className={`${selectedColors[i]} relative z-10 font-bold text-[12px] 2xl:text-[16px] p-[5px] cursor-default rounded-[5px] text-center`}
+                                 whileTap={{
+                                    scale: 0.9,
+                                    transition: { duration: 0.1, ease: "easeIn" },
+                                 }}
+                                 drag={true}
+                                 dragConstraints={sliderRefs.current[index]}
+                                 dragPropagation
+                              >
+                                 {skill}
+                              </motion.p>
+                           </div>
+                        )
                      })}
                   </div>
                </div>
@@ -73,11 +91,11 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
             </motion.div>
          ));
       } else {
-         return children.slice(slider.start, slider.end).map((value, i) => (
+         return children.slice(slider.start, slider.end).map((value, index) => (
             <motion.div
                layout
                className={slideClasses}
-               key={"children" + Date.now() + i}
+               key={"children" + Date.now() + index}
                initial={slider.direction === "right" ? animate.right : animate.left}
                animate={{ x: 0, scale: 1 }}
                exit={slider.direction === "left" ? animate.right : animate.left}
@@ -90,12 +108,16 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
 
    const renderedElements = useMemo(() => carouselElements(), [slider, skills, children, context.lgWidth]);
 
+   useEffect(() => {
+      sliderRefs.current = Array(renderedElements.length).fill().map(() => React.createRef());
+   }, [renderedElements]);
+
    const carouselButtons = () => {
       if (!skills && !children) return;
       const totalElements = children ? children.length : Object.keys(skills).length;
       const slidesNum = Math.ceil(totalElements / (slider.end - slider.start));
       const elementsPerSlide = slider.end - slider.start;
-      const slideInputsList = []
+      const slideInputsList = [];
       for (let i = 0; i < slidesNum; i++) {
          slideInputsList.push(
             <motion.input
@@ -149,7 +171,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
          }}
       >
          <div className={`flex ${skills ? 'max-lg:flex-col' : 'flex-col lg:gap-[20vh]'} gap-[30px]`}>
-            <AnimatePresence initial={false} mode='popLayout' >
+            <AnimatePresence initial={true} mode='popLayout' >
                {renderedElements}
             </AnimatePresence>
          </div>

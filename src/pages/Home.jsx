@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState, useRef } from "react"
 import ContextProps from "../assets/JS/createContext"
 import { motion } from "framer-motion"
 import Carousel from "../components/Carousel";
@@ -35,7 +35,26 @@ export default function Home() {
       ],
    });
 
-   const introMssg = context.lang === "es" ? "<p>HOLA, SOY UN<br /><span class='text-[#FFBE00]'>DESARROLLADOR WEB</span><br />A TU SERVICIO</p>" : "<p>HELLO, I'M A<br /><span class='text-[#FFBE00]'>WEB DEVELOPER</span><br />AT YOUR SERVICE</p>";
+   const refs = useRef({});
+
+   function calcDistance(element, offset = "right") {
+      if (element) {
+         const rect = element.getBoundingClientRect();
+         const distance = (offset === "right" ? innerWidth - rect.right : rect.left);
+         console.log("window: " + innerWidth, "\nizquierda: " + rect.left, "\nderecha: " +  (innerWidth - rect.right));
+         console.log("document: " + document.documentElement.clientWidth, "\nizquierda: " + rect.left, "\nderecha: " +  (document.documentElement.clientWidth - rect.right));
+         return distance;
+      }
+   }
+
+   const inView = {
+      opacity: 1,
+      transition: {
+         duration: 0.5
+      }
+   }
+
+   const introMssg = context.lang === "es" ? "<p>HOLA, SOY UN<br /><span class='text-[#FFBE00]'>DESARROLLADOR WEB</span><br /></p>" : "<p>HELLO, I'M A<br /><span class='text-[#FFBE00]'>WEB DEVELOPER</span><br /></p>";
 
    useEffect(() => {
       let projectDescription;
@@ -45,7 +64,7 @@ export default function Home() {
             "Pequeño proyecto sobre la maquetación y diseño de la interfaz de una página web tipo e-commerce con HTML y CSS",
             "Software de comercio electrónico tipo Marketplace con MERN Stack y diseño Responsive. Gestiona usuarios, productos y ventas. Ofrece informes de ventas, interfaz de carrito de compras para clientes, panel de control para vendedores y herramientas de monitoreo para administradores. Solución completa para negocios de comercio electrónico."
          ]
-         aboutMe = "<p>Desarrollador Web Full Stack Jr., cuento con experiencia en el desarrollo de aplicaciones web dinámicas y responsivas.<br /><br />Me apasiona el aprendizaje continuo y la mejora de mis habilidades técnicas y creativas. Tengo capacidad para trabajar en equipo, resolver problemas y adaptarme a diferentes requisitos y tecnologías.<br /><br /><span class='font-bold'>Mi objetivo es crear soluciones web innovadoras y de calidad que satisfagan las necesidades de los usuarios y los clientes.</span></p>";
+         aboutMe = "<p>Desarrollador Web Full-stack junior, con una gran pasión por el desarrollo web y un interés creciente en el desarrollo móvil. Tengo experiencia trabajando con una variedad de lenguajes y tecnologías, incluidos HTML, CSS, JavaScript, React, Node.js y más. Siempre estoy ampliando mis habilidades y manteniéndome actualizado con las últimas tendencias y tecnologías.<br /><br />Además de mi experiencia técnica, tengo buena capacidad para afrontar, superar retos y aprender de ellos. Me encanta resolver problemas desafiantes y siempre estoy buscando alguna oportunidad en la que pueda aplicar mis habilidades de programación de maneras novedosas y llamativas.<br /><br /><span class='font-bold'>Mi objetivo es crear soluciones web innovadoras y de calidad que satisfagan las necesidades de los usuarios y los clientes.</span></p>";
       } else {
          projectDescription = [
             "Small project on the layout and interface design of an e-commerce type website with HTML and CSS",
@@ -97,13 +116,39 @@ export default function Home() {
                      </button>
                   </>
                )}
-               {!context.lgWidth && <div className="bg-[#FFBE00] w-[15%] h-[2px] rounded-full lg:hidden" />}
+               {!context.lgWidth && <div className="bg-[#FFBE00] w-[15%] h-[2px] rounded-full" />}
             </div>
-            <div className="relative overflow-hidden">
-               <img className="absolute top-[20%] right-[20%] 2xl:right-[35%] z-[-1] scale-[0.45] lg:scale-[0.35] 2xl:scale-[0.6] " src={imports.flechas_izq} alt="flechas" />
-               <img className="absolute top-[15%] left-[25%] 2xl:left-[35%] z-[-1] scale-[0.5] 2xl:scale-[0.6] rotate-90" src={imports.puntos} alt="flechas" />
+            <div className="relative">
+               <div className="absolute top-[30%] lg:top-[20%] right-[30%] 4xl:right-[35%] -z-[1] scale-[0.6] md:scale-[0.5] lg:scale-[0.6] xl:scale-[0.5] w-fit overflow-x-hidden">
+                  <motion.img 
+                     className="" 
+                     animate={{ x: [null, "-17.8%"] }}
+                     transition={{ 
+                        ease: "linear",
+                        repeat: Infinity,
+                        duration: 2,
+                     }}
+                     src={imports.flechas_izq} 
+                     alt="flechas" 
+                  />
+               </div>
+               <img
+                  className="absolute top-[15%] left-[25%] 2xl:left-[35%] -z-[1] scale-[0.5] 2xl:scale-[0.6] rotate-90" 
+                  src={imports.puntos} 
+                  alt="puntos" 
+               />
                <div className="absolute w-full h-full z-10"></div>
                <motion.img 
+                  ref={ref => refs.current.laptop = ref}
+                  initial={{
+                     x: innerWidth / 2,
+                  }}
+                  whileInView={{
+                     x: 0,
+                     transition: {
+                        duration: 0.5
+                     }
+                  }}
                   layout
                   animate={{
                      scale: [null, 1.1, 1],
@@ -138,11 +183,25 @@ export default function Home() {
             </button>
          </div>
          <div id={context.lang === "es" ? "SOBRE MI" : "ABOUT ME"} className="flex flex-col lg:grid w-fit lg:grid-cols-[1.5fr_3fr] max-lg:gap-[30px] max-lg:items-center min-h-screen">
-            <div className="flex lg:justify-center">
-               <figure className="relative mt-[15%] w-[175px] h-[175px] lg:scale-[1.2] rounded-full bg-picture overflow-visible">
-                  <img className="scale-[1.20] z-50 -rotate-[2deg] absolute bottom-[10%]" src={imports.yo} alt="Yo"/>
-                  <img className="scale-[2] lg:scale-[2.2] absolute lg:-left-[25%]" src={context.lang === "es" ? imports.sobre_mi : imports.about_me} alt="About me" />
-               </figure>
+            <div className="flex lg:justify-center relative">
+               <motion.div
+                  initial={{ 
+                     x: -(innerWidth / 5),
+                  }}
+                  whileInView={{
+                     x: 0,
+                     transition: {
+                        duration: 0.5
+                     }
+                  }}
+               >
+                  <figure 
+                     className="relative mt-[15%] lg:mt-[35%] w-[175px] h-[175px] lg:scale-[1.2] 2xl:scale-[1.4] 3xl:scale-[1.6] rounded-full bg-picture overflow-visible"
+                  >
+                     <img className="scale-[1.20] -rotate-[2deg] absolute bottom-[10%]" src={imports.yo} alt="Yo"/>
+                  </figure>
+               </motion.div>
+               <img className="absolute -z-[1] top-0 md:max-lg:top-[15%] -left-[5%] scale-[2] md:scale-[2.5] lg:scale-[1.1]" src={context.lang === "es" ? imports.sobre_mi : imports.about_me} alt="About me" />
             </div>
             <div className="relative flex flex-col gap-[30px] lg:gap-[15px] max-lg:items-center">
                {context.lgWidth && <img className="absolute w-[578] h-[10%] -top-[5%] -right-[15%]" src={imports.rectas_horizontales} alt="lines" />}
@@ -164,10 +223,22 @@ export default function Home() {
             </figure>
             <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
             <img className="absolute top-[40%] z-[-1] scale-[4] lg:scale-[1.5]" src={context.lang === "es" ? imports.habilidades : imports.skills } alt="Skills" />
-            <Carousel 
-               skills={text.skills} 
-               slideClasses={"bg-skills min-h-[150px] border-[2px] border-slate-600 grid grid-cols-[1.5fr_1fr] gap-x-[10px] p-[10px] rounded-[8px] w-full box-border"} 
-            />
+            <motion.div
+               initial={{ 
+                  x: -innerWidth / 2,
+               }}
+               whileInView={{
+                  x: 0,
+                  transition: {
+                     duration: 0.5
+                  }
+               }}
+            >   
+               <Carousel 
+                  skills={text.skills} 
+                  slideClasses={"bg-skills min-h-[150px] border-[2px] border-slate-600 grid grid-cols-[1.5fr_1fr] gap-x-[10px] p-[10px] rounded-[8px] w-full box-border"} 
+               />
+            </motion.div>
          </div>
          <div id={context.lang === "es" ? "PROYECTOS" : "PROJECTS"} className="flex relative flex-col gap-[30px] items-center px-[5%] max-lg:h-[850px] lg:min-h-screen lg:pb-[20vh]">
             <figure className="relative flex justify-center items-center">
@@ -179,14 +250,13 @@ export default function Home() {
             <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
             <img className="absolute top-[15%] lg:top-[40%] z-[-1] scale-[4] lg:scale-[2]" src={context.lang === "es" ? imports.proyectos : imports.projects } alt="Projects" />
             <Carousel
-               slideClasses={"max-lg:text-left max-lg:overflow-x-hidden gap-[50px] max-lg:pt-[30px] flex max-lg:flex-col items-center"}
                cancelButtons={context.lgWidth}
             >
                {renderProjects(text.projects, context.lang, context.lgWidth)}
             </Carousel>
             {context.lgWidth && <img className="absolute w-[578px] scale-[0.8] h-[7%] bottom-0 -left-[15%]" src={imports.rectas_horizontales} alt="lines" />}
          </div>
-         <div id={context.lang === "es" ? "PROCESO" : "PROCESS"} className="flex relative flex-col gap-[30px] items-center px-[5%] lg:h-[80vh] min-h-screen">
+         <div id={context.lang === "es" ? "PROCESO" : "PROCESS"} className="flex relative flex-col gap-[30px] items-center px-[5%] lg:h-[80vh] overflow-hidden min-h-screen">
             <figure className="relative flex justify-center items-center">
                <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
                   {context.lang === "es" ? "PROCESOS" : "PROCESS"}
@@ -195,7 +265,22 @@ export default function Home() {
             <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
             <img className="absolute top-[10%] lg:top-[40%] -left-[35%] z-[-1] lg:scale-[0.3] scale-[0.5]" src={imports.puntos} alt="flechas" />
             <img className="absolute top-[50%] lg:top-0 lg:right-0 lg:w-[calc(732px/1.2)] z-[-1] max-lg:scale-[1.5]" src={context.lang === "es" ? imports.procesos : imports.processes } alt="Process" />
-            <object className="w-full h-full md:max-lg:w-[60%] md:max-lg:h-[60%]" title="Process" name="Flow Tree" data={context.lgWidth ? imports.tree_desktop : imports.tree_mobile} type="image/svg+xml" />
+            <motion.object 
+               initial={{ 
+                  x: innerWidth / 2,
+               }}
+               whileInView={{
+                  x: 0,
+                  transition: {
+                     duration: 0.5
+                  }
+               }}
+               className="w-full h-full lg:w-[110%] lg:h-[110%] md:max-lg:w-[60%] md:max-lg:h-[60%]" 
+               title="Process" 
+               name="Flow Tree" 
+               data={context.lgWidth ? imports.tree_desktop : imports.tree_mobile} 
+               type="image/svg+xml" 
+            />
          </div>
          <div id="CONTACT" className="flex relative flex-col gap-[30px] items-center px-[5%] min-h-screen">
             <figure className="relative flex justify-center items-center">

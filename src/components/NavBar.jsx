@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react"
+import { useContext, useState } from "react"
 import ContextProps from "../assets/JS/createContext"
 import { Squash as Hamburger } from 'hamburger-react'
 import { motion } from "framer-motion"
@@ -79,7 +79,7 @@ export default function NavBar() {
       ];
       return inputValues.map((value, index) => (
          <motion.input
-            className="max-lg:h-[60px] max-lg:text-left max-lg:pt-[30px] flex max-lg:border-b-[1px] border-[#D9D9D9] focus:outline-none"
+            className="max-lg:h-[60px] max-lg:text-left max-lg:pt-[30px] flex max-lg:border-b-[1px] cursor-pointer border-[#D9D9D9] focus:outline-none"
             key={value + index} 
             style={styles.item} 
             variants={variants.item}
@@ -166,7 +166,7 @@ export default function NavBar() {
             type="button"
             onClick={() => document.getElementById("CONTACT").scrollIntoView({ behavior: "smooth" })}
          >
-            <h4 className="font-dela absolute bg-[#16BAC5] z-10">
+            <h4 className="font-dela absolute bg-[#16BAC5] 4xl:text-[18px] z-10">
                {context.lang === "es" ? "CONTÁCTAME" : "CONTACT ME"}
             </h4>
          </motion.button>

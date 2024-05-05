@@ -99,16 +99,35 @@ export default function ContactMe({ lang }) {
 
    const optional = <span className='text-[0.7em] align-text-top cursor-help' title={lang === "es" ? "Si alguno de los campos marcados con (?) se rellena, el otro es opcional" : "If one of the fields marked with (?) is filled out, the other is optional"}>(?)</span>;
    const mandatory = <span className=' align-text-top cursor-help' title={lang === "es" ? "Este campo es requerido" : "This field is required"}>*</span>;
+   const inView = {
+      initial: i => ({
+         x: (i % 2 == 0) ? -innerWidth / 2 : innerWidth / 2,
+      }),
+      whileInView: i => ({
+         x: 0,
+         transition: {
+            delay: i * 0.05,
+            duration: 0.5
+         }
+      }),
+   };
 
    return (
-      <form id='contact-form' className="w-[90%] md:w-[60%] lg:w-[30%] flex flex-col gap-[10px]">
+      <form 
+         id='contact-form'
+         className="w-[90%] md:w-[60%] lg:w-[50%] xl:w-[30%] flex flex-col gap-[10px]"
+      >
          <ul className='contactLabel flex flex-col gap-[0.5lh] lg:hidden'>
             <li className='text-[0.7em]'>{lang === "es" ? "Si alguno de los campos marcados con (?) se rellena, el otro es opcional" : "If one of the fields marked with (?) is filled out, the other is optional"}</li>
             <li className='text-[0.7em]'>{lang === "es" ? "Los campos marcados con * son requeridos" : "Fields marked with * are required"}</li>
          </ul>
          <label htmlFor='contact-name' className='contactLabel'>{lang === "es" ? "Nombre completo" : "Full name"}</label>
-         <input
+         <motion.input
             disabled={contact}
+            custom={1}
+            initial="initial"
+            whileInView="whileInView"
+            variants={inView}
             className='contactInput'
             id="contact-name"
             form='contact-form'
@@ -123,8 +142,12 @@ export default function ContactMe({ lang }) {
             <span className="error">{error.user_name}</span>
          </div>
          <label htmlFor='contact-email' className='contactLabel'>Email{optional}</label>
-         <input
+         <motion.input
             disabled={contact}
+            custom={2}
+            initial="initial"
+            whileInView="whileInView"
+            variants={inView}
             className='contactInput'
             id="contact-email"
             form='contact-form'
@@ -139,8 +162,12 @@ export default function ContactMe({ lang }) {
             <span className="error">{error.user_email}</span>
          </div>
          <label htmlFor='contact-phone' className='contactLabel'>{lang === "es" ? "Teléfono" : "Phone"}{optional}</label>
-         <input
+         <motion.input
             disabled={contact}
+            custom={3}
+            initial="initial"
+            whileInView="whileInView"
+            variants={inView}
             className='contactInput'
             placeholder={lang === "es" ? "Con prefijo (Ej.: +34)" : "With prefix (E.g.:+34)"}
             id="contact-phone"
@@ -155,8 +182,12 @@ export default function ContactMe({ lang }) {
             <span className="error">{error.user_phone}</span>
          </div>
          <label htmlFor='contact-subject' className='contactLabel'>{lang === "es" ? "Asunto" : "Subject"}{mandatory}</label>
-         <input
+         <motion.input
             disabled={contact}
+            custom={4}
+            initial="initial"
+            whileInView="whileInView"
+            variants={inView}
             className='contactInput'
             id="contact-subject"
             form='contact-form'
@@ -172,8 +203,12 @@ export default function ContactMe({ lang }) {
             <span className="error">{error.subject}</span>
          </div>
          <label htmlFor='contact-message' className='contactLabel'>{lang === "es" ? "Mensaje" : "Message"}{mandatory}</label>
-         <textarea
+         <motion.textarea
             disabled={contact}
+            custom={5}
+            initial="initial"
+            whileInView="whileInView"
+            variants={inView}
             className='contactInput h-[4lh] lg:h-[6lh]'
             id="contact-message"
             form='contact-form'

@@ -38,6 +38,10 @@ export default {
 						"border-radius": "0px 25px 25px 0px",
 					},
 				}
+			},
+			screens: {
+				"3xl": "1768px",
+				"4xl": "2000px",
 			}
 		},
 	},
