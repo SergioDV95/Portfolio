@@ -151,7 +151,7 @@ export default function Home() {
                   }}
                   layout
                   animate={{
-                     scale: [null, 1.1, 1],
+                     scale: context.lgWidth ? [null, 1.1, 1] : [1.1, 1.2, 1.1],
                      y: [null, -5, 0],
                   }} 
                   transition={{ 
@@ -182,9 +182,9 @@ export default function Home() {
                </a>
             </button>
          </div>
-         <div id={context.lang === "es" ? "SOBRE MI" : "ABOUT ME"} className="flex flex-col lg:grid w-fit lg:grid-cols-[1.5fr_3fr] max-lg:gap-[30px] max-lg:items-center min-h-screen">
+         <div id={context.lang === "es" ? "SOBRE MI" : "ABOUT ME"} className="flex flex-col lg:grid w-fit lg:grid-cols-[1.5fr_3fr] max-lg:gap-[30px] max-lg:items-center max-md:mt-[35%] max-lg:mt-[25%] min-h-screen">
             <div className="flex lg:justify-center relative">
-               <motion.div
+               <motion.div 
                   initial={{ 
                      x: -(innerWidth / 5),
                   }}

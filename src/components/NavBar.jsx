@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import ContextProps from "../assets/JS/createContext"
 import { Squash as Hamburger } from 'hamburger-react'
 import { motion } from "framer-motion"
-import { logo } from "../assets/JS/imports"
+import { logo, ondas } from "../assets/JS/imports"
 
 export default function NavBar() {
    const { context, setContext } = useContext(ContextProps);
@@ -93,6 +93,7 @@ export default function NavBar() {
    };
    return (
       <header className="flex max-lg:justify-end lg:text-[0.9em] 2xl:text-[0.8em] justify-between text-end gap-[30px] w-full max-lg:p-[5%] lg:px-[5%] lg:mt-[4%] relative">
+         <img className="absolute z-[-1] -rotate-[20deg] max-lg:scale-[2] -left-[65%] lg:-left-[55%] top-[45%] lg:-top-[150px] 2xl:-top-[5%]" src={ondas} alt="ondas" />
          <motion.nav 
             layout
             className={`flex max-lg:z-50 max-lg:flex-col rounded-[8px] max-lg:gap-[2%] p-[1.5%] lg:items-center justify-center lg:justify-between font-semibold bg-navbarMobile lg:bg-navbarDesktop border-[2px] border-[#E2E2E2] box-border`}
