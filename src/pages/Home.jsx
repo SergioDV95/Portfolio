@@ -37,7 +37,7 @@ export default function Home() {
 
    const refs = useRef({});
 
-   function calcDistance(element, offset = "right") {
+   /* function calcDistance(element, offset = "right") {
       if (element) {
          const rect = element.getBoundingClientRect();
          const distance = (offset === "right" ? innerWidth - rect.right : rect.left);
@@ -45,14 +45,7 @@ export default function Home() {
          console.log("document: " + document.documentElement.clientWidth, "\nizquierda: " + rect.left, "\nderecha: " +  (document.documentElement.clientWidth - rect.right));
          return distance;
       }
-   }
-
-   const inView = {
-      opacity: 1,
-      transition: {
-         duration: 0.5
-      }
-   }
+   } */
 
    const introMssg = context.lang === "es" ? "<p>HOLA, SOY UN<br /><span class='text-[#FFBE00]'>DESARROLLADOR WEB</span><br /></p>" : "<p>HELLO, I'M A<br /><span class='text-[#FFBE00]'>WEB DEVELOPER</span><br /></p>";
 
@@ -70,7 +63,7 @@ export default function Home() {
             "Small project on the layout and interface design of an e-commerce type website with HTML and CSS",
             "Marketplace e-commerce software with MERN Stack and Responsive design. Manage users, products and sales. It offers sales reports, shopping cart interface for customers, dashboard for sellers, and monitoring tools for administrators. Complete solution for e-commerce businesses."
          ]
-         aboutMe = "<p>Full Stack Jr. Web Developer, I have experience in developing dynamic and responsive web applications.<br /><br />I am passionate about continuous learning and improving my technical and creative skills. I have the ability to work in a team, solve problems and adapt to different requirements and technologies.<br /><br /><span class='font-bold'>My goal is to create innovative and quality web solutions that meet the needs of users and clients.</span></p>";
+         aboutMe = "<p>Junior Full-stack Web Developer with a growing interest in mobile development. I have experience working with a variety of languages and technologies, including HTML, CSS, JavaScript, React, Node.js, and more. I'm always expanding my skills and staying up-to-date with the latest trends and technologies in the field of web development.<br /><br />In addition to my technical experience, I have a good ability to face, overcome challenges, and learn from them. I love solving defiant problems and am always looking for opportunities to apply my programming skills in new and innovative ways.<br /><br /><span class='font-bold'>My goal is to create quality web solutions that meet the needs of users and clients.</span></p>";
       }
       setText(text => {
          const newProjects = text.projects.map((project, index) => (
