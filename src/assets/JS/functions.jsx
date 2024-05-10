@@ -5,6 +5,7 @@ export const renderProjects = (projects, lang, lgWidth) => {
       const selectedColors = [];
       return (
          <motion.div 
+            layout
             key={project.name + index} 
             className="max-lg:text-left max-lg:overflow-x-hidden gap-[50px] max-lg:pt-[30px] flex max-lg:flex-col items-center"
             initial={{ 
@@ -13,7 +14,7 @@ export const renderProjects = (projects, lang, lgWidth) => {
             whileInView={{
                x: 0,
                transition: {
-                  duration: 0.5
+                  type: "spring",
                }
             }}
          >

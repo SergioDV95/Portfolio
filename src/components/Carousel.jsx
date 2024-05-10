@@ -1,6 +1,6 @@
 import React from 'react';
-import { useState, useMemo, useContext, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useMemo, useContext, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import ContextProps from '../assets/JS/createContext';
 import * as imports from '../assets/JS/imports';
 
@@ -12,7 +12,16 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       direction: "",
       currentSlide: 0
    });
-   const sliderRefs = useRef([]);
+   const sliderRefs = useRef([]), firstButtonRef = useRef(null);
+   /* const isInView = useInView(firstButtonRef);
+
+   useEffect(() => {
+      console.log(isInView);
+      if (isInView) {
+         console.log("hola mundo");
+         firstButtonRef.current.click();
+      }
+   }, [isInView]); */
 
    useEffect(() => {
       setSlider((slider) => ({ ...slider, end: context.lgWidth ? (endIndex || 3) : 1 }))
@@ -122,12 +131,13 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
          slideInputsList.push(
             <motion.input
                layout
+               /* ref={i === 0 ? firstButtonRef : null} */
                key={"input" + Date.now() + i}
                name={"slideDots" + id}
                className={` w-[10px] h-[10px] rounded-full enabled:cursor-pointer`}
                initial={{ backgroundColor: "#D9D9D94D", scale: 1 }}
                animate={slider.currentSlide === i ? { backgroundColor: "#D9D9D9", scale: 1.4 } : { backgroundColor: "#D9D9D94D", scale: 1 }}
-               disabled={slider.currentSlide === i}
+               disabled={false}
                type="button"
                onClick={e => {
                   e.stopPropagation();

@@ -139,18 +139,18 @@ export default function Home() {
                   whileInView={{
                      x: 0,
                      transition: {
-                        duration: 0.5
+                        type: "spring",
                      }
                   }}
                   layout
                   animate={{
                      scale: context.lgWidth ? [null, 1.1, 1] : [1.1, 1.2, 1.1],
                      y: [null, -5, 0],
+                     transition: { 
+                        repeat: Infinity,
+                        duration: 8,
+                     }
                   }} 
-                  transition={{ 
-                     repeat: Infinity,
-                     duration: 8,
-                  }}
                   className="lg:relative lg:-right-[35px] box-border max-w-full" 
                   src={imports.laptop}
                   onContextMenu={e => e.preventDefault()}
@@ -184,7 +184,7 @@ export default function Home() {
                   whileInView={{
                      x: 0,
                      transition: {
-                        duration: 0.5
+                        type: "spring",
                      }
                   }}
                >
@@ -203,7 +203,7 @@ export default function Home() {
                </h1>
                <div className="flex max-lg:flex-col lg:items-center gap-[30px] max-lg:items-center">
                   <div className="bg-[#FFBE00] w-[15%] lg:w-[2px] h-[2px] lg:h-full rounded-full" />
-                  <div className="max-lg:text-center leading-[22px] max-lg:px-[5%]" dangerouslySetInnerHTML={{ __html: text.aboutMe }} />
+                  <div className="max-lg:text-center leading-[1.5em] max-lg:px-[5%]" dangerouslySetInnerHTML={{ __html: text.aboutMe }} />
                </div>
             </div>
          </div>
@@ -223,7 +223,7 @@ export default function Home() {
                whileInView={{
                   x: 0,
                   transition: {
-                     duration: 0.5
+                     type: "spring",
                   }
                }}
             >   
@@ -265,7 +265,9 @@ export default function Home() {
                whileInView={{
                   x: 0,
                   transition: {
-                     duration: 0.5
+                     type: "spring",
+                     bounce: 0.3,
+                     duration: 0.6
                   }
                }}
                className="w-full h-full lg:w-[110%] lg:h-[110%] md:max-lg:w-[60%] md:max-lg:h-[60%]" 

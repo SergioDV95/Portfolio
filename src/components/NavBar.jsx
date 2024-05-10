@@ -70,6 +70,15 @@ export default function NavBar() {
       }
    };
 
+   const navbar = {
+      isNotHovering: {
+         x: "-110%"
+      },
+      isHovering: {
+         x: "-10%"
+      }
+   }
+
    const inputElements = () => {
       const inputValues = [
          `${context.lang === "es" ? "SOBRE MI" : "ABOUT ME"}`, 
@@ -78,22 +87,42 @@ export default function NavBar() {
          `${context.lang === "es" ? "PROCESO" : "PROCESS"}`
       ];
       return inputValues.map((value, index) => (
-         <motion.input
-            className="max-lg:h-[60px] max-lg:text-left max-lg:pt-[30px] flex max-lg:border-b-[1px] cursor-pointer border-[#D9D9D9] focus:outline-none"
-            key={value + index} 
-            style={styles.item} 
-            variants={variants.item}
-            whileTap={{ scale: 0.85 }}
-            whileHover={{ scale: 1.1 }}
-            type="button" 
-            value={value} 
-            onClick={() => document.getElementById(value).scrollIntoView({ behavior: "smooth" })}
-         />
+         context.lgWidth ?
+            <motion.div 
+               className="flex flex-col justify-center relative overflow-hidden px-[0.5em]"
+               key={value + index} 
+               initial="isNotHovering"
+               whileHover="isHovering"
+            >
+               <motion.input
+                  className="max-lg:h-[60px] max-lg:text-left max-lg:pt-[30px] flex max-lg:border-b-[1px] cursor-pointer border-[#D9D9D9] focus:outline-none"
+                  style={styles.item} 
+                  variants={variants.item}
+                  whileTap={{ scale: 0.85 }}
+                  whileHover={{ scale: 1.1 }}
+                  type="button" 
+                  value={value} 
+                  onClick={() => document.getElementById(value).scrollIntoView({ behavior: "smooth" })}
+               />
+               {context.lgWidth && <motion.div className="w-full h-[2px] bg-[#D9D9D9] absolute bottom-[15%]" variants={navbar} />}
+            </motion.div>
+            :
+            <motion.input
+               className="max-lg:h-[60px] max-lg:text-left max-lg:pt-[30px] flex max-lg:border-b-[1px] cursor-pointer border-[#D9D9D9] focus:outline-none"
+               key={value + index} 
+               style={styles.item} 
+               variants={variants.item}
+               whileTap={{ scale: 0.85 }}
+               whileHover={{ scale: 1.1 }}
+               type="button" 
+               value={value} 
+               onClick={() => document.getElementById(value).scrollIntoView({ behavior: "smooth" })}
+            />
       ));
    };
    return (
       <header className="flex max-lg:justify-end lg:text-[0.9em] 2xl:text-[0.8em] justify-between text-end gap-[30px] w-full max-lg:p-[5%] lg:px-[5%] lg:mt-[4%] relative">
-         <img className="absolute z-[-1] -rotate-[20deg] max-lg:scale-[2] -left-[65%] lg:-left-[55%] top-[45%] lg:-top-[150px] 2xl:-top-[5%]" src={ondas} alt="ondas" />
+         <img className="absolute z-[-1] -rotate-[20deg] max-lg:scale-[2] -left-[65%] lg:-left-[50%] lg:-top-[250%] 4xl:-top-[350%] " src={ondas} alt="ondas" />
          <motion.nav 
             layout
             className={`flex max-lg:z-50 max-lg:flex-col rounded-[8px] max-lg:gap-[2%] p-[1.5%] lg:items-center justify-center lg:justify-between font-semibold bg-navbarMobile lg:bg-navbarDesktop border-[2px] border-[#E2E2E2] box-border`}
@@ -167,7 +196,7 @@ export default function NavBar() {
             type="button"
             onClick={() => document.getElementById("CONTACT").scrollIntoView({ behavior: "smooth" })}
          >
-            <h4 className="font-dela absolute bg-[#16BAC5] 4xl:text-[18px] z-10">
+            <h4 className="font-dela absolute bg-[#16BAC5] lg:max-xl:text-[10px] 4xl:text-[18px] z-10">
                {context.lang === "es" ? "CONTÁCTAME" : "CONTACT ME"}
             </h4>
          </motion.button>

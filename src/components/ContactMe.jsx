@@ -106,8 +106,9 @@ export default function ContactMe({ lang }) {
       whileInView: i => ({
          x: 0,
          transition: {
+            type: "spring",
             delay: i * 0.05,
-            duration: 0.5
+            bounce: 0.4,
          }
       }),
    };
