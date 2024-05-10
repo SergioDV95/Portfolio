@@ -20,6 +20,7 @@ export default {
 			boxShadow: {
 				button: "6px 6px 5.7px #00000040",
 				lightMode: "inset 6px 6px 5.7px #00000040",
+				navbar: "0 0 4px 1px #D9D9D9",
 			},
 			animation: {
 				openNavbar: "navbar 1s forwards",

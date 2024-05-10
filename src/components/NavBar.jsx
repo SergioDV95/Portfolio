@@ -72,10 +72,10 @@ export default function NavBar() {
 
    const navbar = {
       isNotHovering: {
-         x: "-110%"
+         x: "-115%"
       },
       isHovering: {
-         x: "-10%"
+         x: "-8%"
       }
    }
 
@@ -104,7 +104,7 @@ export default function NavBar() {
                   value={value} 
                   onClick={() => document.getElementById(value).scrollIntoView({ behavior: "smooth" })}
                />
-               {context.lgWidth && <motion.div className="w-full h-[2px] bg-[#D9D9D9] absolute bottom-[15%]" variants={navbar} />}
+               {context.lgWidth && <motion.div className="w-full h-[2px] bg-[#D9D9D9] shadow-navbar absolute bottom-[15%]" transition={{ type: "tween" }} variants={navbar} />}
             </motion.div>
             :
             <motion.input
