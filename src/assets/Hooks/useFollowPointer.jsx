@@ -11,7 +11,7 @@ export default function useFollowPointer(ref) {
          const element = ref.current;
          const x = pageX - calcDistance(element, "x") - element.offsetWidth / 2;
          const y = pageY - calcDistance(element, "y") - element.offsetHeight / 2;
-         setPoint({ x: x, y: y });
+         setPoint({ x, y });
       };
 
       window.addEventListener("pointermove", handlePointerMove);

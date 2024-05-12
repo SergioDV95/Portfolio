@@ -8,7 +8,7 @@ function App() {
 	const [context, setContext] = useState({
 		lang: navigator.language.startsWith('es') ? 'es' : 'en',
 		mode: localStorage.getItem('mode') || 'light',
-		lgWidth: window.innerWidth >= 1024
+		lgWidth: window.innerWidth >= 1024,
 	});
 
    useEffect(() => {

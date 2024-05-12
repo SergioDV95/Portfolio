@@ -132,7 +132,7 @@ export default function Home() {
                      </div>
                      <button className="buttonGlow" type="button" >
                         <a
-                           className="px-[15px] py-[10px] w-full h-full"
+                           className="px-[0.5em] py-[0.5em] w-full h-full"
                            href={context.lang === "es" ? imports.desarrollador : imports.developer}
                            download
                            type="application/pdf"
@@ -144,8 +144,8 @@ export default function Home() {
                )}
                {!context.lgWidth && <div className="bg-[#FFBE00] w-[15%] h-[2px] rounded-full" />}
             </div>
-            <div className="relative -z-[1]">
-               <div className="absolute top-[30%] lg:top-[20%] right-[30%] 4xl:right-[35%] -z-[1] scale-[0.85] md:scale-[0.5] lg:scale-[0.6] xl:scale-[0.5] w-fit overflow-x-hidden">
+            <div className="relative ">
+               <div className="absolute top-[30%] lg:top-[20%] right-[30%] 4xl:right-[35%]  scale-[0.85] md:scale-[0.5] lg:scale-[0.6] xl:scale-[0.5] w-fit overflow-x-hidden">
                   <motion.img
                      className=""
                      animate={{ x: [null, "-17.8%"] }}
@@ -159,11 +159,11 @@ export default function Home() {
                   />
                </div>
                <img
-                  className="absolute top-[15%] left-[25%] 2xl:left-[35%] -z-[1] scale-[0.7] 2xl:scale-[0.6] rotate-90"
+                  className="absolute top-[15%] left-[25%] 2xl:left-[35%]  scale-[0.7] 2xl:scale-[0.6] rotate-90"
                   src={imports.puntos}
                   alt="puntos"
                />
-               <div className="absolute w-full h-full -z-[1]"></div>
+               <div className="absolute w-full h-full "></div>
                <motion.img
                   ref={ref => refs.current.laptop = ref}
                   initial={{
@@ -184,7 +184,7 @@ export default function Home() {
                         duration: 8,
                      }
                   }}
-                  className="lg:relative lg:-z-[1] lg:-right-[35px] box-border max-w-full"
+                  className="lg:relative lg:-right-[35px] box-border max-w-full"
                   src={imports.laptop}
                   onContextMenu={e => e.preventDefault()}
                   alt="Laptop"
@@ -208,7 +208,7 @@ export default function Home() {
                </a>
             </button>
          </div>
-         <div id={context.lang === "es" ? "SOBRE MI" : "ABOUT ME"} className="flex z-[1] flex-col lg:grid w-fit lg:grid-cols-[1.5fr_3fr] max-lg:gap-[30px] max-lg:items-center max-md:mt-[35%] max-lg:mt-[25%] min-h-screen">
+         <div id={context.lang === "es" ? "SOBRE MI" : "ABOUT ME"} className="flex  flex-col lg:grid w-fit lg:grid-cols-[1.5fr_3fr] max-lg:gap-[30px] max-lg:items-center max-md:mt-[35%] max-lg:mt-[25%] min-h-screen">
             <div className="flex lg:justify-center relative">
                <motion.div
                   initial={{
@@ -227,7 +227,7 @@ export default function Home() {
                      <img className="scale-[1.20] -rotate-[2deg] absolute bottom-[10%]" src={imports.yo} alt="Yo" />
                   </figure>
                </motion.div>
-               <img className="absolute -z-[1] top-0 md:max-lg:top-[15%] -left-[5%] scale-[2] md:scale-[2.5] lg:scale-[1.1]" src={context.lang === "es" ? imports.sobre_mi : imports.about_me} alt="About me" />
+               <img className="absolute z-[0] top-0 md:max-lg:top-[15%] -left-[5%] scale-[2] md:scale-[2.5] lg:scale-[1.1]" src={context.lang === "es" ? imports.sobre_mi : imports.about_me} alt="About me" />
             </div>
             <div className="relative flex flex-col gap-[30px] lg:gap-[15px] max-lg:items-center">
                {context.lgWidth && <img className="absolute w-[578] h-[10%] -top-[5%] -right-[15%]" src={imports.rectas_horizontales} alt="lines" />}
@@ -279,7 +279,7 @@ export default function Home() {
                </div> */}
             </div>
          </div>
-         <div id={context.lang === "es" ? "HABILIDADES" : "SKILLS"} className="flex z-[1] flex-col relative gap-[30px] lg:gap-[3lh] items-center max-lg:px-[5%] min-h-[65vh] lg:min-h-screen">
+         <div id={context.lang === "es" ? "HABILIDADES" : "SKILLS"} className="flex z-[0] flex-col relative gap-[30px] lg:gap-[3lh] items-center max-lg:px-[5%] min-h-[65vh] lg:min-h-screen">
             <figure className="relative flex justify-center items-center">
                <img className={`absolute ${context.lang === "es" ? "-left-[50%] lg:-left-[70%] w-[50%] lg:w-[60%]" : "-left-[100%]"} `} src={imports.flechas_der} alt="Right arrows" />
                <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
@@ -305,7 +305,7 @@ export default function Home() {
                />
             </motion.div>
          </div>
-         <div id={context.lang === "es" ? "PROYECTOS" : "PROJECTS"} className="flex z-[1] relative flex-col gap-[30px] items-center px-[5%] max-lg:h-[850px] lg:min-h-screen lg:pb-[20vh]">
+         <div id={context.lang === "es" ? "PROYECTOS" : "PROJECTS"} className="flex z-[0] relative flex-col gap-[30px] items-center px-[5%] max-lg:h-[850px] lg:min-h-screen lg:pb-[20vh]">
             <figure className="relative flex justify-center items-center">
                <img className={`absolute ${context.lang === "es" ? "-right-[50%] w-[50%]" : "-right-[60%] w-[60%]"} `} src={imports.flechas_der} alt="Right arrows" />
                <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
@@ -321,7 +321,7 @@ export default function Home() {
             </Carousel>
             {context.lgWidth && <img className="absolute w-[578px] scale-[0.8] h-[7%] bottom-0 -left-[15%]" src={imports.rectas_horizontales} alt="lines" />}
          </div>
-         <div id={context.lang === "es" ? "PROCESO" : "PROCESS"} className="flex relative z-[1] flex-col gap-[30px] items-center px-[5%] lg:h-[80vh] min-h-screen">
+         <div id={context.lang === "es" ? "PROCESO" : "PROCESS"} className="flex relative z-[0] flex-col gap-[30px] items-center px-[5%] lg:h-[80vh] min-h-screen">
             <figure className="relative flex justify-center items-center">
                <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
                   {context.lang === "es" ? "PROCESOS" : "PROCESS"}
@@ -349,7 +349,7 @@ export default function Home() {
                type="image/svg+xml"
             />
          </div>
-         <div id="CONTACT" className="flex relative flex-col gap-[30px] items-center px-[5%] min-h-screen">
+         <div id="CONTACT" className="flex relative flex-col gap-[30px] items-center px-[5%] min-h-screen z-[0]">
             <figure className="relative flex justify-center items-center">
                <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
                   {context.lang === "es" ? "CONTÁCTAME" : "CONTACT ME"}

@@ -137,7 +137,8 @@
       display: inline-block;
       width: fit-content;
       height: fit-content;
-      padding: 10px 15px;
+      box-sizing: border-box;
+      padding: 0.5em 0.5em;
       font-style: bold;
       font-size: 18px;
       font-family: Dela Gothic One, sans-serif;
@@ -239,6 +240,8 @@
    }
 
    #logo-gradient {
+      --cursor: auto;
+      cursor: var(--cursor);
       -webkit-mask-image: url("/SVG/Logo(1).svg");
       mask-image: url("/SVG/Logo(1).svg");
       -webkit-mask-repeat: no-repeat;
@@ -247,6 +250,10 @@
       mask-position: center;
       -webkit-mask-size: 100% 100%;
       mask-size: 100% 100%;
+   }
+
+   #logo-gradient:hover {
+      cursor: var(--cursor);
    }
 
    .dev-text {

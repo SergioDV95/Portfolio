@@ -28,6 +28,8 @@ import db from "/SVG/DB.svg";
 import tools from "/SVG/TOOLS.svg";
 import tree_desktop from "/SVG/Tree_desktop.svg";
 import tree_mobile from "/SVG/Tree+Text.svg";
+import cool from "/png/cool_icon.png";
+import sad from "/png/sad_icon.png";
 
 export { 
    logo,
@@ -60,4 +62,6 @@ export {
    tools,
    tree_desktop,
    tree_mobile,
+   cool,
+   sad,
 };

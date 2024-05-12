@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useMemo, useContext, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ContextProps from '../assets/JS/createContext';
 import * as imports from '../assets/JS/imports';
 

@@ -2,7 +2,7 @@ import { useContext, useRef, useState } from "react"
 import ContextProps from "../assets/JS/createContext"
 import { Squash as Hamburger } from 'hamburger-react'
 import { motion } from "framer-motion"
-import { ondas } from "../assets/JS/imports"
+import { ondas, sad, cool } from "../assets/JS/imports"
 import useFollowPointer from "../assets/Hooks/useFollowPointer"
 
 export default function NavBar() {
@@ -145,6 +145,7 @@ export default function NavBar() {
             </div>
             <motion.div className="flex max-lg:flex-col gap-[15px] items-center" layout variants={context.lgWidth ? "" : variants.item} style={styles.item}>
                <motion.div
+                  className="relative z-20"
                   animate={isActive ? 
                      null
                      :
@@ -175,22 +176,32 @@ export default function NavBar() {
                      ease: "easeInOut",
                      delay: 10,
                      repeat: Infinity,
-                     repeatDelay: 15
+                     repeatDelay: 10
                   }}
                >
                   <motion.div
                      layout
                      ref={logoRef}
                      id="logo-gradient"
-                     className="w-[6em] h-[6em] lg:w-[3.5em] lg:h-[3.5em] 3xl:w-[3em] 3xl:h-[3em] 4xl:w-[2.5em] 4xl:h-[2.5em] relative z-[500]"
-                     animate={isActive ? { x: x, y: y } : null}
+                     className="w-[6em] h-[6em] lg:w-[3.5em] lg:h-[3.5em] 3xl:w-[3em] 3xl:h-[3em] 4xl:w-[2.5em] 4xl:h-[2.5em]"
+                     animate={isActive ? { x, y } : null}
                      transition={{
                         type: "spring",
                         damping: 3,
                         stiffness: 50,
                         restDelta: 0.001
                      }}
-                     onClick={() => setIsActive(!isActive)}
+                     onClick={e => {
+                        if (!isActive) {
+                           document.body.style.setProperty("cursor", `url(${sad}) 16 16, auto`);
+                           e.currentTarget.style.setProperty("--cursor", `url(${cool}) 16 16, pointer`);
+                           setIsActive(true);
+                        } else {
+                           document.body.style.setProperty("cursor", "auto");
+                           e.currentTarget.style.setProperty("--cursor", "pointer");
+                           setIsActive(false);
+                        }
+                     }}
                   >
                      <motion.div
                         layout
@@ -219,7 +230,7 @@ export default function NavBar() {
                               },
                               transform: {
                                  type: "tween",
-                                 duration: 15,
+                                 duration: 30,
                                  repeat: Infinity,
                                  repeatType: "reverse",
                                  ease: "linear"
@@ -288,6 +299,7 @@ export default function NavBar() {
                {context.lang === "es" ? "CONTÁCTAME" : "CONTACT ME"}
             </h4>
          </motion.button>
+         {isActive && <div className="w-screen h-screen fixed top-0 left-0 z-10" />}
       </header>
    )
 }

@@ -38,15 +38,17 @@ export const renderProjects = (projects, lang, lgWidth) => {
                </div>
                <p>{project.description}</p>
                <div className="flex max-lg:justify-center mt-[10px]">
-                  <motion.a 
-                     className="bg-navbarDesktop w-fit p-[0.5em] rounded-[8px] border border-white appearance-none font-bold"
-                     href={project.link}
-                     target="_blank"
-                     rel="external"
-                     whileTap={{ scale: 0.9 }}
-                  >
-                  {lang === "es" ? "Visitar web" : "Visit website"}
-                  </motion.a>
+                  <button className="buttonGlow" type="button" >
+                     <a 
+                        className="px-[0.5em] py-[0.5em] text-[0.9em] w-full h-full"
+                        href={project.link}
+                        target="_blank"
+                        rel="external"
+                        whileTap={{ scale: 0.9 }}
+                     >
+                     {lang === "es" ? "VISITAR WEB" : "VISIT WEBSITE"}
+                     </a>
+                  </button>
                </div>
             </div>
             {lgWidth && (index % 2 != 0) && <img className="scale-x-[1.4] scale-y-[1.5] lg:w-[50%]" src={project.image} alt={project.name} />}
