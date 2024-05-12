@@ -97,6 +97,7 @@ export default function Home() {
                               "linear-gradient(to right, #FFBE00, #FFFFFF, #FFBE00 0%)",
                               "linear-gradient(to right, #FFBE00, #FFFFFF 0%, #FFBE00 10%)",
                               "linear-gradient(to right, #FFBE00 0%, #FFFFFF, #FFBE00 20%)",
+                              "linear-gradient(to right, #FFBE00 20%, #FFFFFF, #FFBE00 40%)",
                               "linear-gradient(to right, #FFBE00 40%, #FFFFFF, #FFBE00 60%)",
                               "linear-gradient(to right, #FFBE00 60%, #FFFFFF, #FFBE00 80%)",
                               "linear-gradient(to right, #FFBE00 80%, #FFFFFF, #FFBE00 100%)",
@@ -144,7 +145,7 @@ export default function Home() {
                {!context.lgWidth && <div className="bg-[#FFBE00] w-[15%] h-[2px] rounded-full" />}
             </div>
             <div className="relative -z-[1]">
-               <div className="absolute top-[30%] lg:top-[20%] right-[30%] 4xl:right-[35%] -z-[1] scale-[0.6] md:scale-[0.5] lg:scale-[0.6] xl:scale-[0.5] w-fit overflow-x-hidden">
+               <div className="absolute top-[30%] lg:top-[20%] right-[30%] 4xl:right-[35%] -z-[1] scale-[0.7] md:scale-[0.5] lg:scale-[0.6] xl:scale-[0.5] w-fit overflow-x-hidden">
                   <motion.img
                      className=""
                      animate={{ x: [null, "-17.8%"] }}
