@@ -184,7 +184,7 @@ export default function Home() {
                         duration: 8,
                      }
                   }}
-                  className="lg:relative lg:-right-[35px] box-border max-w-full z-[-1]"
+                  className="lg:relative lg:z-[-1] lg:-right-[35px] box-border max-w-full"
                   src={imports.laptop}
                   onContextMenu={e => e.preventDefault()}
                   alt="Laptop"
