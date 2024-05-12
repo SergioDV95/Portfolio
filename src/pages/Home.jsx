@@ -163,7 +163,7 @@ export default function Home() {
                   src={imports.puntos}
                   alt="puntos"
                />
-               <div className="absolute w-full h-full "></div>
+               <div className="absolute w-full h-full z-[1]"></div>
                <motion.img
                   ref={ref => refs.current.laptop = ref}
                   initial={{
