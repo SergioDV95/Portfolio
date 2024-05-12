@@ -182,7 +182,7 @@ export default function NavBar() {
                      layout
                      ref={logoRef}
                      id="logo-gradient"
-                     className="w-[6em] h-[6em] lg:w-[3.5em] lg:h-[3.5em] 3xl:w-[3em] 3xl:h-[3em] 4xl:w-[2.5em] 4xl:h-[2.5em] relative z-50"
+                     className="w-[6em] h-[6em] lg:w-[3.5em] lg:h-[3.5em] 3xl:w-[3em] 3xl:h-[3em] 4xl:w-[2.5em] 4xl:h-[2.5em] relative z-[500]"
                      animate={isActive ? { x: x, y: y } : null}
                      transition={{
                         type: "spring",
