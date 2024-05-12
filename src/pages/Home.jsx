@@ -163,7 +163,7 @@ export default function Home() {
                   src={imports.puntos}
                   alt="puntos"
                />
-               <div className="absolute w-full h-full z-[1]"></div>
+               <div className="absolute w-full h-full z-[2]"></div>
                <motion.img
                   ref={ref => refs.current.laptop = ref}
                   initial={{
@@ -184,7 +184,7 @@ export default function Home() {
                         duration: 8,
                      }
                   }}
-                  className="lg:relative lg:z-[-1] lg:-right-[35px] box-border max-w-full"
+                  className="lg:relative lg:z-[0] lg:-right-[35px] box-border max-w-full"
                   src={imports.laptop}
                   onContextMenu={e => e.preventDefault()}
                   alt="Laptop"
