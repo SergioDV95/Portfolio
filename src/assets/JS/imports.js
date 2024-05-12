@@ -1,4 +1,5 @@
 import logo from "/SVG/Logo(1).svg";
+import logo2 from "/SVG/Logo(2).svg";
 import ondas from "/png/dark/ondas_org.png";
 import flechas_izq from "/png/dark/flechas_izq.png";
 import puntos from "/png/dark/puntos.png";
@@ -30,6 +31,7 @@ import tree_mobile from "/SVG/Tree+Text.svg";
 
 export { 
    logo,
+   logo2,
    ondas,
    flechas_izq, 
    puntos, 

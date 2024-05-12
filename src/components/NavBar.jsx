@@ -1,12 +1,16 @@
-import { useContext, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import ContextProps from "../assets/JS/createContext"
 import { Squash as Hamburger } from 'hamburger-react'
 import { motion } from "framer-motion"
-import { logo, ondas } from "../assets/JS/imports"
+import { ondas } from "../assets/JS/imports"
+import useFollowPointer from "../assets/Hooks/useFollowPointer"
 
 export default function NavBar() {
    const { context, setContext } = useContext(ContextProps);
    const [isOpen, setOpen] = useState();
+   const [isActive, setIsActive] = useState(false);
+   const logoRef = useRef(null);
+   const { x, y } = useFollowPointer(logoRef);
 
    const variants = {
       list: {
@@ -45,7 +49,7 @@ export default function NavBar() {
             y: -50,
             opacity: 0,
             display: "none",
-            transition: { 
+            transition: {
                display: { delay: 0.5 },
             },
          },
@@ -81,27 +85,27 @@ export default function NavBar() {
 
    const inputElements = () => {
       const inputValues = [
-         `${context.lang === "es" ? "SOBRE MI" : "ABOUT ME"}`, 
+         `${context.lang === "es" ? "SOBRE MI" : "ABOUT ME"}`,
          `${context.lang === "es" ? "HABILIDADES" : "SKILLS"}`,
          `${context.lang === "es" ? "PROYECTOS" : "PROJECTS"}`,
          `${context.lang === "es" ? "PROCESO" : "PROCESS"}`
       ];
       return inputValues.map((value, index) => (
          context.lgWidth ?
-            <motion.div 
+            <motion.div
                className="flex flex-col justify-center relative overflow-hidden px-[0.5em]"
-               key={value + index} 
+               key={value + index}
                initial="isNotHovering"
                whileHover="isHovering"
             >
                <motion.input
                   className="max-lg:h-[60px] max-lg:text-left max-lg:pt-[30px] flex max-lg:border-b-[1px] cursor-pointer border-[#D9D9D9] focus:outline-none"
-                  style={styles.item} 
+                  style={styles.item}
                   variants={variants.item}
                   whileTap={{ scale: 0.85 }}
                   whileHover={{ scale: 1.1 }}
-                  type="button" 
-                  value={value} 
+                  type="button"
+                  value={value}
                   onClick={() => document.getElementById(value).scrollIntoView({ behavior: "smooth" })}
                />
                <motion.div className="w-full h-[2px] bg-[#D9D9D9] shadow-navbar absolute bottom-[15%]" transition={{ type: "tween" }} variants={navbar} />
@@ -109,23 +113,23 @@ export default function NavBar() {
             :
             <motion.input
                className="max-lg:h-[60px] max-lg:text-left max-lg:pt-[30px] flex max-lg:border-b-[1px] cursor-pointer border-[#D9D9D9] focus:outline-none"
-               key={value + index} 
-               style={styles.item} 
+               key={value + index}
+               style={styles.item}
                variants={variants.item}
                whileTap={{ scale: 0.85 }}
                whileHover={{ scale: 1.1 }}
-               type="button" 
-               value={value} 
+               type="button"
+               value={value}
                onClick={() => document.getElementById(value).scrollIntoView({ behavior: "smooth" })}
             />
       ));
    };
    return (
-      <header className="flex max-lg:justify-end lg:text-[0.9em] 2xl:text-[0.8em] justify-between text-end gap-[30px] w-full max-lg:p-[5%] lg:px-[5%] lg:mt-[4%] relative">
-         <img className="absolute z-[-1] -rotate-[20deg] max-lg:scale-[2] -left-[65%] lg:-left-[50%] lg:-top-[250%] 4xl:-top-[350%] " src={ondas} alt="ondas" />
-         <motion.nav 
+      <header className="flex max-lg:justify-end lg:text-[0.9em] 2xl:text-[0.8em] justify-between text-end gap-[30px] w-full max-lg:p-[5%] lg:px-[5%] lg:pt-[4%] relative">
+         <img className="absolute z-[-1] -rotate-[20deg] max-lg:scale-[2] -left-[65%] lg:-left-[50%] lg:-top-[125%] 4xl:-top-[150%] " src={ondas} alt="ondas" />
+         <motion.nav
             layout
-            className={`flex max-lg:z-50 max-lg:flex-col rounded-[8px] max-lg:gap-[2%] p-[1.5%] lg:items-center justify-center lg:justify-between font-semibold bg-navbarMobile lg:bg-navbarDesktop border-[2px] border-[#E2E2E2] box-border`}
+            className={`flex max-lg:z-50 max-lg:flex-col rounded-[8px] max-lg:gap-[2%] px-[1.5%] lg:items-center justify-center lg:justify-between font-semibold bg-navbarMobile lg:bg-navbarDesktop border-[2px] border-[#E2E2E2] box-border`}
             variants={variants.list}
             animate={context.lgWidth ? "" : (isOpen ? "open" : "closed")}
             initial={styles.list}
@@ -139,12 +143,96 @@ export default function NavBar() {
                   easing="ease-in"
                />
             </div>
-            <motion.div className="flex max-lg:flex-col gap-[30px] lg:max-xl:gap-[15px] lg:items-center" layout variants={context.lgWidth ? "" : variants.item} style={styles.item}>
-               <object className="h-[3em] max-lg:scale-[2]" data={logo} type="image/svg+xml" />
+            <motion.div className="flex max-lg:flex-col gap-[15px] items-center" layout variants={context.lgWidth ? "" : variants.item} style={styles.item}>
+               <motion.div
+                  animate={isActive ? 
+                     null
+                     :
+                     {
+                        transform: [
+                           "rotate(0deg)",
+                           "rotate(22.5deg)",
+                           "rotate(-22.5deg)",
+                           "rotate(11.25deg)",
+                           "rotate(-11.25deg)",
+                           "rotate(5.625deg)",
+                           "rotate(-5.625deg)",
+                           "rotate(2.8125deg)",
+                           "rotate(-2.8125deg)",
+                           "rotate(1.40625deg)",
+                           "rotate(-1.40625deg)",
+                           "rotate(0.703125deg)",
+                           "rotate(-0.703125deg)",
+                           "rotate(0.3515625deg)",
+                           "rotate(-0.3515625deg)",
+                           "rotate(0deg)",
+                        ],
+                     }
+                  }
+                  transition={{
+                     type: "tween",
+                     duration: 1,
+                     ease: "easeInOut",
+                     delay: 10,
+                     repeat: Infinity,
+                     repeatDelay: 7
+                  }}
+               >
+                  <motion.div
+                     layout
+                     ref={logoRef}
+                     id="logo-gradient"
+                     className="w-[6em] h-[6em] lg:w-[3.5em] lg:h-[3.5em] 3xl:w-[3em] 3xl:h-[3em] 4xl:w-[2.5em] 4xl:h-[2.5em] relative z-50"
+                     animate={isActive ? { x: x, y: y } : null}
+                     transition={{
+                        type: "spring",
+                        damping: 3,
+                        stiffness: 50,
+                        restDelta: 0.001
+                     }}
+                     onClick={() => setIsActive(!isActive)}
+                  >
+                     <motion.div
+                        layout
+                        className="w-[150%] h-[150%] -top-[25%] -left-[25%] rounded-full absolute"
+                        animate={{
+                           transform: [
+                              "rotate(0deg)",
+                              "rotate(360deg)",
+                           ],
+                           backgroundImage: [
+                              `linear-gradient(#058eee, #013567 0%, #001d3d)`,
+                              `linear-gradient(#058eee, #013567 100%, #001d3d)`,
+                              `linear-gradient(#22c1c3, #92be77 100%, #fdbb2d)`,
+                              `linear-gradient(#22c1c3, #92be77 0%, #fdbb2d)`,
+                              `linear-gradient(#833ab4, #fd1d1d 0%, #fcb045)`,
+                              `linear-gradient(#833ab4, #fd1d1d 100%, #fcb045)`,
+                              `linear-gradient(#3f5efb, #a351af 100%, #fc466b)`,
+                              `linear-gradient(#3f5efb, #a351af 0%, #fc466b)`,
+                           ],
+                           transition: {
+                              backgroundImage: {
+                                 type: "tween",
+                                 duration: 30,
+                                 repeat: Infinity,
+                                 repeatType: "mirror",
+                              },
+                              transform: {
+                                 type: "tween",
+                                 duration: 15,
+                                 repeat: Infinity,
+                                 repeatType: "reverse",
+                                 ease: "linear"
+                              }
+                           }
+                        }}
+                     />
+                  </motion.div>
+               </motion.div>
                <h1 className="max-lg:px-[5%] font-dela max-md:text-start whitespace-nowrap md:text-center text-[28px] lg:text-[20px] xl:text-[34px] max-md:mb-[10%]">SERGIO DAZA</h1>
             </motion.div>
             <div className="max-lg:h-full max-lg:px-[5%] flex max-lg:flex-col lg:gap-[20px] xl:gap-[30px]">
-               <motion.select 
+               <motion.select
                   layout
                   initial={{ opacity: 0.80 }}
                   whileHover={{ opacity: 1 }}
@@ -152,9 +240,9 @@ export default function NavBar() {
                   style={styles.item}
                   variants={variants.item}
                   title="Idioma"
-                  name="lang" 
+                  name="lang"
                   id="lang"
-                  onChange={e => setContext(context => ({...context, lang: e.target.value}))}
+                  onChange={e => setContext(context => ({ ...context, lang: e.target.value }))}
                   value={context.lang}
                >
                   <option className="bg-[#374049] appearance-none" value="es">ES</option>
@@ -187,12 +275,12 @@ export default function NavBar() {
                </div>
             </motion.div> */}
          </motion.nav>
-         <motion.button 
+         <motion.button
             layout
-            className="card font-semibold appearance-none" 
-            whileTap={{ scale: 0.9 }} 
-            whileHover={{ scale: 1.1 }} 
-            title={context.lang === "es" ? "Contacto" : "Contact"} 
+            className="card font-semibold appearance-none"
+            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.1 }}
+            title={context.lang === "es" ? "Contacto" : "Contact"}
             type="button"
             onClick={() => document.getElementById("CONTACT").scrollIntoView({ behavior: "smooth" })}
          >

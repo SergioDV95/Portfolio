@@ -54,3 +54,16 @@ export const renderProjects = (projects, lang, lgWidth) => {
       )
    });
 }
+
+export const calcDistance = (element, axis) => {
+   let distance = 0;
+   while (element) {
+      if (axis === "x") {
+         distance += element.offsetLeft;
+      } else if (axis === "y") {
+         distance += element.offsetTop;
+      }
+      element = element.offsetParent;
+   }
+   return distance;
+}
