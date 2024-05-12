@@ -175,7 +175,7 @@ export default function NavBar() {
                      ease: "easeInOut",
                      delay: 10,
                      repeat: Infinity,
-                     repeatDelay: 7
+                     repeatDelay: 15
                   }}
                >
                   <motion.div
