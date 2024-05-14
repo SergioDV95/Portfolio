@@ -13,20 +13,21 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       direction: "",
       currentSlide: 0
    });
-   const sliderRefs = useRef([]), firstButtonRef = useRef(null);
-   /* const isInView = useInView(firstButtonRef);
-
-   useEffect(() => {
-      console.log(isInView);
-      if (isInView) {
-         console.log("hola mundo");
-         firstButtonRef.current.click();
-      }
-   }, [isInView]); */
+   const sliderRefs = useRef([]), firstButtonRef = useRef(null), buttonRefs = useRef([]);
 
    useEffect(() => {
       setSlider((slider) => ({ ...slider, end: context.lgWidth ? (endIndex || 3) : 1 }))
    }, [context.lgWidth]);
+
+   useEffect(() => {
+      if (buttonRefs.current[slider.currentSlide]) {
+         buttonRefs.current[slider.currentSlide].click();
+      }
+   }, [playButton]);
+
+   useEffect(() => {
+      console.log(playButton);
+   }, [playButton])
 
    let startXCoord;
 
@@ -56,7 +57,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
             >
                <div className="flex flex-col gap-1">
                   <h3>{key}:</h3>
-                  <div className="flex flex-wrap gap-[5px]" ref={sliderRefs.current[index]}>
+                  <div className="flex flex-wrap gap-[5px]" ref={div => sliderRefs.current[index] = div}>
                      {Array.isArray(value) && value.map((skill, i) => {
                         const number = Math.random();
                         if (number < 0.33 && selectedColors[selectedColors.length - 1] !== "bg-[#3E619B]") {
@@ -72,16 +73,18 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                            <div className='relative' key={"skill" + skill + i}>
                               <div className='w-[95%] h-[95%] box-border absolute top-0 left-0 border-[2px] border-gray-300 border-dashed rounded-[7px]' />
                               <motion.p
+                                 layout
                                  className={`${selectedColors[i]} relative z-10 font-bold text-[12px] 2xl:text-[16px] p-[5px] cursor-grab rounded-[5px] text-center`}
                                  whileTap={{
                                     scale: 0.9,
                                     cursor: "grabbing",
                                     transition: { duration: 0.1, ease: "easeIn" },
                                  }}
-                                 animate={playButton ? 
+                                 initial={{ x: 0, y: 0 }}
+                                 animate={playButton ?
                                     {
-                                       x: scatterCoords(),
-                                       y: scatterCoords()
+                                       x: scatterCoords() + "%",
+                                       y: scatterCoords() + "%"
                                     }
                                     :
                                     null
@@ -127,10 +130,6 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
 
    const renderedElements = useMemo(() => carouselElements(), [slider, skills, children, context.lgWidth]);
 
-   useEffect(() => {
-      sliderRefs.current = Array(renderedElements.length).fill().map(() => React.createRef());
-   }, [renderedElements]);
-
    const carouselButtons = () => {
       if (!skills && !children) return;
       const totalElements = children ? children.length : Object.keys(skills).length;
@@ -141,13 +140,12 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
          slideInputsList.push(
             <motion.input
                layout
-               /* ref={i === 0 ? firstButtonRef : null} */
+               ref={button => buttonRefs.current[i] = button}
                key={"input" + Date.now() + i}
                name={"slideDots" + id}
                className={` w-[10px] h-[10px] rounded-full enabled:cursor-pointer`}
                initial={{ backgroundColor: "#D9D9D94D", scale: 1 }}
                animate={slider.currentSlide === i ? { backgroundColor: "#D9D9D9", scale: 1.4 } : { backgroundColor: "#D9D9D94D", scale: 1 }}
-               disabled={false}
                type="button"
                onClick={e => {
                   e.stopPropagation();
@@ -169,40 +167,42 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
    }
 
    return (
-      <div
-         className="flex flex-col relative w-full pb-[60px] gap-[30px] lg:gap-[60px] items-center px-[5%]"
-         onTouchStart={e => {
-            e.stopPropagation();
-            startXCoord = e.touches[0].clientX
-         }}
-         onTouchEnd={e => {
-            e.stopPropagation();
-            let inputsList = document.getElementsByName(`slideDots${id}`);
-            let xOffset = startXCoord - e.changedTouches[0].clientX;
-            if (Math.abs(xOffset) > (window.innerWidth / 4)) {
-               if (Math.sign(xOffset) === 1) {
-                  if (slider.currentSlide === (inputsList.length - 1)) inputsList[0].click();
-                  else inputsList[slider.currentSlide + 1].click();
-               } else {
-                  if (slider.currentSlide === 0) inputsList[inputsList.length - 1].click();
-                  else inputsList[slider.currentSlide - 1].click();
+      <>
+         <div
+            className="flex flex-col relative w-full pb-[60px] gap-[30px] lg:gap-[60px] items-center px-[5%]"
+            onTouchStart={e => {
+               e.stopPropagation();
+               startXCoord = e.touches[0].clientX
+            }}
+            onTouchEnd={e => {
+               e.stopPropagation();
+               let inputsList = document.getElementsByName(`slideDots${id}`);
+               let xOffset = startXCoord - e.changedTouches[0].clientX;
+               if (Math.abs(xOffset) > (window.innerWidth / 4)) {
+                  if (Math.sign(xOffset) === 1) {
+                     if (slider.currentSlide === (inputsList.length - 1)) inputsList[0].click();
+                     else inputsList[slider.currentSlide + 1].click();
+                  } else {
+                     if (slider.currentSlide === 0) inputsList[inputsList.length - 1].click();
+                     else inputsList[slider.currentSlide - 1].click();
+                  }
                }
+            }}
+         >
+            <div className={`flex ${skills ? 'max-lg:flex-col' : 'flex-col lg:gap-[20vh]'} gap-[30px]`}>
+               <AnimatePresence initial={true} mode='popLayout' >
+                  {renderedElements}
+               </AnimatePresence>
+            </div>
+            {!cancelButtons &&
+               <motion.div
+                  layout
+                  className="flex gap-[10px]"
+               >
+                  {carouselButtons()}
+               </motion.div>
             }
-         }}
-      >
-         <div className={`flex ${skills ? 'max-lg:flex-col' : 'flex-col lg:gap-[20vh]'} gap-[30px]`}>
-            <AnimatePresence initial={true} mode='popLayout' >
-               {renderedElements}
-            </AnimatePresence>
          </div>
-         {!cancelButtons &&
-            <motion.div
-               layout
-               className="flex gap-[10px]"
-            >
-               {carouselButtons()}
-            </motion.div>
-         }
-      </div>
+      </>
    )
 }

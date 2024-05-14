@@ -71,6 +71,6 @@ export const calcDistance = (element, axis) => {
 }
 
 export const scatterCoords = () => {
-   const randomCoord = Math.floor(Math.random() * 61) - 30;
+   const randomCoord = Math.floor(Math.random() * 241) - 120;
    return randomCoord;
 }

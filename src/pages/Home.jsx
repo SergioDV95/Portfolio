@@ -8,6 +8,7 @@ import * as imports from "../assets/JS/imports";
 
 export default function Home() {
    const { context } = useContext(ContextProps);
+   const [playButton, setPlayButton] = useState(false);
    const [text, setText] = useState({
       aboutMe: "",
       skills: {
@@ -105,7 +106,7 @@ export default function Home() {
                               "linear-gradient(to right, #FFBE00 100%, #FFFFFF, #FFBE00)",
                            ],
                         }}
-                        transition={{ 
+                        transition={{
                            duration: 0.65,
                            repeat: Infinity,
                            delay: 5,
@@ -246,6 +247,10 @@ export default function Home() {
                <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
                   {context.lang === "es" ? "HABILIDADES" : "SKILLS"}
                </h1>
+               <button
+                  className="buttonGlow absolute -right-[30px] hidden lg:block"
+                  onClick={() => setPlayButton(!playButton)}
+               >PLAY</button>
             </figure>
             <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
             <img className="absolute top-[40%] z-[-1] scale-[4] lg:scale-[1.5]" src={context.lang === "es" ? imports.habilidades : imports.skills} alt="Skills" />
@@ -261,6 +266,7 @@ export default function Home() {
                }}
             >
                <Carousel
+                  playButton={playButton}
                   skills={text.skills}
                   slideClasses={"bg-skills min-h-[150px] border-[2px] border-slate-600 grid grid-cols-[1.5fr_1fr] gap-x-[10px] p-[10px] rounded-[8px] w-full box-border"}
                />
