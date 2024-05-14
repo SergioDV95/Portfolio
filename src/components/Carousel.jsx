@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useMemo, useContext, useEffect, useRef } from 'react';
+import { useState, useMemo, useContext, useEffect, useRef, createRef } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import ContextProps from '../assets/JS/createContext';
 import * as imports from '../assets/JS/imports';
@@ -13,15 +12,18 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       direction: "",
       currentSlide: 0
    });
-   const sliderRefs = useRef([]), firstButtonRef = useRef(null), buttonRefs = useRef([]);
+   const [refs, setRefs] = useState({
+      slides: [],
+      buttons: []
+   });
 
    useEffect(() => {
       setSlider((slider) => ({ ...slider, end: context.lgWidth ? (endIndex || 3) : 1 }))
    }, [context.lgWidth]);
 
    useEffect(() => {
-      if (buttonRefs.current[slider.currentSlide]) {
-         buttonRefs.current[slider.currentSlide].click();
+      if (refs.buttons[slider.currentSlide]?.current) {
+         refs.buttons[slider.currentSlide].current.click();
       }
    }, [playButton]);
 
@@ -57,7 +59,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
             >
                <div className="flex flex-col gap-1">
                   <h3>{key}:</h3>
-                  <div className="flex flex-wrap gap-[5px]" ref={div => sliderRefs.current[index] = div}>
+                  <div className="flex flex-wrap gap-[5px]" ref={refs.slides[index]}>
                      {Array.isArray(value) && value.map((skill, i) => {
                         const number = Math.random();
                         if (number < 0.33 && selectedColors[selectedColors.length - 1] !== "bg-[#3E619B]") {
@@ -90,7 +92,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                                     null
                                  }
                                  drag={true}
-                                 dragConstraints={sliderRefs.current[index]}
+                                 dragConstraints={refs.slides[index]}
                                  dragPropagation
                               >
                                  {skill}
@@ -130,6 +132,23 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
 
    const renderedElements = useMemo(() => carouselElements(), [slider, skills, children, context.lgWidth]);
 
+   useEffect(() => {
+      setRefs((refs) => {
+         const arrayRefs = type => new Array(type.length).fill().map(() => createRef());
+         if (!refs.buttons.length) {
+            return {
+               slides: arrayRefs(carouselElements()),
+               buttons: arrayRefs(carouselButtons())
+            }
+         } else {
+            return {
+               ...refs,
+               slides: arrayRefs(carouselElements()),
+            }
+         }
+      });
+   }, [renderedElements]);
+
    const carouselButtons = () => {
       if (!skills && !children) return;
       const totalElements = children ? children.length : Object.keys(skills).length;
@@ -140,7 +159,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
          slideInputsList.push(
             <motion.input
                layout
-               ref={button => buttonRefs.current[i] = button}
+               ref={refs.buttons[i]}
                key={"input" + Date.now() + i}
                name={"slideDots" + id}
                className={` w-[10px] h-[10px] rounded-full enabled:cursor-pointer`}
