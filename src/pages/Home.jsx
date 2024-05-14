@@ -247,11 +247,23 @@ export default function Home() {
                <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
                   {context.lang === "es" ? "HABILIDADES" : "SKILLS"}
                </h1>
-               <button
-                  className="buttonGlow absolute -right-[30px] hidden lg:block"
-                  onClick={() => setPlayButton(!playButton)}
-               >PLAY</button>
+               {context.lgWidth &&
+                  <button
+                     className="buttonGlow absolute -right-[30px] text-[1em] "
+                     onClick={() => setPlayButton(!playButton)}
+                  >
+                     {context.lang === "es" ? "JUGAR" : "PLAY"}
+                  </button>
+               }
             </figure>
+            {!context.lgWidth &&
+               <button
+                  className="buttonGlow absolute text-[1em] "
+                  onClick={() => setPlayButton(!playButton)}
+               >
+                  {context.lang === "es" ? "JUGAR" : "PLAY"}
+               </button>
+            }
             <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
             <img className="absolute top-[40%] z-[-1] scale-[4] lg:scale-[1.5]" src={context.lang === "es" ? imports.habilidades : imports.skills} alt="Skills" />
             <motion.div
