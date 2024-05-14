@@ -3,8 +3,9 @@ import { useState, useMemo, useContext, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import ContextProps from '../assets/JS/createContext';
 import * as imports from '../assets/JS/imports';
+import { scatterCoords } from '../assets/JS/functions';
 
-export default function Carousel({ skills, slideClasses, children, startIndex, endIndex, cancelButtons }) {
+export default function Carousel({ skills, slideClasses, children, startIndex, endIndex, cancelButtons, playButton }) {
    const { context } = useContext(ContextProps);
    const [slider, setSlider] = useState({
       start: startIndex || 0,
@@ -71,11 +72,20 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                            <div className='relative' key={"skill" + skill + i}>
                               <div className='w-[95%] h-[95%] box-border absolute top-0 left-0 border-[2px] border-gray-300 border-dashed rounded-[7px]' />
                               <motion.p
-                                 className={`${selectedColors[i]} relative z-10 font-bold text-[12px] 2xl:text-[16px] p-[5px] cursor-default rounded-[5px] text-center`}
+                                 className={`${selectedColors[i]} relative z-10 font-bold text-[12px] 2xl:text-[16px] p-[5px] cursor-grab rounded-[5px] text-center`}
                                  whileTap={{
                                     scale: 0.9,
+                                    cursor: "grabbing",
                                     transition: { duration: 0.1, ease: "easeIn" },
                                  }}
+                                 animate={playButton ? 
+                                    {
+                                       x: scatterCoords(),
+                                       y: scatterCoords()
+                                    }
+                                    :
+                                    null
+                                 }
                                  drag={true}
                                  dragConstraints={sliderRefs.current[index]}
                                  dragPropagation

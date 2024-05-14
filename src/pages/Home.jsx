@@ -79,7 +79,7 @@ export default function Home() {
    }, [context.lang]);
 
    return (
-      <main className="mt-[10%] lg:mt-[5%] px-[5%] pb-[5%] flex flex-col max-lg:gap-[60px] overflow-hidden">
+      <main className="mt-[10%] lg:mt-[5%] px-[5%] pb-[5%] flex flex-col max-lg:gap-[60px] max-w-[100vw] overflow-hidden">
          <div id="intro" className="flex flex-col lg:grid lg:min-h-screen lg:grid-cols-[2fr_3fr] gap-[30px] max-lg:items-center">
             <div className="flex flex-col lg:pt-[15%] gap-[15px] lg:gap-[30px] max-lg:items-center">
                <div className="font-dela max-lg:text-center text-[22px] lg:text-[30px] xl:whitespace-nowrap">
@@ -227,7 +227,7 @@ export default function Home() {
                      <img className="scale-[1.20] -rotate-[2deg] absolute bottom-[10%]" src={imports.yo} alt="Yo" />
                   </figure>
                </motion.div>
-               <img className="absolute z-[0] top-0 md:max-lg:top-[15%] -left-[5%] scale-[2] md:scale-[2.5] lg:scale-[1.1]" src={context.lang === "es" ? imports.sobre_mi : imports.about_me} alt="About me" />
+               <img className="absolute -z-[1] top-0 md:max-lg:top-[15%] -left-[5%] scale-[2] md:scale-[2.5] lg:scale-[1.1]" src={context.lang === "es" ? imports.sobre_mi : imports.about_me} alt="About me" />
             </div>
             <div className="relative flex flex-col gap-[30px] lg:gap-[15px] max-lg:items-center">
                {context.lgWidth && <img className="absolute w-[578] h-[10%] -top-[5%] -right-[15%]" src={imports.rectas_horizontales} alt="lines" />}
@@ -238,45 +238,6 @@ export default function Home() {
                   <div className="bg-[#FFBE00] w-[15%] lg:w-[2px] h-[2px] lg:h-full rounded-full" />
                   <div className="max-lg:text-center leading-[1.5em] max-lg:px-[5%]" dangerouslySetInnerHTML={{ __html: text.aboutMe }} />
                </div>
-               {/* <div className="w-full h-full flex justify-center items-center">
-                  <div id="logo-gradient" className="w-[60%] h-[60%] relative">
-                     <motion.div 
-                        layout
-                        className="w-[150%] h-[150%] -top-[25%] -left-[25%] rounded-full absolute"
-                        animate={{
-                           transform: [
-                              "rotate(0deg)",
-                              "rotate(360deg)",
-                           ],
-                           backgroundImage: [
-                              `linear-gradient(#058eee, #013567 0%, #001d3d)`, 
-                              `linear-gradient(#058eee, #013567 100%, #001d3d)`, 
-                              `linear-gradient(#22c1c3, #92be77 100%, #fdbb2d)`,
-                              `linear-gradient(#22c1c3, #92be77 0%, #fdbb2d)`,
-                              `linear-gradient(#833ab4, #fd1d1d 0%, #fcb045)`,
-                              `linear-gradient(#833ab4, #fd1d1d 100%, #fcb045)`,
-                              `linear-gradient(#3f5efb, #a351af 100%, #fc466b)`,
-                              `linear-gradient(#3f5efb, #a351af 0%, #fc466b)`,
-                           ],
-                           transition: {
-                              backgroundImage: {
-                                 type: "tween",
-                                 duration: 30,
-                                 repeat: Infinity,
-                                 repeatType: "reverse",
-                              },
-                              transform: {
-                                 type: "tween",
-                                 duration: 20,
-                                 repeat: Infinity,
-                                 repeatType: "loop",
-                                 ease: "linear"
-                              }
-                           }
-                        }}
-                     />
-                  </div>
-               </div> */}
             </div>
          </div>
          <div id={context.lang === "es" ? "HABILIDADES" : "SKILLS"} className="flex z-[0] flex-col relative gap-[30px] lg:gap-[3lh] items-center max-lg:px-[5%] min-h-[65vh] lg:min-h-screen">
