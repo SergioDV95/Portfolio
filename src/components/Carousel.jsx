@@ -84,7 +84,10 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                                  animate={playButton ?
                                     {
                                        x: scatterCoords() + "%",
-                                       y: scatterCoords() + "%"
+                                       y: scatterCoords() + "%",
+                                       transition: {
+                                          type: "spring",
+                                       },
                                     }
                                     :
                                     null
