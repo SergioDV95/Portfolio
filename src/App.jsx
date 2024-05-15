@@ -1,11 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from 'react'
-import Layout from "./components/Layout";
+import { useState, useEffect, Suspense, lazy } from 'react'
 import ContextProps from "./assets/JS/createContext";
 import Home from "./pages/Home";
+import Loading from "./components/Loading";
 
-function App() {
+const Layout = lazy(() => delayImport(import("./components/Layout"), true));
+
+const delayImport = (importation, delay) => delay ? new Promise(resolve => setTimeout(() => resolve(importation), 7000)).then(module => module) : importation;
+
+export default function App() {
 	const [context, setContext] = useState({
+		main: null,
 		lang: navigator.language.startsWith('es') ? 'es' : 'en',
 		mode: localStorage.getItem('mode') || 'light',
 		lgWidth: window.innerWidth >= 1024,
@@ -30,14 +35,14 @@ function App() {
 	return (
 		<BrowserRouter>
 			<ContextProps.Provider value={{ context, setContext }}>
-				<Routes>
-					<Route path="/Portfolio/" element={<Layout />}>
-						<Route index element={<Home />} />
-					</Route>
-				</Routes>
+				<Suspense fallback={<Loading />}>
+					<Routes>
+						<Route path="/Portfolio/" element={<Layout />}>
+							<Route index element={<Home />} />
+						</Route>
+					</Routes>
+				</Suspense>
 			</ContextProps.Provider>
 		</BrowserRouter>
 	)
 }
-
-export default App

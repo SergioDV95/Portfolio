@@ -27,10 +27,6 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       }
    }, [playButton]);
 
-   useEffect(() => {
-      console.log(playButton);
-   }, [playButton])
-
    let startXCoord;
 
    const id = useMemo(() => (

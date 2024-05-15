@@ -99,6 +99,7 @@ export default function ContactMe({ lang }) {
 
    const optional = <span className='text-[0.7em] align-text-top cursor-help' title={lang === "es" ? "Si alguno de los campos marcados con (?) se rellena, el otro es opcional" : "If one of the fields marked with (?) is filled out, the other is optional"}>(?)</span>;
    const mandatory = <span className=' align-text-top cursor-help' title={lang === "es" ? "Este campo es requerido" : "This field is required"}>*</span>;
+   
    const inView = {
       initial: i => ({
          x: (i % 2 == 0) ? -innerWidth / 2 : innerWidth / 2,

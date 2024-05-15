@@ -7,7 +7,7 @@ import { renderProjects } from "../assets/JS/functions";
 import * as imports from "../assets/JS/imports";
 
 export default function Home() {
-   const { context } = useContext(ContextProps);
+   const { context, setContext } = useContext(ContextProps);
    const [playButton, setPlayButton] = useState(false);
    const [text, setText] = useState({
       aboutMe: "",
@@ -36,7 +36,7 @@ export default function Home() {
       ],
    });
 
-   const refs = useRef({});
+   const refs = useRef({}), main = useRef(null);
 
    /* function calcDistance(element, offset = "right") {
       if (element) {
@@ -79,8 +79,12 @@ export default function Home() {
       });
    }, [context.lang]);
 
+   useEffect(() => {
+      if (!context.main && main?.current) setContext(context => ({...context, main: main.current}));
+   }, [main]);
+
    return (
-      <main className="mt-[10%] lg:mt-[5%] px-[5%] pb-[5%] flex flex-col max-lg:gap-[60px] max-w-[100vw] overflow-hidden">
+      <main ref={main} id="main-content" className="mt-[10%] lg:mt-[5%] px-[5%] pb-[5%] flex flex-col max-lg:gap-[60px] max-w-[100vw] overflow-hidden">
          <div id="intro" className="flex flex-col lg:grid lg:min-h-screen lg:grid-cols-[2fr_3fr] gap-[30px] max-lg:items-center">
             <div className="flex flex-col lg:pt-[15%] gap-[15px] lg:gap-[30px] max-lg:items-center">
                <div className="font-dela max-lg:text-center text-[22px] lg:text-[30px] xl:whitespace-nowrap">
