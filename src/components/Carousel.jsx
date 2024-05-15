@@ -1,4 +1,4 @@
-import { useState, useMemo, useContext, useEffect, useRef, createRef } from 'react';
+import { useState, useMemo, useContext, useEffect, createRef } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import ContextProps from '../assets/JS/createContext';
 import * as imports from '../assets/JS/imports';
@@ -57,9 +57,9 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                animate={{ x: 0, scale: 1 }}
                exit={slider.direction === "left" ? animate.right : animate.left}
             >
-               <div className="flex flex-col gap-1">
+               <div className="flex flex-col" ref={refs.slides[index]}>
                   <h3>{key}:</h3>
-                  <div className="flex flex-wrap gap-[5px]" ref={refs.slides[index]}>
+                  <div className="flex flex-wrap gap-[5px] h-full content-start" >
                      {Array.isArray(value) && value.map((skill, i) => {
                         const number = Math.random();
                         if (number < 0.33 && selectedColors[selectedColors.length - 1] !== "bg-[#3E619B]") {
@@ -72,31 +72,33 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                            selectedColors.push("bg-[#FFBE00]");
                         }
                         return (
-                           <div className='relative' key={"skill" + skill + i}>
-                              <div className='w-[95%] h-[95%] box-border absolute top-0 left-0 border-[2px] border-gray-300 border-dashed rounded-[7px]' />
+                           <div className='relative w-fit h-fit' key={"skill" + skill + i}>
+                              <div className='w-full h-full box-border absolute top-0 left-0 border-[2px] xl:border-[3px] border-gray-300 border-dashed rounded-[7px]' />
                               <motion.p
                                  layout
                                  className={`${selectedColors[i]} relative z-10 font-bold text-[12px] 2xl:text-[16px] p-[5px] cursor-grab rounded-[5px] text-center`}
-                                 whileTap={{
-                                    scale: 0.9,
-                                    cursor: "grabbing",
-                                    transition: { duration: 0.1, ease: "easeIn" },
-                                 }}
                                  initial={{ x: 0, y: 0 }}
                                  animate={playButton ?
                                     {
-                                       x: scatterCoords() + "%",
-                                       y: scatterCoords() + "%",
+                                       x: scatterCoords(-200, 200) + "%",
+                                       y: scatterCoords(-200, 200) + "%",
                                        transition: {
                                           type: "spring",
+                                          damping: 8,
+                                          stiffness: 200
                                        },
                                     }
                                     :
                                     null
                                  }
                                  drag={true}
+                                 whileTap={{ cursor: "grabbing" }}
+                                 whileDrag={{
+                                    scale: 0.9,
+                                    cursor: "grabbing",
+                                    transition: { duration: 0.1, ease: "easeIn" },
+                                 }}
                                  dragConstraints={refs.slides[index]}
-                                 dragPropagation
                               >
                                  {skill}
                               </motion.p>

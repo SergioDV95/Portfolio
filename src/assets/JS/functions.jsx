@@ -44,7 +44,6 @@ export const renderProjects = (projects, lang, lgWidth) => {
                         href={project.link}
                         target="_blank"
                         rel="external"
-                        whileTap={{ scale: 0.9 }}
                      >
                      {lang === "es" ? "VISITAR WEB" : "VISIT WEBSITE"}
                      </a>
@@ -70,7 +69,9 @@ export const calcDistance = (element, axis) => {
    return distance;
 }
 
-export const scatterCoords = () => {
-   const randomCoord = Math.floor(Math.random() * 241) - 120;
+export const scatterCoords = (minCoord, maxCoord) => {
+   const min = Number(minCoord);
+   const max = Number(maxCoord);
+   const randomCoord = Math.floor(Math.random() * (max - min + 1) + min);
    return randomCoord;
 }

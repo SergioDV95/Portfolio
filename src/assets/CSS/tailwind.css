@@ -117,9 +117,6 @@
    .error {
       @apply absolute indent-1 -bottom-[9px] text-[0.8em] [color:_rgb(255,0,0)]
    }
-}
-
-@layer utilities {
 
    .slideInputs {
       background-color: #D9D9D94D;
@@ -178,7 +175,7 @@
       content: "";
       position: absolute;
       top: 0;
-      left: -120%;
+      left: -150%;
       width: 100%;
       height: 100%;
       background: rgba(255, 255, 255, 0.2);
@@ -187,7 +184,7 @@
    }
    
    .buttonGlow:enabled:hover::after {
-      left: 120%;
+      left: 150%;
    }
 
    @keyframes enabledButton {
@@ -237,6 +234,9 @@
          transform: translateX(-2.5px);
       }
    }
+}
+
+@layer utilities {
 
    #logo-gradient {
       --cursor: auto;

@@ -249,19 +249,19 @@ export default function Home() {
                </h1>
                {context.lgWidth &&
                   <button
-                     className="buttonGlow absolute -right-[30px] text-[1em] "
+                     className="buttonGlow absolute -right-[35%] text-[1em]"
                      onClick={() => setPlayButton(!playButton)}
                   >
-                     {context.lang === "es" ? "JUGAR" : "PLAY"}
+                     <img className="w-[20px] h-[20px]" src={playButton ? imports.stopIcon : imports.playIcon} alt="start/stop" />
                   </button>
                }
             </figure>
             {!context.lgWidth &&
                <button
-                  className="buttonGlow absolute text-[1em] "
+                  className="buttonGlow text-[1em] "
                   onClick={() => setPlayButton(!playButton)}
                >
-                  {context.lang === "es" ? "JUGAR" : "PLAY"}
+                  <img className="w-[20px] h-[20px]" src={playButton ? imports.stopIcon : imports.playIcon} alt="start/stop" />
                </button>
             }
             <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />

@@ -30,6 +30,8 @@ import tree_desktop from "/SVG/Tree_desktop.svg";
 import tree_mobile from "/SVG/Tree+Text.svg";
 import cool from "/png/cool_icon.png";
 import sad from "/png/sad_icon.png";
+import playIcon from "/SVG/play-solid.svg"
+import stopIcon from "/SVG/stop-solid.svg"
 
 export { 
    logo,
@@ -64,4 +66,6 @@ export {
    tree_mobile,
    cool,
    sad,
+   playIcon,
+   stopIcon,
 };
