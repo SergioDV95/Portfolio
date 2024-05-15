@@ -80,8 +80,8 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                                  initial={{ x: 0, y: 0 }}
                                  animate={playButton ?
                                     {
-                                       x: scatterCoords(-200, 200) + "%",
-                                       y: scatterCoords(-200, 200) + "%",
+                                       x: scatterCoords(-175, 175) + "%",
+                                       y: scatterCoords(-175, 175) + "%",
                                        transition: {
                                           type: "spring",
                                           damping: 8,
@@ -98,7 +98,9 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                                     cursor: "grabbing",
                                     transition: { duration: 0.1, ease: "easeIn" },
                                  }}
-                                 dragConstraints={refs.slides[index]}
+                                 dragTransition={{
+                                    power: 0.3,
+                                 }}
                               >
                                  {skill}
                               </motion.p>
