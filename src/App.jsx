@@ -4,7 +4,7 @@ import ContextProps from "./assets/JS/createContext";
 import Loading from "./components/Loading";
 
 const Layout = lazy(() => delayImport(import("./components/Layout"), false));
-const Home = lazy(() => delayImport(import("./pages/Home"), false));
+const Home = lazy(() => delayImport(import("./pages/Home"), true));
 
 const delayImport = (importation, delay) => delay ? new Promise(resolve => setTimeout(() => resolve(importation), 7000)).then(module => module) : importation;
 
