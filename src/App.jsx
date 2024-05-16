@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect, Suspense, lazy } from 'react'
 import ContextProps from "./assets/JS/createContext";
-import Home from "./pages/Home";
 import Loading from "./components/Loading";
 
-const Layout = lazy(() => delayImport(import("./components/Layout"), true));
+const Layout = lazy(() => delayImport(import("./components/Layout"), false));
+const Home = lazy(() => delayImport(import("./pages/Home"), false));
 
 const delayImport = (importation, delay) => delay ? new Promise(resolve => setTimeout(() => resolve(importation), 7000)).then(module => module) : importation;
 
