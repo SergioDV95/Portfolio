@@ -3,10 +3,10 @@ import { useState, useEffect, Suspense, lazy } from 'react'
 import ContextProps from "./assets/JS/createContext";
 import Loading from "./components/Loading";
 
-const Layout = lazy(() => delayImport(import("./components/Layout"), false));
-const Home = lazy(() => delayImport(import("./pages/Home"), false));
+const Layout = lazy(() => delayImport(import("./components/Layout"), 1000));
+const Home = lazy(() => delayImport(import("./pages/Home"), 3000));
 
-const delayImport = (importation, delay) => delay ? new Promise(resolve => setTimeout(() => resolve(), 7000)).then(() => importation) : importation;
+const delayImport = (importation, delay) => new Promise(resolve => setTimeout(() => resolve(importation), delay)).then((value) => value);
 
 export default function App() {
 	const [context, setContext] = useState({
