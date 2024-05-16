@@ -4,9 +4,9 @@ import ContextProps from "./assets/JS/createContext";
 import Loading from "./components/Loading";
 
 const Layout = lazy(() => delayImport(import("./components/Layout"), false));
-const Home = lazy(() => delayImport(import("./pages/Home"), true));
+const Home = lazy(() => delayImport(import("./pages/Home"), false));
 
-const delayImport = (importation, delay) => delay ? new Promise(resolve => setTimeout(() => resolve(importation), 7000)).then(module => module) : importation;
+const delayImport = (importation, delay) => delay ? new Promise(resolve => setTimeout(() => resolve(), 7000)).then(() => importation) : importation;
 
 export default function App() {
 	const [context, setContext] = useState({

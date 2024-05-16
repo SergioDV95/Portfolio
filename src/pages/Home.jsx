@@ -182,7 +182,7 @@ export default function Home() {
                   }}
                   layout
                   animate={{
-                     scale: context.lgWidth ? [null, 1.1, 1] : [1.3, 1.5, 1.3],
+                     scale: context.lgWidth ? [null, 1.1, 1] : [1.4, 1.5, 1.4],
                      y: [null, -5, 0],
                      transition: {
                         repeat: Infinity,

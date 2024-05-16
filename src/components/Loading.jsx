@@ -17,20 +17,22 @@ export default function Loading() {
 
    handleLoad(); */
 
+   const $1600px = window.matchMedia("(min-width: 1600px)").matches;
+
    return (
       <section className="w-screen h-screen flex justify-center items-center">
          <div className="loading relative flex w-fit h-fit">
             <motion.svg
-               width="200"
-               height="200"
-               viewBox="0 0 200 200"
+               width={$1600px ? 300 : 200}
+               height={$1600px ? 300 : 200}
+               viewBox={$1600px ? "0 0 400 400" : "0 0 200 200"}
             >
                <motion.circle
-                  cx="100"
-                  cy="100"
-                  r="80"
+                  cx={$1600px ? 200 : 100}
+                  cy={$1600px ? 200 : 100}
+                  r={$1600px ? 160 : 80}
                   style={{
-                     strokeWidth: 10,
+                     strokeWidth: $1600px ? 17 : 10,
                      strokeLinecap: "round",
                      fill: "transparent",
                   }}
@@ -53,12 +55,12 @@ export default function Loading() {
                   }}
                />
                <motion.circle
-                  cx="100"
-                  cy="100"
-                  r="80"
+                  cx={$1600px ? 200 : 100}
+                  cy={$1600px ? 200 : 100}
+                  r={$1600px ? 160 : 80}
                   stroke="#FFFFFF33"
                   style={{
-                     strokeWidth: 10,
+                     strokeWidth: $1600px ? 17 : 10,
                      strokeLinecap: "round",
                      fill: "transparent",
                   }}
