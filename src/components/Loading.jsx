@@ -1,26 +1,31 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import ContextProps from "../assets/JS/createContext";
 import { motion } from "framer-motion";
 
 export default function Loading() {
-   const { context } = useContext(ContextProps);
+   const { context, setContext } = useContext(ContextProps);
    const [loading, setLoading] = useState({
-      state: true,
       progress: 0
    });
 
-   /* const handleLoad = () => {
-      const main = document.getElementById("main-content");
-      const children = main.children;
-      console.log(children.length);
+   const handleLoad = () => {
+      const everyElement = document.querySelectorAll("*");
+      const loadedElements = [];
+      everyElement.forEach((element, i) => {
+         loadedElements.push(i);
+         element.onload = () => setLoading(load => ({ ...load, progress: loadedElements }));
+      })
+      window.onload = () => setContext(context => ({ ...context, loaded: true }));
    }
 
-   handleLoad(); */
+   useEffect(() => handleLoad(), []);
+
+   useEffect(() => console.log(loading), [loading]);
 
    const $1600px = window.matchMedia("(min-width: 1600px)").matches;
 
    return (
-      <section className="w-screen h-screen flex justify-center items-center">
+      <section className="flex w-screen h-screen justify-center items-center">
          <div className="loading relative flex w-fit h-fit">
             <motion.svg
                width={$1600px ? 300 : 200}
