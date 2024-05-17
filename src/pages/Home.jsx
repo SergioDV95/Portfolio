@@ -222,7 +222,7 @@ export default function Home() {
                   }}
                >
                   <figure
-                     className="relative mt-[15%] lg:mt-[35%] w-[175px] h-[175px] lg:scale-[1.2] 2xl:scale-[1.4] 3xl:scale-[1.6] rounded-full bg-picture overflow-visible"
+                     className="relative mt-[15%] lg:mt-[35%] w-[175px] h-[175px] lg:scale-[1.2] 2xl:scale-[1.4] 3xl:scale-[1.6] rounded-full bg-picture overflow-visible z-10"
                   >
                      <img className="scale-[1.20] -rotate-[2deg] absolute bottom-[10%]" src={imports.yo} alt="Yo" />
                   </figure>

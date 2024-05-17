@@ -25,7 +25,7 @@ export default function Loading() {
    const $1600px = window.matchMedia("(min-width: 1600px)").matches;
 
    return (
-      <section className="flex w-screen h-screen justify-center items-center">
+      <section className="flex bg-black w-screen h-screen justify-center items-center">
          <div className="loading relative flex w-fit h-fit">
             <motion.svg
                width={$1600px ? 300 : 200}
