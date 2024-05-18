@@ -16,7 +16,9 @@ export default function Loading() {
       window.onload = () => setContext(context => ({ ...context, loaded: true }));
    }
 
-   useEffect(() => handleLoad(), []);
+   useEffect(() => console.log(context.loaded), [context.loaded]);
+
+   handleLoad();
 
    const $1600px = window.matchMedia("(min-width: 1600px)").matches;
 
