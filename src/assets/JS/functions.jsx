@@ -18,7 +18,7 @@ export const renderProjects = (projects, lang, lgWidth) => {
                }
             }}
          >
-            {lgWidth ? (index % 2 == 0) && <img className="scale-x-[1.2] scale-y-[1.3] lg:w-[50%]" src={project.image} alt={project.name} /> : <img className="scale-x-[1.4] scale-y-[1.5] lg:w-[50%]" src={project.image} alt={project.name} />}
+            {lgWidth ? ((index % 2 == 0) && <img className="scale-x-[1.2] scale-y-[1.3] lg:w-[50%]" src={project.image} alt={project.name} />) : <img className="scale-x-[1.4] scale-y-[1.5] lg:w-[50%]" src={project.image} alt={project.name} />}
             <div className="flex flex-col gap-[15px]">
                <h1 className="font-dela text-[20px] text-[#FFBE00]">{project.name}</h1>
                <div className="flex flex-wrap gap-[5px]">

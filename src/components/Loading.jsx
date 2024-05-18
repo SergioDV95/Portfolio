@@ -7,19 +7,26 @@ export default function Loading() {
    const [loading, setLoading] = useState(0);
 
    const handleLoad = () => {
-      const everyElement = Array.from(document.querySelectorAll("*"));
+      const everyResource = Array.from(document.querySelectorAll("img, object, svg"));
       const loadedElements = [];
-      everyElement.forEach((element, i) => {
-         loadedElements.push(i);
-         element.onload = () => setLoading(Math.round(loadedElements.length * 100 / everyElement.length));
+      everyResource.forEach((resource, i) => {
+         if (resource instanceof HTMLObjectElement || resource instanceof HTMLImageElement || resource instanceof SVGElement) {
+            loadedElements.push(i);
+            resource.onload = () => {
+               setLoading(Math.round(loadedElements.length * 100 / everyResource.length));
+            }
+         }
       })
+      /* window.onload = () => setContext(context => ({ ...context, loaded: true })); */
    }
 
    useEffect(() => handleLoad(), []);
 
    useEffect(() => {
-      if (loading === 100) setContext(context => ({ ...context, loaded: true }));
-      console.log(loading)
+      if (loading === 100) {
+         const timeout = setTimeout(() => setContext(context => ({ ...context, loaded: true })), 1000);
+         return () => clearTimeout(timeout);
+      };
    }, [loading]);
 
    const $1600px = window.matchMedia("(min-width: 1600px)").matches;
@@ -48,8 +55,7 @@ export default function Loading() {
                   animate={{
                      pathLength: loading / 100,
                      transition: {
-                        pathLength: { 
-                           delay: 0.5, 
+                        pathLength: {
                            type: "spring",
                            bounce: 0.35,
                            duration: 2,
