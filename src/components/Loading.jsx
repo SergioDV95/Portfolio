@@ -6,6 +6,7 @@ export default function Loading() {
    const { context, setContext } = useContext(ContextProps);
    const [loading, setLoading] = useState(0);
 
+   let timeout;
    const handleLoad = () => {
       const everyResource = Array.from(document.querySelectorAll("img, object, svg"));
       const loadedElements = [];
@@ -17,17 +18,25 @@ export default function Loading() {
             }
          }
       })
-      /* window.onload = () => setContext(context => ({ ...context, loaded: true })); */
+      window.onload = () => timeout = setTimeout(() => setContext(context => ({ ...context, loaded: true })), 1000);
    }
 
-   useEffect(() => handleLoad(), []);
-
    useEffect(() => {
+      handleLoad();
+
+      return () => {
+         if (timeout) {
+            clearTimeout(timeout);
+         }
+      }
+   }, []);
+
+   /* useEffect(() => {
       if (loading === 100) {
          const timeout = setTimeout(() => setContext(context => ({ ...context, loaded: true })), 1000);
          return () => clearTimeout(timeout);
       };
-   }, [loading]);
+   }, [loading]); */
 
    const $1600px = window.matchMedia("(min-width: 1600px)").matches;
 
