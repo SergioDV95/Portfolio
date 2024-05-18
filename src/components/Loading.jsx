@@ -3,22 +3,27 @@ import ContextProps from "../assets/JS/createContext";
 import { motion } from "framer-motion";
 
 export default function Loading() {
-   const { context, setContext } = useContext(ContextProps);
+   const { context } = useContext(ContextProps);
    const [loading, setLoading] = useState(0);
 
-   const handleLoad = () => {
-      const everyElement = Array.from(document.querySelectorAll("*"));
+   useEffect(() => {
+      const resourceElements = Array.from(document.querySelectorAll("img, svg, object"));
       const loadedElements = [];
-      everyElement.forEach((element, i) => {
-         loadedElements.push(i);
-         element.onload = () => setLoading(loadedElements.length * 100 / everyElement.length);
-      })
-      window.onload = () => setContext(context => ({ ...context, loaded: true }));
-   }
+      const handleLoad = () => setLoading(loadedElements.length * 100 / resourceElements.length);
+      resourceElements.forEach((resource, i) => {
+         if (resource instanceof HTMLImageElement || resource instanceof SVGElement || resource instanceof HTMLObjectElement) {
+            loadedElements.push(i);
+            resource.addEventListener("load", handleLoad);
+         }
+      });
+      return () => {
+         resourceElements.forEach(resource => {
+            resource.removeEventListener("load", handleLoad);
+         });
+      }
+   }, []);
 
-   useEffect(() => console.log(context.loaded), [context.loaded]);
-
-   handleLoad();
+   useEffect(() => console.log(loading), [loading]);
 
    const $1600px = window.matchMedia("(min-width: 1600px)").matches;
 

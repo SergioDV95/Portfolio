@@ -34,6 +34,17 @@ export default function App() {
 		localStorage.setItem('mode', context.mode);
 	}, [context.mode]);
 
+	useEffect(() => {
+		const handleWinLoad = () => setContext(context => ({ ...context, loaded: true }));
+		//const handleWinUnload = () => setContext(context => ({ ...context, loaded: false }));
+		window.addEventListener('load', handleWinLoad);
+		//window.addEventListener('unload', handleWinUnload);
+		return () => {
+			window.removeEventListener('load', handleWinLoad);
+			//window.removeEventListener('unload', handleWinUnload);
+		}
+	}, []);
+
 	return (
 		<BrowserRouter>
 			<ContextProps.Provider value={{ context, setContext }}>
