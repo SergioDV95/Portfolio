@@ -13,7 +13,7 @@ const Home = lazy(() => import("./pages/Home"));
 export default function App() {
 	const [context, setContext] = useState({
 		loaded: false,
-		lang: navigator.language.startsWith('es') ? 'es' : 'en',
+		lang: localStorage.getItem('lang') || navigator.language.startsWith('es') ? 'es' : 'en',
 		mode: localStorage.getItem('mode') || 'light',
 		lgWidth: window.innerWidth >= 1024,
 	});
@@ -31,8 +31,9 @@ export default function App() {
    }, []);
 
 	useEffect(() => {
+		localStorage.setItem('lang', context.lang);
 		localStorage.setItem('mode', context.mode);
-	}, [context.mode]);
+	}, [context.mode, context.lang]);
 
 	useEffect(() => {
 		const handleWinLoad = () => setContext(context => ({ ...context, loaded: true }));
