@@ -4,23 +4,23 @@ import { motion } from "framer-motion";
 
 export default function Loading() {
    const { context, setContext } = useContext(ContextProps);
-   const [loading, setLoading] = useState({
-      progress: 0
-   });
+   const [loading, setLoading] = useState(0);
 
    const handleLoad = () => {
-      const everyElement = document.querySelectorAll("*");
+      const everyElement = Array.from(document.querySelectorAll("*"));
       const loadedElements = [];
       everyElement.forEach((element, i) => {
          loadedElements.push(i);
-         element.onload = () => setLoading(load => ({ ...load, progress: loadedElements }));
+         element.onload = () => setLoading(Math.round(loadedElements.length * 100 / everyElement.length));
       })
-      window.onload = () => setContext(context => ({ ...context, loaded: true }));
    }
 
    useEffect(() => handleLoad(), []);
 
-   useEffect(() => console.log(loading), [loading]);
+   useEffect(() => {
+      if (loading === 100) setContext(context => ({ ...context, loaded: true }));
+      console.log(loading)
+   }, [loading]);
 
    const $1600px = window.matchMedia("(min-width: 1600px)").matches;
 
@@ -37,7 +37,7 @@ export default function Loading() {
                   cy={$1600px ? 200 : 100}
                   r={$1600px ? 160 : 80}
                   style={{
-                     strokeWidth: $1600px ? 17 : 10,
+                     strokeWidth: $1600px ? 18 : 10,
                      strokeLinecap: "round",
                      fill: "transparent",
                   }}
@@ -46,15 +46,13 @@ export default function Loading() {
                      stroke: "#16BAC5"
                   }}
                   animate={{
-                     pathLength: 0.95,
+                     pathLength: loading / 100,
                      transition: {
                         pathLength: { 
                            delay: 0.5, 
                            type: "spring",
                            bounce: 0.35,
-                           duration: 2, 
-                           repeat: Infinity, 
-                           repeatType: "reverse",
+                           duration: 2,
                         }
                      }
                   }}
@@ -81,7 +79,10 @@ export default function Loading() {
                   }} */
                />
             </motion.svg>
-            <h1 className="absolute w-full h-full flex justify-center font-dela items-center">{context.lang === "es" ? "CARGANDO" : "LOADING"}</h1>
+            <div className="absolute w-full h-full flex flex-col justify-center items-center font-dela">
+               <h4>{context.lang === "es" ? "CARGANDO" : "LOADING"}</h4>
+               <h4>{loading}%</h4>
+            </div>
          </div>
       </section>
    )

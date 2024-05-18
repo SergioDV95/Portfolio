@@ -89,11 +89,6 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                                  }
                                  drag={true}
                                  whileTap={{ cursor: "grabbing" }}
-                                 whileDrag={{
-                                    scale: 0.9,
-                                    cursor: "grabbing",
-                                    transition: { duration: 0.1, ease: "easeIn" },
-                                 }}
                                  dragTransition={{
                                     power: 0.3,
                                  }}
