@@ -6,37 +6,17 @@ export default function Loading() {
    const { context, setContext } = useContext(ContextProps);
    const [loading, setLoading] = useState(0);
 
-   let timeout;
    const handleLoad = () => {
-      const everyResource = Array.from(document.querySelectorAll("img, object, svg"));
+      const everyElement = Array.from(document.querySelectorAll("*"));
       const loadedElements = [];
-      everyResource.forEach((resource, i) => {
-         if (resource instanceof HTMLObjectElement || resource instanceof HTMLImageElement || resource instanceof SVGElement) {
-            loadedElements.push(i);
-            resource.onload = () => {
-               setLoading(Math.round(loadedElements.length * 100 / everyResource.length));
-            }
-         }
+      everyElement.forEach((element, i) => {
+         loadedElements.push(i);
+         element.onload = () => setLoading(loadedElements * 100 / everyElement.length);
       })
-      window.onload = () => timeout = setTimeout(() => setContext(context => ({ ...context, loaded: true })), 1000);
+      window.onload = () => setContext(context => ({ ...context, loaded: true }));
    }
 
-   useEffect(() => {
-      handleLoad();
-
-      return () => {
-         if (timeout) {
-            clearTimeout(timeout);
-         }
-      }
-   }, []);
-
-   /* useEffect(() => {
-      if (loading === 100) {
-         const timeout = setTimeout(() => setContext(context => ({ ...context, loaded: true })), 1000);
-         return () => clearTimeout(timeout);
-      };
-   }, [loading]); */
+   useEffect(() => handleLoad(), []);
 
    const $1600px = window.matchMedia("(min-width: 1600px)").matches;
 
@@ -62,12 +42,15 @@ export default function Loading() {
                      stroke: "#16BAC5"
                   }}
                   animate={{
-                     pathLength: loading / 100,
+                     pathLength: 0.95,
                      transition: {
-                        pathLength: {
+                        pathLength: { 
+                           delay: 0.5, 
                            type: "spring",
-                           bounce: 0.35,
-                           duration: 2,
+                           bounce: 0.45,
+                           duration: 2.5, 
+                           repeat: Infinity, 
+                           repeatType: "reverse",
                         }
                      }
                   }}
@@ -94,10 +77,7 @@ export default function Loading() {
                   }} */
                />
             </motion.svg>
-            <div className="absolute w-full h-full flex flex-col justify-center items-center font-dela">
-               <h4>{context.lang === "es" ? "CARGANDO" : "LOADING"}</h4>
-               <h4>{loading}%</h4>
-            </div>
+            <h1 className="absolute w-full h-full flex justify-center font-dela items-center">{context.lang === "es" ? "CARGANDO" : "LOADING"}</h1>
          </div>
       </section>
    )
