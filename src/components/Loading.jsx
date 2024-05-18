@@ -11,7 +11,7 @@ export default function Loading() {
       const loadedElements = [];
       everyElement.forEach((element, i) => {
          loadedElements.push(i);
-         element.onload = () => setLoading(loadedElements * 100 / everyElement.length);
+         element.onload = () => setLoading(loadedElements.length * 100 / everyElement.length);
       })
       window.onload = () => setContext(context => ({ ...context, loaded: true }));
    }
