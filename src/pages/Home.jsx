@@ -83,7 +83,7 @@ export default function Home() {
       <main className="mt-[10%] lg:mt-[5%] px-[5%] pb-[5%] flex flex-col max-lg:gap-[60px] overflow-hidden">
          <div id="intro" className="flex flex-col lg:grid lg:min-h-screen lg:grid-cols-[2fr_3fr] gap-[30px] max-lg:items-center">
             <div className="flex flex-col lg:pt-[15%] gap-[15px] lg:gap-[30px] max-lg:items-center">
-               <div className="font-dela max-lg:text-center text-[22px] lg:text-[30px] xl:whitespace-nowrap">
+               <div className="font-dela max-lg:text-center text-[22px] lg:text-[1.7em] xl:text-[2.1em] xl:whitespace-nowrap">
                   <p>{context.lang === "es" ? "HOLA, SOY UN" : "HELLO, I'M A"}<br />
                      <motion.span
                         layout
@@ -164,11 +164,12 @@ export default function Home() {
                   src={imports.puntos}
                   alt="puntos"
                />
-               <div className="absolute w-full h-full z-[2]"></div>
+               <div className="absolute w-full h-full z-[2]" />
                <motion.img
                   ref={ref => refs.current.laptop = ref}
                   initial={{
                      x: innerWidth / 2,
+                     position: "absolute",
                   }}
                   whileInView={{
                      x: 0,
@@ -178,7 +179,7 @@ export default function Home() {
                   }}
                   layout
                   animate={{
-                     scale: context.lgWidth ? [null, 1.1, 1] : [1.4, 1.5, 1.4],
+                     scale: context.lgWidth ? [null, 1.2, 1] : [1.3, 1.4, 1.3],
                      y: [null, -5, 0],
                      transition: {
                         repeat: Infinity,
@@ -223,7 +224,7 @@ export default function Home() {
                   }}
                >
                   <figure
-                     className="relative mt-[15%] lg:mt-[35%] w-[175px] h-[175px] lg:scale-[1.2] 2xl:scale-[1.4] 3xl:scale-[1.6] rounded-full bg-picture overflow-visible z-10"
+                     className="relative mt-[5vh] lg:mt-[15vh] 3xl:mt-[20vh] w-[175px] h-[175px] lg:scale-[1.2] 2xl:scale-[1.4] 3xl:scale-[1.6] rounded-full bg-picture overflow-visible z-10"
                   >
                      <img className="scale-[1.20] -rotate-[2deg] absolute bottom-[10%]" src={imports.yo} alt="Yo" />
                   </figure>
@@ -232,7 +233,7 @@ export default function Home() {
             </div>
             <div className="relative flex flex-col gap-[30px] lg:gap-[15px] max-lg:items-center">
                {context.lgWidth && <img className="absolute w-[578] h-[10%] -top-[5%] -right-[15%]" src={imports.rectas_horizontales} alt="lines" />}
-               <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
+               <h1 className="font-dela max-lg:text-center text-[#FFBE00] text-[2em] lg:text-[3em]">
                   {context.lang === "es" ? "SOBRE MÍ" : "ABOUT ME"}
                </h1>
                <div className="flex max-lg:flex-col lg:items-center gap-[30px] max-lg:items-center">
@@ -244,7 +245,7 @@ export default function Home() {
          <div id={context.lang === "es" ? "HABILIDADES" : "SKILLS"} className="flex z-[0] flex-col relative gap-[30px] lg:gap-[3lh] items-center max-lg:px-[5%] min-h-[65vh] lg:min-h-screen">
             <figure className="relative flex justify-center items-center">
                <img className={`absolute ${context.lang === "es" ? "-left-[50%] lg:-left-[70%] w-[50%] lg:w-[60%]" : "-left-[100%]"} `} src={imports.flechas_der} alt="Right arrows" />
-               <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
+               <h1 className="font-dela max-lg:text-center text-[#FFBE00] text-[2em] lg:text-[3em]">
                   {context.lang === "es" ? "HABILIDADES" : "SKILLS"}
                </h1>
                {context.lgWidth &&
@@ -280,14 +281,14 @@ export default function Home() {
                <Carousel
                   playButton={playButton}
                   skills={text.skills}
-                  slideClasses={"bg-skills min-h-[150px] border-[2px] border-slate-600 grid grid-cols-[1.5fr_1fr] gap-x-[10px] p-[10px] rounded-[8px] w-full box-border"}
+                  slideClasses={"bg-skills min-h-[150px] md:max-lg:min-h-[100px] xl:min-h-[200px] border-[2px] border-slate-600 grid grid-cols-[1.5fr_1fr] gap-x-[10px] p-[10px] rounded-[8px] w-full box-border"}
                />
             </motion.div>
          </div>
          <div id={context.lang === "es" ? "PROYECTOS" : "PROJECTS"} className="flex z-[0] relative flex-col gap-[30px] items-center px-[5%] max-lg:h-[850px] lg:min-h-screen lg:pb-[20vh]">
             <figure className="relative flex justify-center items-center">
                <img className={`absolute ${context.lang === "es" ? "-right-[50%] w-[50%]" : "-right-[60%] w-[60%]"} `} src={imports.flechas_der} alt="Right arrows" />
-               <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
+               <h1 className="font-dela max-lg:text-center text-[#FFBE00] text-[2em] lg:text-[3em]">
                   {context.lang === "es" ? "PROYECTOS" : "PROJECTS"}
                </h1>
             </figure>
@@ -302,7 +303,7 @@ export default function Home() {
          </div>
          <div id={context.lang === "es" ? "PROCESO" : "PROCESS"} className="flex relative z-[0] flex-col gap-[30px] items-center px-[5%] lg:h-[80vh] min-h-screen">
             <figure className="relative flex justify-center items-center">
-               <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
+               <h1 className="font-dela max-lg:text-center text-[#FFBE00] text-[2em] lg:text-[3em]">
                   {context.lang === "es" ? "PROCESOS" : "PROCESS"}
                </h1>
             </figure>
@@ -330,7 +331,7 @@ export default function Home() {
          </div>
          <div id="CONTACT" className="flex relative flex-col gap-[30px] items-center px-[5%] min-h-screen z-[0]">
             <figure className="relative flex justify-center items-center">
-               <h1 className="font-dela max-lg:text-center text-[24px] text-[#FFBE00] lg:text-[32px]">
+               <h1 className="font-dela max-lg:text-center text-[#FFBE00] text-[2em] lg:text-[3em]">
                   {context.lang === "es" ? "CONTÁCTAME" : "CONTACT ME"}
                </h1>
             </figure>
