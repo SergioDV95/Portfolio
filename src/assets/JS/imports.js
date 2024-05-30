@@ -32,6 +32,7 @@ import cool from "/png/cool_icon.png";
 import sad from "/png/sad_icon.png";
 import playIcon from "/SVG/play-solid.svg"
 import stopIcon from "/SVG/stop-solid.svg"
+import arrowUp from "/SVG/arrow-up-solid.svg"
 
 export { 
    logo,
@@ -68,4 +69,5 @@ export {
    sad,
    playIcon,
    stopIcon,
+   arrowUp,
 };

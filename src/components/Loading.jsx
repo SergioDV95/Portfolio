@@ -23,7 +23,7 @@ export default function Loading() {
       }
    }, []);
 
-   useEffect(() => console.log(loading), [loading]);
+   //useEffect(() => console.log(loading), [loading]);
 
    const $1600px = window.matchMedia("(min-width: 1600px)").matches;
 

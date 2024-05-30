@@ -14,7 +14,7 @@
       background-repeat: no-repeat;
    }
    body {
-      @apply h-full light_mode dark:dark_mode 2xl:text-[20px] 4xl:text-[24px] relative box-border text-white font-open
+      @apply h-full light_mode dark:dark_mode 2xl:text-[20px] 4xl:text-[24px] box-border text-white font-open overflow-y-scroll overflow-x-hidden
    }
 }
 

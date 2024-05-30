@@ -128,7 +128,6 @@ export default function NavBar() {
       <header className="flex max-lg:justify-end lg:text-[0.9em] 2xl:text-[0.8em] justify-between text-end gap-[30px] w-full max-lg:p-[5%] lg:px-[5%] lg:pt-[4%] relative">
          <img className="absolute z-[-1] -rotate-[20deg] max-lg:scale-[2] -left-[65%] lg:-left-[50%] lg:-top-[125%] 4xl:-top-[150%]" src={ondas} alt="ondas" />
          <motion.nav
-            layout
             className={`flex max-lg:z-50 max-lg:flex-col rounded-[8px] max-lg:gap-[2%] px-[1.5%] lg:items-center justify-center lg:justify-between font-semibold bg-navbarMobile lg:bg-navbarDesktop border-[2px] border-[#E2E2E2] box-border`}
             variants={variants.list}
             animate={context.lgWidth ? "" : (isOpen ? "open" : "closed")}
@@ -143,7 +142,7 @@ export default function NavBar() {
                   easing="ease-in"
                />
             </div>
-            <motion.div className="flex max-lg:flex-col gap-[15px] items-center" layout variants={context.lgWidth ? "" : variants.item} style={styles.item}>
+            <motion.div className="flex max-lg:flex-col gap-[15px] items-center" variants={context.lgWidth ? "" : variants.item} style={styles.item}>
                <motion.div
                   className="relative z-20"
                   animate={isActive ? 
@@ -180,7 +179,6 @@ export default function NavBar() {
                   }}
                >
                   <motion.div
-                     layout
                      ref={logoRef}
                      id="logo-gradient"
                      className="w-[6em] h-[6em] lg:w-[3.5em] lg:h-[3.5em] 3xl:w-[3em] 3xl:h-[3em] 4xl:w-[2.5em] 4xl:h-[2.5em]"
@@ -204,7 +202,6 @@ export default function NavBar() {
                      }}
                   >
                      <motion.div
-                        layout
                         className="w-[150%] h-[150%] -top-[25%] -left-[25%] rounded-full absolute"
                         animate={{
                            transform: [
@@ -244,7 +241,6 @@ export default function NavBar() {
             </motion.div>
             <div className="max-lg:h-full max-lg:px-[5%] font-semibold flex max-lg:flex-col lg:gap-[20px] xl:gap-[30px]">
                <motion.select
-                  layout
                   initial={{ opacity: 0.80 }}
                   whileHover={{ opacity: 1 }}
                   className="max-lg:text-start text-[20px] rounded-[8px] w-fit bg-[#FFFFFF33] shadow-button p-2 focus:outline-none cursor-pointer"
@@ -270,8 +266,7 @@ export default function NavBar() {
                   className="rounded-full flex bg-button shadow-lightMode box-border w-[65px] h-[33px] py-[2.4px] relative"
                   onClick={() => setContext(context => ({...context, mode: context.mode === "light" ? "dark" : "light"}))}
                >
-                  <motion.div 
-                     layout
+                  <motion.div
                      className="rounded-full box-border bg-[#FFFFFF] w-[44.5%] h-[85%] absolute"
                      animate={{ 
                         left: context.mode === "light" ? "5%" : "",
@@ -287,7 +282,6 @@ export default function NavBar() {
             </motion.div> */}
          </motion.nav>
          <motion.button
-            layout
             className="card font-semibold appearance-none"
             whileTap={{ scale: 0.9 }}
             whileHover={{ scale: 1.1 }}

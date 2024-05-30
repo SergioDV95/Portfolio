@@ -45,7 +45,6 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
          const svgs = [imports.lenguajes, imports.frameworks, imports.cms, imports.db, imports.tools];
          return Object.entries(skills).slice(slider.start, slider.end).map(([key, value], index) => (
             <motion.div
-               layout
                className={slideClasses}
                key={"key" + key + index}
                transition={{ delay: index * 0.1 }}
@@ -71,7 +70,6 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                            <div className='relative w-fit h-fit' key={"skill" + skill + i}>
                               <div className='w-[96%] h-[96%] box-border absolute top-0 left-0 border-[2px] xl:border-[3px] border-gray-300 border-dashed rounded-[7px]' />
                               <motion.p
-                                 layout
                                  className={`${selectedColors[i]} relative z-10 font-bold text-[12px] xl:text-[14px] 2xl:text-[16px] p-[5px] cursor-grab rounded-[5px] text-center`}
                                  initial={{ x: 0, y: 0 }}
                                  animate={playButton ?
@@ -115,7 +113,6 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       } else {
          return children.slice(slider.start, slider.end).map((value, index) => (
             <motion.div
-               layout
                className={slideClasses}
                key={"children" + Date.now() + index}
                initial={slider.direction === "right" ? animate.right : animate.left}
@@ -156,7 +153,6 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       for (let i = 0; i < slidesNum; i++) {
          slideInputsList.push(
             <motion.input
-               layout
                ref={refs.buttons[i]}
                key={"input" + Date.now() + i}
                name={"slideDots" + id}
@@ -213,7 +209,6 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
             </div>
             {!cancelButtons &&
                <motion.div
-                  layout
                   className="flex gap-[10px]"
                >
                   {carouselButtons()}

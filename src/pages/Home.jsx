@@ -37,6 +37,7 @@ export default function Home() {
    });
 
    const refs = useRef({});
+   const arrowRef = useRef(null);
 
    /* function calcDistance(element, offset = "right") {
       if (element) {
@@ -79,14 +80,47 @@ export default function Home() {
       });
    }, [context.lang]);
 
+   useEffect(() => {
+      if (arrowRef.current) {
+         const x = window.innerWidth - arrowRef.current.getBoundingClientRect().right;
+         console.log(x);
+      }
+   }, [arrowRef.current]);
+
+   const arrowVariant = {
+      figure: {
+         hidden: {
+            x: arrowRef.current && innerWidth - arrowRef.current.getBoundingClientRect().right,
+         },
+         show: {
+            x: 0,
+            transition: {
+               type: "spring",
+               duration: 2,
+            }
+         }
+      },
+      img: {
+         hidden: {
+            transform: `rotate(180deg)`,
+         },
+         show: {
+            transform: "rotate(0deg)",
+            transition: {
+               type: "spring",
+               duration: 2,
+            }
+         }
+      }
+   };
+
    return (
-      <main className="mt-[10%] lg:mt-[5%] px-[5%] pb-[5%] flex flex-col max-lg:gap-[60px] overflow-hidden">
+      <main className="mt-[10%] lg:mt-[5%] px-[5%] pb-[5%] max-lg:gap-[60px] overflow-x-hidden">
          <div id="intro" className="flex flex-col lg:grid lg:min-h-screen lg:grid-cols-[2fr_3fr] gap-[30px] max-lg:items-center">
             <div className="flex flex-col lg:pt-[15%] gap-[15px] lg:gap-[30px] max-lg:items-center">
                <div className="font-dela max-lg:text-center text-[22px] lg:text-[1.7em] xl:text-[2.1em] xl:whitespace-nowrap">
                   <p>{context.lang === "es" ? "HOLA, SOY UN" : "HELLO, I'M A"}<br />
                      <motion.span
-                        layout
                         className="text-[1.2em] lg:max-xl:text-[1.1em]"
                         style={{
                            WebkitBackgroundClip: "text",
@@ -177,7 +211,6 @@ export default function Home() {
                         type: "spring",
                      }
                   }}
-                  layout
                   animate={{
                      scale: context.lgWidth ? [null, 1.2, 1] : [1.3, 1.4, 1.3],
                      y: [null, -5, 0],
@@ -338,6 +371,23 @@ export default function Home() {
             <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
             <img className="absolute top-[40%] z-[-1] max-lg:scale-[1.5] lg:w-[calc(732px/1.2)] lg:-left-[8%]" src={context.lang === "es" ? imports.contactame : imports.contact} alt="Contact me" />
             <ContactMe lang={context.lang} />
+            <motion.figure
+            ref={arrowRef}
+            className="rounded-full bg-white w-fit p-[0.75em] cursor-pointer sticky top-[80%] left-[98%] lg:left-[95%] z-10"
+            initial="hidden"
+            whileInView="show"
+            variants={arrowVariant.figure}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
+               <motion.img 
+                  className="w-[2em] h-[2em]" 
+                  alt="Arrow" 
+                  src={imports.arrowUp}
+                  initial="hidden"
+                  whileInView="show"
+                  variants={arrowVariant.img}
+               />
+            </motion.figure>
          </div>
       </main>
    )
