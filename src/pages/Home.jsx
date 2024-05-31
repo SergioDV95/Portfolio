@@ -80,17 +80,10 @@ export default function Home() {
       });
    }, [context.lang]);
 
-   useEffect(() => {
-      if (arrowRef.current) {
-         const x = window.innerWidth - arrowRef.current.getBoundingClientRect().right;
-         console.log(x);
-      }
-   }, [arrowRef.current]);
-
    const arrowVariant = {
       figure: {
          hidden: {
-            x: arrowRef.current && innerWidth - arrowRef.current.getBoundingClientRect().right,
+            x: context.lgWidth ? innerWidth / 14 : innerWidth / 6,
          },
          show: {
             x: 0,
@@ -371,24 +364,24 @@ export default function Home() {
             <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
             <img className="absolute top-[40%] z-[-1] max-lg:scale-[1.5] lg:w-[calc(732px/1.2)] lg:-left-[8%]" src={context.lang === "es" ? imports.contactame : imports.contact} alt="Contact me" />
             <ContactMe lang={context.lang} />
-            <motion.figure
+         </div>
+         <motion.figure
             ref={arrowRef}
-            className="rounded-full bg-white w-fit p-[0.75em] cursor-pointer sticky top-[80%] left-[98%] lg:left-[95%] z-10"
+            className="rounded-full bg-white w-fit p-[0.75em] cursor-pointer sticky top-[80%] left-[80%] lg:left-[95%] z-10"
             initial="hidden"
             whileInView="show"
             variants={arrowVariant.figure}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            >
-               <motion.img 
-                  className="w-[2em] h-[2em]" 
-                  alt="Arrow" 
-                  src={imports.arrowUp}
-                  initial="hidden"
-                  whileInView="show"
-                  variants={arrowVariant.img}
-               />
-            </motion.figure>
-         </div>
+         >
+            <motion.img 
+               className="w-[2em] h-[2em]" 
+               alt="Arrow" 
+               src={imports.arrowUp}
+               initial="hidden"
+               whileInView="show"
+               variants={arrowVariant.img}
+            />
+         </motion.figure>
       </main>
    )
 };
