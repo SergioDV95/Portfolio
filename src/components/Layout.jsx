@@ -8,10 +8,10 @@ export default function Layout() {
    const { context } = useContext(ContextProps);
    return (
       <>
-         <section className={`${context.loaded ? "hidden" : "block"}`}>
+         <section className={`${context.load ? "hidden" : "block"}`}>
             <Loading />
          </section>
-         <section className={`${context.loaded ? "block" : "hidden"}`}>
+         <section className={`${context.load ? "block" : "hidden"}`}>
             <NavBar />
             <Outlet />
          </section>

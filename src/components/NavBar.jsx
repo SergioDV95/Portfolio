@@ -179,6 +179,7 @@ export default function NavBar() {
                   }}
                >
                   <motion.div
+                     layout
                      ref={logoRef}
                      id="logo-gradient"
                      className="w-[6em] h-[6em] lg:w-[3.5em] lg:h-[3.5em] 3xl:w-[3em] 3xl:h-[3em] 4xl:w-[2.5em] 4xl:h-[2.5em]"
@@ -202,6 +203,7 @@ export default function NavBar() {
                      }}
                   >
                      <motion.div
+                        layout
                         className="w-[150%] h-[150%] -top-[25%] -left-[25%] rounded-full absolute"
                         animate={{
                            transform: [

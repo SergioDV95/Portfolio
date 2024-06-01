@@ -70,6 +70,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                            <div className='relative w-fit h-fit' key={"skill" + skill + i}>
                               <div className='w-[96%] h-[96%] box-border absolute top-0 left-0 border-[2px] xl:border-[3px] border-gray-300 border-dashed rounded-[7px]' />
                               <motion.p
+                                 onTouchStart={e => e.stopPropagation()}
                                  className={`${selectedColors[i]} relative z-10 font-bold text-[12px] xl:text-[14px] 2xl:text-[16px] p-[5px] cursor-grab rounded-[5px] text-center`}
                                  initial={{ x: 0, y: 0 }}
                                  animate={playButton ?
@@ -185,7 +186,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
             className="flex flex-col relative w-full pb-[60px] gap-[30px] lg:gap-[60px] items-center px-[5%]"
             onTouchStart={e => {
                e.stopPropagation();
-               startXCoord = e.touches[0].clientX
+               startXCoord = e.touches[0].clientX;
             }}
             onTouchEnd={e => {
                e.stopPropagation();

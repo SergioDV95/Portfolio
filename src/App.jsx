@@ -12,7 +12,7 @@ const Home = lazy(() => import("./pages/Home"));
 
 export default function App() {
 	const [context, setContext] = useState({
-		loaded: false,
+		load: false,
 		lang: localStorage.getItem('lang') || navigator.language.startsWith('es') ? 'es' : 'en',
 		mode: localStorage.getItem('mode') || 'light',
 		lgWidth: window.innerWidth >= 1024,
@@ -36,15 +36,15 @@ export default function App() {
 	}, [context.mode, context.lang]);
 
 	useEffect(() => {
-		const handleWinLoad = () => setContext(context => ({ ...context, loaded: true }));
-		//const handleWinUnload = () => setContext(context => ({ ...context, loaded: false }));
+		const handleWinLoad = () => setContext(context => ({ ...context, load: true }));
+		//const handleWinUnload = () => setContext(context => ({ ...context, load: false }));
 		window.addEventListener('load', handleWinLoad);
 		//window.addEventListener('unload', handleWinUnload);
 		return () => {
 			window.removeEventListener('load', handleWinLoad);
 			//window.removeEventListener('unload', handleWinUnload);
 		}
-	}, []);
+	}, [context.load]);
 
 	return (
 		<BrowserRouter>

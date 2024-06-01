@@ -108,7 +108,7 @@ export default function Home() {
    };
 
    return (
-      <main className="mt-[10%] lg:mt-[5%] px-[5%] pb-[5%] max-lg:gap-[60px] overflow-x-hidden">
+      <main className="flex flex-col mt-[10%] lg:mt-[5%] px-[5%] pb-[5%] max-lg:gap-[10vh] overflow-x-hidden">
          <div id="intro" className="flex flex-col lg:grid lg:min-h-screen lg:grid-cols-[2fr_3fr] gap-[30px] max-lg:items-center">
             <div className="flex flex-col lg:pt-[15%] gap-[15px] lg:gap-[30px] max-lg:items-center">
                <div className="font-dela max-lg:text-center text-[22px] lg:text-[1.7em] xl:text-[2.1em] xl:whitespace-nowrap">
@@ -175,7 +175,6 @@ export default function Home() {
             <div className="relative ">
                <div className="absolute top-[30%] lg:top-[20%] right-[30%] 4xl:right-[35%]  scale-[0.85] md:scale-[0.5] lg:scale-[0.6] xl:scale-[0.5] w-fit overflow-x-hidden">
                   <motion.img
-                     className=""
                      animate={{ x: [null, "-17.8%"] }}
                      transition={{
                         ease: "linear",
@@ -196,7 +195,6 @@ export default function Home() {
                   ref={ref => refs.current.laptop = ref}
                   initial={{
                      x: innerWidth / 2,
-                     position: "absolute",
                   }}
                   whileInView={{
                      x: 0,
@@ -205,7 +203,7 @@ export default function Home() {
                      }
                   }}
                   animate={{
-                     scale: context.lgWidth ? [null, 1.2, 1] : [1.3, 1.4, 1.3],
+                     scale: context.lgWidth ? [1.1, 1.2, 1.1] : [1.3, 1.4, 1.3],
                      y: [null, -5, 0],
                      transition: {
                         repeat: Infinity,
@@ -236,7 +234,7 @@ export default function Home() {
                </a>
             </button>
          </div>
-         <div id={context.lang === "es" ? "SOBRE MI" : "ABOUT ME"} className="flex  flex-col lg:grid w-fit lg:grid-cols-[1.5fr_3fr] max-lg:gap-[30px] max-lg:items-center max-md:mt-[35%] max-lg:mt-[25%] min-h-screen">
+         <div id={context.lang === "es" ? "SOBRE MI" : "ABOUT ME"} className="flex flex-col lg:grid w-fit lg:grid-cols-[1.5fr_3fr] max-lg:gap-[30px] max-lg:items-center max-md:mt-[35%] max-lg:mt-[25%] min-h-screen">
             <div className="flex lg:justify-center relative">
                <motion.div
                   initial={{
@@ -268,7 +266,7 @@ export default function Home() {
                </div>
             </div>
          </div>
-         <div id={context.lang === "es" ? "HABILIDADES" : "SKILLS"} className="flex z-[0] flex-col relative gap-[30px] lg:gap-[3lh] items-center max-lg:px-[5%] min-h-[65vh] lg:min-h-screen">
+         <div id={context.lang === "es" ? "HABILIDADES" : "SKILLS"} className="flex z-[0] flex-col relative gap-[30px] lg:gap-[3lh] items-center max-lg:px-[5%] min-h-screen">
             <figure className="relative flex justify-center items-center">
                <img className={`absolute ${context.lang === "es" ? "-left-[50%] lg:-left-[70%] w-[50%] lg:w-[60%]" : "-left-[100%]"} `} src={imports.flechas_der} alt="Right arrows" />
                <h1 className="font-dela max-lg:text-center text-[#FFBE00] text-[2em] lg:text-[3em]">
@@ -311,7 +309,7 @@ export default function Home() {
                />
             </motion.div>
          </div>
-         <div id={context.lang === "es" ? "PROYECTOS" : "PROJECTS"} className="flex z-[0] relative flex-col gap-[30px] items-center px-[5%] max-lg:h-[850px] lg:min-h-screen lg:pb-[20vh]">
+         <div id={context.lang === "es" ? "PROYECTOS" : "PROJECTS"} className="flex z-[0] relative flex-col gap-[30px] items-center px-[5%] min-h-screen lg:pb-[20vh]">
             <figure className="relative flex justify-center items-center">
                <img className={`absolute ${context.lang === "es" ? "-right-[50%] w-[50%]" : "-right-[60%] w-[60%]"} `} src={imports.flechas_der} alt="Right arrows" />
                <h1 className="font-dela max-lg:text-center text-[#FFBE00] text-[2em] lg:text-[3em]">

@@ -4,10 +4,9 @@ export const renderProjects = (projects, lang, lgWidth) => {
    return projects.map((project, index) => {
       const selectedColors = [];
       return (
-         <motion.div 
-            layout
+         <motion.div
             key={project.name + index} 
-            className="max-lg:text-left max-lg:overflow-x-hidden gap-[50px] max-lg:pt-[30px] flex max-lg:flex-col items-center"
+            className="max-lg:text-left max-lg:overflow-hidden gap-[50px] max-lg:pt-[30px] flex max-lg:flex-col items-center"
             initial={{ 
                x: (index % 2 == 0) ? -innerWidth / 2 : innerWidth / 2,
             }}
