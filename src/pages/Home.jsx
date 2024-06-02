@@ -206,7 +206,7 @@ export default function Home() {
                <motion.img
                   ref={ref => refs.current.laptop = ref}
                   initial={{
-                     x: innerWidth / 2,
+                     x: innerWidth / 3,
                   }}
                   whileInView={{
                      x: 0,
@@ -215,7 +215,7 @@ export default function Home() {
                      }
                   }}
                   animate={{
-                     scale: context.lgWidth ? [1.1, 1.2, 1.1] : [1.3, 1.4, 1.3],
+                     scale: context.lgWidth ? [1.1, 1.2, 1.1] : [1.2, 1.4, 1.2],
                      y: [null, -5, 0],
                      transition: {
                         repeat: Infinity,

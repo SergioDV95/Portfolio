@@ -291,7 +291,7 @@ export default function NavBar() {
             type="button"
             onClick={() => document.getElementById("CONTACT").scrollIntoView({ behavior: "smooth" })}
          >
-            <h4 className="font-dela absolute bg-[#16BAC5] lg:max-xl:text-[10px] 4xl:text-[18px] z-10">
+            <h4 className="font-dela absolute bg-[#16BAC5] lg:max-[1300px]:text-[11.5px] 4xl:text-[17px] z-10">
                {context.lang === "es" ? "CONTÁCTAME" : "CONTACT ME"}
             </h4>
          </motion.button>
