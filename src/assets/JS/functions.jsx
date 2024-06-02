@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 
-export const renderProjects = (projects, lang, lgWidth) => {
+export const renderProjects = (projects, context) => {
    return projects.map((project, index) => {
       const selectedColors = [];
       return (
@@ -17,9 +17,9 @@ export const renderProjects = (projects, lang, lgWidth) => {
                }
             }}
          >
-            {lgWidth ? ((index % 2 == 0) && <img className="scale-x-[1.2] scale-y-[1.3] lg:w-[50%]" src={project.image} alt={project.name} />) : <img className="scale-x-[1.4] scale-y-[1.5] lg:w-[50%]" src={project.image} alt={project.name} />}
+            {context.lgWidth ? ((index % 2 == 0) && <img className="scale-x-[1.2] scale-y-[1.3] lg:w-[50%]" src={project.image} alt={project.name} />) : <img className="scale-x-[1.4] scale-y-[1.5] lg:w-[50%]" src={project.image} alt={project.name} />}
             <div className="flex flex-col gap-[15px]">
-               <h1 className="font-dela text-[20px] text-[#FFBE00]">{project.name}</h1>
+               <h1 className={`font-dela text-[20px] ${context.light ? "text-[#012f4b]" : "text-[#FFBE00]"}`}>{project.name}</h1>
                <div className="flex flex-wrap gap-[5px]">
                   {project.technologies?.length && project.technologies.map((tech, i) => {
                      const number = Math.random();
@@ -44,12 +44,12 @@ export const renderProjects = (projects, lang, lgWidth) => {
                         target="_blank"
                         rel="external"
                      >
-                     {lang === "es" ? "VISITAR WEB" : "VISIT WEBSITE"}
+                     {context.lang === "es" ? "VISITAR WEB" : "VISIT WEBSITE"}
                      </a>
                   </button>
                </div>
             </div>
-            {lgWidth && (index % 2 != 0) && <img className="scale-x-[1.4] scale-y-[1.5] lg:w-[50%]" src={project.image} alt={project.name} />}
+            {context.lgWidth && (index % 2 != 0) && <img className="scale-x-[1.4] scale-y-[1.5] lg:w-[50%]" src={project.image} alt={project.name} />}
          </motion.div>
       )
    });

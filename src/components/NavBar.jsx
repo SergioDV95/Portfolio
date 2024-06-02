@@ -259,21 +259,21 @@ export default function NavBar() {
                </motion.select>
                {inputElements()}
             </div>
-            {/* <motion.div
+            <motion.div
                initial={styles.item}
                variants={variants.item}
                className="flex gap-[10px]"
             >
                <div 
                   className="rounded-full flex bg-button shadow-lightMode box-border w-[65px] h-[33px] py-[2.4px] relative"
-                  onClick={() => setContext(context => ({...context, mode: context.mode === "light" ? "dark" : "light"}))}
+                  onClick={() => setContext(context => ({...context, light: context.light ? 0 : 1 }))}
                >
                   <motion.div
                      className="rounded-full box-border bg-[#FFFFFF] w-[44.5%] h-[85%] absolute"
                      animate={{ 
-                        left: context.mode === "light" ? "5%" : "",
-                        right: context.mode === "light" ? "" : "5%",
-                        background: context.mode === "light" ? "#FFFFFF" : "#262626"
+                        left: context.light ? "5%" : "",
+                        right: context.light ? "" : "5%",
+                        background: context.light ? "#FFFFFF" : "#262626"
                      }}
                      transition={{ 
                         duration: 0.25,
@@ -281,7 +281,7 @@ export default function NavBar() {
                      }}
                   ></motion.div>
                </div>
-            </motion.div> */}
+            </motion.div>
          </motion.nav>
          <motion.button
             className="card font-semibold appearance-none"

@@ -8,13 +8,14 @@
       background-size: cover;
       background-repeat: no-repeat;
    }
+
    .dark_mode {
-      background-image: url('/png/fondo_dark.png');
-      background-size: cover;
+      background-image: radial-gradient(circle closest-corner at 85% 5%, white 35%, #004f99 60%, #003566 85%, #00284d 100%);
       background-repeat: no-repeat;
    }
+
    body {
-      @apply h-full light_mode dark:dark_mode 2xl:text-[20px] 4xl:text-[24px] box-border text-white font-open
+      @apply h-full 2xl:text-[20px] 4xl:text-[24px] box-border text-white font-open
    }
 }
 
@@ -187,6 +188,10 @@
       left: 150%;
    }
 
+   .main-headings {
+      @apply font-dela max-lg:text-center text-[2em] lg:text-[3em]
+   }
+
    @keyframes enabledButton {
       0% {
          opacity: 0.5;
@@ -253,27 +258,6 @@
 
    #logo-gradient:hover {
       cursor: var(--cursor);
-   }
-
-   .dev-text {
-      position: relative;
-      z-index: 1;
-      background: #FFBE00;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-   }
-
-   .dev-text::before {
-      position: relative;
-      left: 50%;
-      z-index: 5;
-      background: red/* linear-gradient(to right, #FFFFFF80, #FFFFFF, #FFFFFF80) */;
-      -webkit-background-clip: text;
-      background-clip: text;
-      height: 50px;
-      width: 50px;
-      /* animation: slideRight 10s infinite; */
    }
 
    @keyframes slideRight {

@@ -14,7 +14,7 @@ export default function App() {
 	const [context, setContext] = useState({
 		load: false,
 		lang: localStorage.getItem('lang') || navigator.language.startsWith('es') ? 'es' : 'en',
-		mode: localStorage.getItem('mode') || 'light',
+		light: Number(localStorage.getItem('light')) || 0,
 		lgWidth: window.innerWidth >= 1024,
 	});
 
@@ -29,11 +29,11 @@ export default function App() {
          mediaQueryList.removeEventListener("change", handleResize);
       };
    }, []);
-
+	
 	useEffect(() => {
 		localStorage.setItem('lang', context.lang);
-		localStorage.setItem('mode', context.mode);
-	}, [context.mode, context.lang]);
+		localStorage.setItem('light', context.light.toString());
+	}, [context.light, context.lang]);
 
 	useEffect(() => {
 		const handleWinLoad = () => setContext(context => ({ ...context, load: true }));

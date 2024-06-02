@@ -108,20 +108,32 @@ export default function Home() {
    };
 
    return (
-      <main className="flex flex-col mt-[10%] lg:mt-[5%] px-[5%] pb-[5%] max-lg:gap-[10vh] overflow-x-hidden">
+      <section className="flex flex-col mt-[10%] lg:mt-[5%] px-[5%] pb-[5%] max-lg:gap-[10vh] overflow-x-hidden">
          <div id="intro" className="flex flex-col lg:grid lg:min-h-screen lg:grid-cols-[2fr_3fr] gap-[30px] max-lg:items-center">
             <div className="flex flex-col lg:pt-[15%] gap-[15px] lg:gap-[30px] max-lg:items-center">
                <div className="font-dela max-lg:text-center text-[22px] lg:text-[1.7em] xl:text-[2.1em] xl:whitespace-nowrap">
                   <p>{context.lang === "es" ? "HOLA, SOY UN" : "HELLO, I'M A"}<br />
                      <motion.span
-                        className="text-[1.2em] lg:max-xl:text-[1.1em]"
+                        className="text-[1.2em] bg-[length:110%] lg:max-xl:text-[1.1em]"
                         style={{
                            WebkitBackgroundClip: "text",
                            backgroundClip: "text",
                            color: "transparent",
                         }}
                         animate={{
-                           backgroundImage: [
+                           backgroundImage: context.light ? [
+                              "linear-gradient(to right, #012f4b, #FFFFFF, #012f4b 0%)",
+                              "linear-gradient(to right, #012f4b, #FFFFFF 0%, #012f4b 10%)",
+                              "linear-gradient(to right, #012f4b 0%, #FFFFFF, #012f4b 20%)",
+                              "linear-gradient(to right, #012f4b 20%, #FFFFFF, #012f4b 40%)",
+                              "linear-gradient(to right, #012f4b 40%, #FFFFFF, #012f4b 60%)",
+                              "linear-gradient(to right, #012f4b 60%, #FFFFFF, #012f4b 80%)",
+                              "linear-gradient(to right, #012f4b 80%, #FFFFFF, #012f4b 100%)",
+                              "linear-gradient(to right, #012f4b 90%, #FFFFFF 100%, #012f4b)",
+                              "linear-gradient(to right, #012f4b 100%, #FFFFFF, #012f4b)",
+                           ]
+                           :
+                           [
                               "linear-gradient(to right, #FFBE00, #FFFFFF, #FFBE00 0%)",
                               "linear-gradient(to right, #FFBE00, #FFFFFF 0%, #FFBE00 10%)",
                               "linear-gradient(to right, #FFBE00 0%, #FFFFFF, #FFBE00 20%)",
@@ -149,7 +161,7 @@ export default function Home() {
                {context.lgWidth && (
                   <>
                      <div className="flex gap-[10px]">
-                        <div className="bg-[#FFBE00] w-[2px] h-[2lh] rounded-full " />
+                        <div className={`${context.light ? "bg-[#012f4b]" : "bg-[#FFBE00]"} w-[2px] h-[2lh] rounded-full `} />
                         <h4 className="">
                            {context.lang === "es" ?
                               "Escultor de ideas para la web, doy forma y convierto en realidad tus proyectos más ambiciosos o sencillos"
@@ -170,7 +182,7 @@ export default function Home() {
                      </button>
                   </>
                )}
-               {!context.lgWidth && <div className="bg-[#FFBE00] w-[15%] h-[2px] rounded-full" />}
+               {!context.lgWidth && <div className={`${context.light ? "bg-[#012f4b]" : "bg-[#FFBE00]"} w-[15%] h-[2px] rounded-full`} />}
             </div>
             <div className="relative ">
                <div className="absolute top-[30%] lg:top-[20%] right-[30%] 4xl:right-[35%]  scale-[0.85] md:scale-[0.5] lg:scale-[0.6] xl:scale-[0.5] w-fit overflow-x-hidden">
@@ -257,11 +269,11 @@ export default function Home() {
             </div>
             <div className="relative flex flex-col gap-[30px] lg:gap-[15px] max-lg:items-center">
                {context.lgWidth && <img className="absolute w-[578] h-[10%] -top-[5%] -right-[15%]" src={imports.rectas_horizontales} alt="lines" />}
-               <h1 className="font-dela max-lg:text-center text-[#FFBE00] text-[2em] lg:text-[3em]">
+               <motion.h1 className="main-headings" animate={{ color: context.light ? "#012f4b" : "#FFBE00" }}>
                   {context.lang === "es" ? "SOBRE MÍ" : "ABOUT ME"}
-               </h1>
+               </motion.h1>
                <div className="flex max-lg:flex-col lg:items-center gap-[30px] max-lg:items-center">
-                  <div className="bg-[#FFBE00] w-[15%] lg:w-[2px] h-[2px] lg:h-full rounded-full" />
+                  <div className={`${context.light ? "bg-[#012f4b]" : "bg-[#FFBE00]"} w-[15%] lg:w-[2px] h-[2px] lg:h-full rounded-full`} />
                   <div className="max-lg:text-center leading-[1.5em] max-lg:px-[5%]" dangerouslySetInnerHTML={{ __html: text.aboutMe }} />
                </div>
             </div>
@@ -269,9 +281,9 @@ export default function Home() {
          <div id={context.lang === "es" ? "HABILIDADES" : "SKILLS"} className="flex z-[0] flex-col relative gap-[30px] lg:gap-[3lh] items-center max-lg:px-[5%] min-h-screen">
             <figure className="relative flex justify-center items-center">
                <img className={`absolute ${context.lang === "es" ? "-left-[50%] lg:-left-[70%] w-[50%] lg:w-[60%]" : "-left-[100%]"} `} src={imports.flechas_der} alt="Right arrows" />
-               <h1 className="font-dela max-lg:text-center text-[#FFBE00] text-[2em] lg:text-[3em]">
+               <motion.h1 className="main-headings" animate={{ color: context.light ? "#012f4b" : "#FFBE00" }}>
                   {context.lang === "es" ? "HABILIDADES" : "SKILLS"}
-               </h1>
+               </motion.h1>
                {context.lgWidth &&
                   <button
                      className="buttonGlow absolute -right-[35%] text-[1em]"
@@ -289,7 +301,7 @@ export default function Home() {
                   <img className="w-[20px] h-[20px]" src={playButton ? imports.stopIcon : imports.playIcon} alt="start/stop" />
                </button>
             }
-            <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
+            <div className={`${context.light ? "bg-[#012f4b]" : "bg-[#FFBE00]"} w-[20%] h-[2px] rounded-full lg:hidden`} />
             <img className="absolute top-[40%] z-[-1] scale-[4] lg:scale-[1.5]" src={context.lang === "es" ? imports.habilidades : imports.skills} alt="Skills" />
             <motion.div
                initial={{
@@ -312,26 +324,26 @@ export default function Home() {
          <div id={context.lang === "es" ? "PROYECTOS" : "PROJECTS"} className="flex z-[0] relative flex-col gap-[30px] items-center px-[5%] min-h-screen lg:pb-[20vh]">
             <figure className="relative flex justify-center items-center">
                <img className={`absolute ${context.lang === "es" ? "-right-[50%] w-[50%]" : "-right-[60%] w-[60%]"} `} src={imports.flechas_der} alt="Right arrows" />
-               <h1 className="font-dela max-lg:text-center text-[#FFBE00] text-[2em] lg:text-[3em]">
+               <motion.h1 className="main-headings" animate={{ color: context.light ? "#012f4b" : "#FFBE00" }}>
                   {context.lang === "es" ? "PROYECTOS" : "PROJECTS"}
-               </h1>
+               </motion.h1>
             </figure>
-            <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
+            <div className={`${context.light ? "bg-[#012f4b]" : "bg-[#FFBE00]"} w-[20%] h-[2px] rounded-full lg:hidden`} />
             <img className="absolute top-[15%] lg:top-[40%] z-[-1] scale-[4] lg:scale-[2]" src={context.lang === "es" ? imports.proyectos : imports.projects} alt="Projects" />
             <Carousel
                cancelButtons={context.lgWidth}
             >
-               {renderProjects(text.projects, context.lang, context.lgWidth)}
+               {renderProjects(text.projects, context)}
             </Carousel>
             {context.lgWidth && <img className="absolute w-[578px] scale-[0.8] h-[7%] bottom-0 -left-[15%]" src={imports.rectas_horizontales} alt="lines" />}
          </div>
          <div id={context.lang === "es" ? "PROCESO" : "PROCESS"} className="flex relative z-[0] flex-col gap-[30px] items-center px-[5%] lg:h-[80vh] min-h-screen">
             <figure className="relative flex justify-center items-center">
-               <h1 className="font-dela max-lg:text-center text-[#FFBE00] text-[2em] lg:text-[3em]">
+               <motion.h1 className="main-headings" animate={{ color: context.light ? "#012f4b" : "#FFBE00" }}>
                   {context.lang === "es" ? "PROCESOS" : "PROCESS"}
-               </h1>
+               </motion.h1>
             </figure>
-            <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
+            <div className={`${context.light ? "bg-[#012f4b]" : "bg-[#FFBE00]"} w-[20%] h-[2px] rounded-full lg:hidden`} />
             <img className="absolute top-[10%] lg:top-[40%] -left-[35%] z-[-1] lg:scale-[0.3] scale-[0.5]" src={imports.puntos} alt="flechas" />
             <img className="absolute top-[50%] lg:top-0 lg:right-0 lg:w-[calc(732px/1.2)] z-[-1] max-lg:scale-[1.5]" src={context.lang === "es" ? imports.procesos : imports.processes} alt="Process" />
             <motion.object
@@ -355,15 +367,15 @@ export default function Home() {
          </div>
          <div id="CONTACT" className="flex relative flex-col gap-[30px] items-center px-[5%] min-h-screen z-[0]">
             <figure className="relative flex justify-center items-center">
-               <h1 className="font-dela max-lg:text-center text-[#FFBE00] text-[2em] lg:text-[3em]">
+               <motion.h1 className="main-headings" animate={{ color: context.light ? "#012f4b" : "#FFBE00" }}>
                   {context.lang === "es" ? "CONTÁCTAME" : "CONTACT ME"}
-               </h1>
+               </motion.h1>
             </figure>
-            <div className="bg-[#FFBE00] w-[20%] h-[2px] rounded-full lg:hidden" />
+            <div className={`${context.light ? "bg-[#012f4b]" : "bg-[#FFBE00]"} w-[20%] h-[2px] rounded-full lg:hidden`} />
             <img className="absolute top-[40%] z-[-1] max-lg:scale-[1.5] lg:w-[calc(732px/1.2)] lg:-left-[8%]" src={context.lang === "es" ? imports.contactame : imports.contact} alt="Contact me" />
             <ContactMe lang={context.lang} />
          </div>
-         <motion.figure
+         <motion.button
             ref={arrowRef}
             className="rounded-full bg-white w-fit p-[0.75em] cursor-pointer sticky top-[80%] left-[80%] lg:left-[95%] z-10"
             initial="hidden"
@@ -375,11 +387,9 @@ export default function Home() {
                className="w-[2em] h-[2em]" 
                alt="Arrow" 
                src={imports.arrowUp}
-               initial="hidden"
-               whileInView="show"
                variants={arrowVariant.img}
             />
-         </motion.figure>
-      </main>
+         </motion.button>
+      </section>
    )
 };
