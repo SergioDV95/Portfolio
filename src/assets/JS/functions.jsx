@@ -18,8 +18,8 @@ export const renderProjects = (projects, context) => {
             }}
          >
             {context.lgWidth ? ((index % 2 == 0) && <img className="scale-x-[1.2] scale-y-[1.3] lg:w-[50%]" src={project.image} alt={project.name} />) : <img className="scale-x-[1.4] scale-y-[1.5] lg:w-[50%]" src={project.image} alt={project.name} />}
-            <div className="flex flex-col gap-[15px]">
-               <h1 className={`font-dela text-[20px] ${context.light ? "text-[#012f4b]" : "text-[#FFBE00]"}`}>{project.name}</h1>
+            <div className="flex flex-col gap-[15px] w-[50%]">
+               <h1 className="font-dela text-[20px] text-[#012f4b] dark:text-[#FFBE00]">{project.name}</h1>
                <div className="flex flex-wrap gap-[5px]">
                   {project.technologies?.length && project.technologies.map((tech, i) => {
                      const number = Math.random();
@@ -37,7 +37,7 @@ export const renderProjects = (projects, context) => {
                </div>
                <p>{project.description}</p>
                <div className="flex max-lg:justify-center mt-[10px]">
-                  <button className="buttonGlow" type="button" >
+                  <button className="buttonGlow dark:border-[#FFFFFF80]" type="button" >
                      <a 
                         className="px-[0.5em] py-[0.5em] text-[0.9em] w-full h-full"
                         href={project.link}
@@ -49,7 +49,7 @@ export const renderProjects = (projects, context) => {
                   </button>
                </div>
             </div>
-            {context.lgWidth && (index % 2 != 0) && <img className="scale-x-[1.4] scale-y-[1.5] lg:w-[50%]" src={project.image} alt={project.name} />}
+            {context.lgWidth && (index % 2 != 0) && <img className="scale-x-[1.2] scale-y-[1.3] lg:w-[50%]" src={project.image} alt={project.name} />}
          </motion.div>
       )
    });

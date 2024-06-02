@@ -128,7 +128,7 @@ export default function NavBar() {
       <header className="flex max-lg:justify-end lg:text-[0.9em] 2xl:text-[0.8em] justify-between text-end gap-[30px] w-full max-lg:p-[5%] lg:px-[5%] lg:pt-[4%] relative">
          <img className="absolute z-[-1] -rotate-[20deg] max-lg:scale-[2] -left-[65%] lg:-left-[50%] lg:-top-[125%] 4xl:-top-[150%]" src={ondas} alt="ondas" />
          <motion.nav
-            className={`flex max-lg:z-50 max-lg:flex-col rounded-[8px] max-lg:gap-[2%] px-[1.5%] lg:items-center justify-center lg:justify-between font-semibold bg-navbarMobile lg:bg-navbarDesktop border-[2px] border-[#E2E2E2] box-border`}
+            className="flex max-lg:z-50 max-lg:flex-col rounded-[8px] max-lg:gap-[2%] px-[1.5%] max-lg:p-[1.5%] lg:items-center justify-center lg:justify-between font-semibold bg-navbarMobile lg:bg-navbarDesktop border-[2px] border-[white] dark:border-[#FFFFFF80] box-border"
             variants={variants.list}
             animate={context.lgWidth ? "" : (isOpen ? "open" : "closed")}
             initial={styles.list}
@@ -262,10 +262,10 @@ export default function NavBar() {
             <motion.div
                initial={styles.item}
                variants={variants.item}
-               className="flex gap-[10px]"
+               className="flex gap-[10px] max-lg:px-[5%]"
             >
                <div 
-                  className="rounded-full flex bg-button shadow-lightMode box-border w-[65px] h-[33px] py-[2.4px] relative"
+                  className="rounded-full flex bg-button shadow-lightMode box-border w-[65px] h-[33px] py-[2.4px] relative cursor-pointer"
                   onClick={() => setContext(context => ({...context, light: context.light ? 0 : 1 }))}
                >
                   <motion.div
@@ -279,7 +279,7 @@ export default function NavBar() {
                         duration: 0.25,
                         background: { duration: 0.125 }
                      }}
-                  ></motion.div>
+                  />
                </div>
             </motion.div>
          </motion.nav>

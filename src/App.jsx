@@ -3,8 +3,7 @@ import { useState, useEffect, Suspense, lazy } from 'react'
 import ContextProps from "./assets/JS/createContext";
 import Loading from "./components/Loading";
 /* import Layout from "./components/Layout";
-import Home from "./pages/Home"; */
-
+import Home from "./pages/Home";  */
 const Layout = lazy(() => import("./components/Layout"));
 const Home = lazy(() => import("./pages/Home"));
 
@@ -19,13 +18,14 @@ export default function App() {
 	});
 
    useEffect(() => {
+		const handleLoad = () => setContext(context => ({ ...context, load: !context.load }));
+      const handleResize = () => setContext(context => ({...context, lgWidth: mediaQueryList.matches}));
       const mediaQueryList = window.matchMedia('(min-width: 1024px)');
-      function handleResize() {
-         setContext(context => ({...context, lgWidth: mediaQueryList.matches}));
-      }
-      handleResize();
+		window.addEventListener('load', handleLoad);
       mediaQueryList.addEventListener("change", handleResize);
+      handleResize();
       return () => {
+			window.removeEventListener('load', handleLoad);
          mediaQueryList.removeEventListener("change", handleResize);
       };
    }, []);
@@ -34,17 +34,6 @@ export default function App() {
 		localStorage.setItem('lang', context.lang);
 		localStorage.setItem('light', context.light.toString());
 	}, [context.light, context.lang]);
-
-	useEffect(() => {
-		const handleWinLoad = () => setContext(context => ({ ...context, load: true }));
-		//const handleWinUnload = () => setContext(context => ({ ...context, load: false }));
-		window.addEventListener('load', handleWinLoad);
-		//window.addEventListener('unload', handleWinUnload);
-		return () => {
-			window.removeEventListener('load', handleWinLoad);
-			//window.removeEventListener('unload', handleWinUnload);
-		}
-	}, [context.load]);
 
 	return (
 		<BrowserRouter>

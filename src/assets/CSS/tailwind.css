@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+
+   body {
+      @apply h-full 2xl:text-[20px] 4xl:text-[24px] box-border font-open text-white
+   }
+
    .light_mode {
       background-image: url('/png/fondo_light.png');
       background-size: cover;
@@ -13,13 +18,30 @@
       background-image: radial-gradient(circle closest-corner at 85% 5%, white 35%, #004f99 60%, #003566 85%, #00284d 100%);
       background-repeat: no-repeat;
    }
-
-   body {
-      @apply h-full 2xl:text-[20px] 4xl:text-[24px] box-border text-white font-open
-   }
 }
 
 @layer components {
+
+   .contactInput {
+      @apply appearance-none disabled:cursor-not-allowed disabled:opacity-50 bg-[#FFFFFF33] w-full h-[1.5lh] rounded-[8px] border-[2px] border-solid border-white dark:border-[#FFFFFF80] p-[5px] text-white
+   }
+
+   .contactInput:focus {
+      @apply outline-none border-[#FFFFFF] 
+   }
+
+   .contactLabel {
+      @apply dark:text-[#FFFFFF80] text-white font-[11px]
+   }
+
+   .error {
+      @apply absolute indent-1 -bottom-[9px] text-[0.8em] [color:_rgb(255,0,0)]
+   }
+
+   .main-headings {
+      @apply font-dela max-lg:text-center text-[2em] lg:text-[3em] text-[#012f4b] dark:text-[#FFBE00]
+   }
+
    .card {
       --card-height: 50px;
       --card-width: 180px;
@@ -90,33 +112,8 @@
       position: absolute;
    }
 
-   @keyframes rotate {
-      from {
-         transform: rotateZ(1deg);
-      }
-      to {
-         transform: rotateZ(360deg);
-      }
-   }
-
    svg text {
       font-family: Dela Gothic One, sans-serif;
-   }
-
-   .contactInput {
-      @apply appearance-none disabled:cursor-not-allowed disabled:opacity-50 bg-[#FFFFFF33] w-full h-[1.5lh] rounded-[8px] border-[2px] border-solid border-[#FFFFFF80] p-[5px] text-white
-   }
-
-   .contactInput:focus {
-      @apply outline-none border-[#FFFFFF] 
-   }
-
-   .contactLabel {
-      @apply text-[#FFFFFF80] font-[11px]
-   }
-
-   .error {
-      @apply absolute indent-1 -bottom-[9px] text-[0.8em] [color:_rgb(255,0,0)]
    }
 
    .slideInputs {
@@ -187,58 +184,6 @@
    .buttonGlow:enabled:hover::after {
       left: 150%;
    }
-
-   .main-headings {
-      @apply font-dela max-lg:text-center text-[2em] lg:text-[3em]
-   }
-
-   @keyframes enabledButton {
-      0% {
-         opacity: 0.5;
-         scale: 0.7;
-      }
-      30% {
-         opacity: 0.8;
-         scale: 1.15;
-      }
-      60% {
-         opacity: 0.9;
-         scale: 0.90;
-      }
-      100% {
-         opacity: 1;
-         scale: 1;
-      }
-   }
-   @keyframes disabledButton {
-      0%, 100% {
-         transform: translateX(0);
-      }
-      15% {
-         transform: translateX(15px);
-      }
-      30% {
-         transform: translateX(-15px);
-      }
-      45% {
-         transform: translateX(10px);
-      }
-      60% {
-         transform: translateX(-10px);
-      }
-      75% {
-         transform: translateX(5px);
-      }
-      90% {
-         transform: translateX(-5px);
-      }
-      93% {
-         transform: translateX(2.5px);
-      }
-      96% {
-         transform: translateX(-2.5px);
-      }
-   }
 }
 
 @layer utilities {
@@ -259,13 +204,73 @@
    #logo-gradient:hover {
       cursor: var(--cursor);
    }
+}
 
-   @keyframes slideRight {
-      from {
-         left: -10%;
-      }
-      to {
-         left: 110%;
-      }
+/*keyframes*/
+
+@keyframes rotate {
+   from {
+      transform: rotateZ(1deg);
+   }
+   to {
+      transform: rotateZ(360deg);
+   }
+}
+
+@keyframes enabledButton {
+   0% {
+      opacity: 0.5;
+      scale: 0.7;
+   }
+   30% {
+      opacity: 0.8;
+      scale: 1.15;
+   }
+   60% {
+      opacity: 0.9;
+      scale: 0.90;
+   }
+   100% {
+      opacity: 1;
+      scale: 1;
+   }
+}
+
+@keyframes disabledButton {
+   0%, 100% {
+      transform: translateX(0);
+   }
+   15% {
+      transform: translateX(15px);
+   }
+   30% {
+      transform: translateX(-15px);
+   }
+   45% {
+      transform: translateX(10px);
+   }
+   60% {
+      transform: translateX(-10px);
+   }
+   75% {
+      transform: translateX(5px);
+   }
+   90% {
+      transform: translateX(-5px);
+   }
+   93% {
+      transform: translateX(2.5px);
+   }
+   96% {
+      transform: translateX(-2.5px);
+   }
+}
+
+@keyframes slideRight {
+   from {
+      left: -10%;
+   }
+   to {
+      left: 110%;
    }
 }
