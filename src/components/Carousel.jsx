@@ -192,7 +192,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                e.stopPropagation();
                let inputsList = document.getElementsByName(`slideDots${id}`);
                let xOffset = startXCoord - e.changedTouches[0].clientX;
-               if (Math.abs(xOffset) > (window.innerWidth / 2.5)) {
+               if (Math.abs(xOffset) > innerWidth / 4) {
                   if (Math.sign(xOffset) === 1) {
                      if (slider.currentSlide === (inputsList.length - 1)) inputsList[0].click();
                      else inputsList[slider.currentSlide + 1].click();
