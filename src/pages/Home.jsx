@@ -321,7 +321,7 @@ export default function Home() {
                />
             </motion.div>
          </div>
-         <div id={context.lang === "es" ? "PROYECTOS" : "PROJECTS"} className="flex z-[0] relative flex-col gap-[30px] items-center px-[5%] min-h-screen lg:pb-[20vh]">
+         <div id={context.lang === "es" ? "PROYECTOS" : "PROJECTS"} className="flex z-[0] relative flex-col gap-[30px] items-center px-[5%] h-[130vh] lg:min-h-screen lg:pb-[20vh]">
             <figure className="relative flex justify-center items-center">
                <img className={`absolute ${context.lang === "es" ? "-right-[50%] w-[50%]" : "-right-[60%] w-[60%]"} `} src={imports.flechas_der} alt="Right arrows" />
                <h1 className="main-headings">

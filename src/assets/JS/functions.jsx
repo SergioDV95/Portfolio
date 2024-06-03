@@ -6,7 +6,7 @@ export const renderProjects = (projects, context) => {
       return (
          <motion.div
             key={project.name + index} 
-            className="max-lg:text-left max-lg:overflow-hidden gap-[50px] max-lg:pt-[30px] flex max-lg:flex-col items-center"
+            className="max-lg:text-left gap-[50px] max-lg:pt-[30px] flex max-lg:flex-col items-center"
             initial={{ 
                x: (index % 2 == 0) ? -innerWidth / 2 : innerWidth / 2,
             }}
@@ -18,7 +18,7 @@ export const renderProjects = (projects, context) => {
             }}
          >
             {context.lgWidth ? ((index % 2 == 0) && <img className="scale-x-[1.2] scale-y-[1.3] lg:w-[50%]" src={project.image} alt={project.name} />) : <img className="scale-x-[1.4] scale-y-[1.5] lg:w-[50%]" src={project.image} alt={project.name} />}
-            <div className="flex flex-col gap-[15px] w-[50%]">
+            <div className="flex flex-col gap-[15px] lg:w-[50%]">
                <h1 className="font-dela text-[20px] text-[#012f4b] dark:text-[#FFBE00]">{project.name}</h1>
                <div className="flex flex-wrap gap-[5px]">
                   {project.technologies?.length && project.technologies.map((tech, i) => {

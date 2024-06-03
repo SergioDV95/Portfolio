@@ -16,7 +16,7 @@ export default function NavBar() {
       list: {
          open: {
             width: "90%",
-            height: "100vh",
+            height: innerHeight,
             left: 0,
             top: 0,
             transition: {
@@ -128,7 +128,7 @@ export default function NavBar() {
       <header className="flex max-lg:justify-end lg:text-[0.9em] 2xl:text-[0.8em] justify-between text-end gap-[30px] w-full max-lg:p-[5%] lg:px-[5%] lg:pt-[4%] relative">
          <img className="absolute z-[-1] -rotate-[20deg] max-lg:scale-[2] -left-[65%] lg:-left-[50%] lg:-top-[125%] 4xl:-top-[150%]" src={ondas} alt="ondas" />
          <motion.nav
-            className="flex max-lg:z-50 max-lg:flex-col rounded-[8px] max-lg:gap-[2%] px-[1.5%] max-lg:p-[1.5%] lg:items-center justify-center lg:justify-between font-semibold bg-navbarMobile lg:bg-navbarDesktop border-[2px] border-[white] dark:border-[#FFFFFF80] box-border"
+            className="flex max-lg:z-50 max-lg:flex-col rounded-[8px] px-[1.5%] max-lg:p-[1.5%] lg:items-center justify-center lg:justify-between font-semibold bg-[#42506BE6] lg:bg-navbarDesktop border-[2px] border-[white] dark:border-[#FFFFFF80] box-border"
             variants={variants.list}
             animate={context.lgWidth ? "" : (isOpen ? "open" : "closed")}
             initial={styles.list}
@@ -239,13 +239,15 @@ export default function NavBar() {
                      />
                   </motion.div>
                </motion.div>
-               <h1 className="max-lg:px-[5%] font-dela max-md:text-start whitespace-nowrap md:text-center text-[28px] lg:text-[20px] xl:text-[34px] max-md:mb-[10%]">SERGIO DAZA</h1>
+               <h1 className="max-lg:px-[5%] font-dela max-md:text-start whitespace-nowrap lg:max-xl:whitespace-normal md:text-center text-[28px] lg:text-[20px] xl:text-[34px] max-md:mb-[10%]">
+                  SERGIO DAZA
+               </h1>
             </motion.div>
-            <div className="max-lg:h-full max-lg:px-[5%] font-semibold flex max-lg:flex-col lg:gap-[20px] xl:gap-[30px]">
+            <div className="max-lg:h-full lg:ml-[2vw] max-lg:px-[5%] font-semibold flex max-lg:flex-col lg:gap-[10px] xl:gap-[2vw]">
                <motion.select
                   initial={{ opacity: 0.80 }}
                   whileHover={{ opacity: 1 }}
-                  className="max-lg:text-start text-[20px] rounded-[8px] w-fit bg-[#FFFFFF33] shadow-button p-2 focus:outline-none cursor-pointer"
+                  className="max-lg:text-start text-[20px] lg:max-xl:text-[17px] rounded-[8px] w-fit bg-[#FFFFFF33] shadow-button p-2 lg:max-xl:py-2 lg:max-xl:px-0 focus:outline-none cursor-pointer"
                   style={styles.item}
                   variants={variants.item}
                   title="Idioma"
