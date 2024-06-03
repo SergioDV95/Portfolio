@@ -18,17 +18,23 @@ export default function App() {
 	});
 
    useEffect(() => {
-		const handleLoad = () => setContext(context => ({ ...context, load: !context.load }));
       const handleResize = () => setContext(context => ({...context, lgWidth: mediaQueryList.matches}));
       const mediaQueryList = window.matchMedia('(min-width: 1024px)');
-		window.addEventListener('load', handleLoad);
       mediaQueryList.addEventListener("change", handleResize);
       handleResize();
       return () => {
-			window.removeEventListener('load', handleLoad);
          mediaQueryList.removeEventListener("change", handleResize);
       };
    }, []);
+   
+	useEffect(() => {
+		const handleLoad = () => setContext(context => ({ ...context, load: !context.load }));
+		window.addEventListener('load', handleLoad);
+		console.log(context.load);
+      return () => {
+			window.removeEventListener('load', handleLoad);
+      };
+   }, [context.load]);
 	
 	useEffect(() => {
 		localStorage.setItem('lang', context.lang);
