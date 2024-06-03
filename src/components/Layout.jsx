@@ -9,10 +9,10 @@ export default function Layout() {
    const { context } = useContext(ContextProps);
    return (
       <>
-         <section className={`${context.load ? "hidden" : "block"}`}>
+         {/* <section className={`${context.load ? "hidden" : "block"}`}>
             <Loading />
-         </section>
-         <main className={`${context.load ? "block" : "hidden"} ${context.light ? "" : "dark"} dark:text-gray-50`}>
+         </section> */}
+         <main className={`${context.light ? "" : "dark"} dark:text-gray-50`}>
             <motion.div
                className="fixed -left-[12.5vw] -top-[12.5vh] w-[125vw] h-[125vh] -z-[5]"
                animate={{

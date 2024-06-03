@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect, Suspense, lazy } from 'react'
 import ContextProps from "./assets/JS/createContext";
-import Layout from "./components/Layout";
-import Home from "./pages/Home"; 
-/* import Loading from "./components/Loading";
+/* import Layout from "./components/Layout";
+import Home from "./pages/Home";  */
+import Loading from "./components/Loading";
 const Layout = lazy(() => import("./components/Layout"));
-const Home = lazy(() => import("./pages/Home")); */
+const Home = lazy(() => import("./pages/Home"));
 
 //const delayImport = (importation, delay) => new Promise(resolve => setTimeout(() => resolve(importation), delay)).then((value) => value);
 
@@ -27,14 +27,14 @@ export default function App() {
       };
    }, []);
    
-	useEffect(() => {
+	/* useEffect(() => {
 		const handleLoad = () => setContext(context => ({ ...context, load: !context.load }));
 		window.addEventListener('load', handleLoad);
 		console.log(context.load);
       return () => {
 			window.removeEventListener('load', handleLoad);
       };
-   }, [context.load]);
+   }, [context.load]); */
 	
 	useEffect(() => {
 		localStorage.setItem('lang', context.lang);
@@ -44,11 +44,13 @@ export default function App() {
 	return (
 		<BrowserRouter>
 			<ContextProps.Provider value={{ context, setContext }}>
-				<Routes>
-					<Route path="/Portfolio/" element={<Layout />}>
-						<Route index element={<Home />} />
-					</Route>
-				</Routes>
+				<Suspense fallback={<Loading />}>
+					<Routes>
+						<Route path="/Portfolio/" element={<Layout />}>
+							<Route index element={<Home />} />
+						</Route>
+					</Routes>
+				</Suspense>
 			</ContextProps.Provider>
 		</BrowserRouter>
 	)
