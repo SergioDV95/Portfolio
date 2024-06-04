@@ -317,11 +317,11 @@ export default function Home() {
                <Carousel
                   playButton={playButton}
                   skills={text.skills}
-                  slideClasses={"bg-skills min-h-[150px] md:max-lg:min-h-[100px] xl:min-h-[200px] border-[2px] border-white dark:border-[#FFFFFF80] grid grid-cols-[1.5fr_1fr] gap-x-[10px] p-[10px] rounded-[8px] w-full box-border"}
+                  slideClasses={"bg-skills min-h-[150px] relative md:max-lg:min-h-[100px] xl:min-h-[200px] border-[2px] border-white dark:border-[#FFFFFF80] grid grid-cols-[1.5fr_1fr] gap-x-[10px] p-[10px] rounded-[8px] w-full box-border"}
                />
             </motion.div>
          </div>
-         <div id={context.lang === "es" ? "PROYECTOS" : "PROJECTS"} className="flex z-[0] relative flex-col gap-[30px] items-center px-[5%] h-[130vh] lg:min-h-screen lg:pb-[20vh]">
+         <div id={context.lang === "es" ? "PROYECTOS" : "PROJECTS"} className="flex z-[0] relative flex-col gap-[30px] items-center px-[5%] lg:min-h-screen lg:pb-[20vh]">
             <figure className="relative flex justify-center items-center">
                <img className={`absolute ${context.lang === "es" ? "-right-[50%] w-[50%]" : "-right-[60%] w-[60%]"} `} src={imports.flechas_der} alt="Right arrows" />
                <h1 className="main-headings">

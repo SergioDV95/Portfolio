@@ -204,6 +204,10 @@
    #logo-gradient:hover {
       cursor: var(--cursor);
    }
+
+   .projects {
+      min-height: max(130vh, 180vh);
+   }
 }
 
 /*keyframes*/
