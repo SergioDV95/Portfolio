@@ -39,15 +39,12 @@ export default function Home() {
    const refs = useRef({});
    const arrowRef = useRef(null);
 
-   /* function calcDistance(element, offset = "right") {
-      if (element) {
-         const rect = element.getBoundingClientRect();
-         const distance = (offset === "right" ? innerWidth - rect.right : rect.left);
-         console.log("window: " + innerWidth, "\nizquierda: " + rect.left, "\nderecha: " +  (innerWidth - rect.right));
-         console.log("document: " + document.documentElement.clientWidth, "\nizquierda: " + rect.left, "\nderecha: " +  (document.documentElement.clientWidth - rect.right));
-         return distance;
-      }
-   } */
+   const calcDistance = (element, from) => {
+      if (!element) return null;
+      const rect = element.getBoundingClientRect();
+      const offset = from === "right" ? innerWidth - rect.right : rect.left - innerWidth;
+      return offset;
+   }
 
    useEffect(() => {
       let projectDescription;
