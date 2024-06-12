@@ -16,6 +16,7 @@ export default {
 				picture: "linear-gradient(#FFFFFF66, #FFFFFF33 60%)",
 				inputs: "linear-gradient(#FFFFFF33, #FFFFFF66)",
 				skills: "linear-gradient(to right, #FFFFFF33, #FFFFFF66)",
+				granulated: "url(/SVG/Granulated.svg)",
 			},
 			boxShadow: {
 				button: "6px 6px 5.7px #00000040",

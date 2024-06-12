@@ -33,6 +33,7 @@ import sad from "/png/sad_icon.png";
 import playIcon from "/SVG/play-solid.svg"
 import stopIcon from "/SVG/stop-solid.svg"
 import arrowUp from "/SVG/arrow-up-solid.svg"
+import granulated from "/SVG/Granulated.svg"
 
 export { 
    logo,
@@ -70,4 +71,5 @@ export {
    playIcon,
    stopIcon,
    arrowUp,
+   granulated,
 };

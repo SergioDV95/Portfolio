@@ -128,7 +128,7 @@ export default function NavBar() {
       <header className="flex max-lg:justify-end lg:text-[0.9em] 2xl:text-[0.8em] justify-between text-end gap-[30px] w-full max-lg:p-[5%] lg:px-[5%] lg:pt-[4%] relative">
          <img className="absolute z-[-1] -rotate-[20deg] max-lg:scale-[2] -left-[65%] lg:-left-[50%] lg:-top-[125%] 4xl:-top-[150%]" src={ondas} alt="ondas" />
          <motion.nav
-            className="flex max-lg:z-50 max-lg:flex-col rounded-[8px] px-[1.5%] max-lg:p-[1.5%] lg:items-center justify-center lg:justify-between font-semibold bg-[#42506BE6] lg:bg-navbarDesktop border-[2px] border-[white] dark:border-[#FFFFFF80] box-border"
+            className="flex max-lg:z-50 max-lg:flex-col w-[80%] rounded-[8px] px-[1.5%] max-lg:p-[1.5%] lg:items-center justify-center lg:justify-between font-semibold bg-[#42506BE6] lg:bg-navbarDesktop border-[2px] border-[white] dark:border-[#FFFFFF80] box-border"
             variants={variants.list}
             animate={context.lgWidth ? "" : (isOpen ? "open" : "closed")}
             initial={styles.list}
@@ -243,11 +243,11 @@ export default function NavBar() {
                   SERGIO DAZA
                </h1>
             </motion.div>
-            <div className="max-lg:h-full lg:ml-[2vw] max-lg:px-[5%] font-semibold flex max-lg:flex-col lg:gap-[10px] xl:gap-[2vw]">
+            <div className="max-lg:h-full xl:ml-[2vw] max-lg:px-[5%] font-semibold flex max-lg:flex-col lg:gap-[5%] xl:gap-[1vw] 2xl:gap-[2vw]">
                <motion.select
                   initial={{ opacity: 0.80 }}
                   whileHover={{ opacity: 1 }}
-                  className="max-lg:text-start text-[20px] lg:max-xl:text-[17px] rounded-[8px] w-fit bg-[#FFFFFF33] shadow-button p-2 lg:max-xl:py-2 lg:max-xl:px-0 focus:outline-none cursor-pointer"
+                  className="max-lg:text-start text-[20px] lg:max-xl:text-[17px] rounded-[8px] bg-[#FFFFFF33] shadow-button p-2 lg:max-xl:py-2 lg:max-xl:px-0 focus:outline-none cursor-pointer"
                   style={styles.item}
                   variants={variants.item}
                   title="Idioma"
