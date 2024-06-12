@@ -247,7 +247,7 @@ export default function NavBar() {
                <motion.select
                   initial={{ opacity: 0.80 }}
                   whileHover={{ opacity: 1 }}
-                  className="max-lg:text-start text-[20px] lg:max-xl:text-[17px] rounded-[8px] bg-[#FFFFFF33] shadow-button p-2 lg:max-xl:py-2 lg:max-xl:px-0 focus:outline-none cursor-pointer"
+                  className="max-lg:text-start text-[20px] w-fit lg:max-xl:text-[17px] rounded-[8px] bg-[#FFFFFF33] shadow-button p-2 lg:max-xl:py-2 lg:max-xl:px-0 focus:outline-none cursor-pointer"
                   style={styles.item}
                   variants={variants.item}
                   title="Idioma"
