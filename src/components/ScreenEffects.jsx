@@ -10,7 +10,6 @@ export default function ScreenEffects({ context }) {
                   "radial-gradient(circle closest-corner at 80% 20%, #b4e1fe 33%, #75c8fd 66%, #11a1fb 99%, #0089df 100%)"
                   :
                   "radial-gradient(circle closest-corner at 20% 80%, #049cfb 33%, #0331c4 66%, #00335d 99%, #00284d 100%)"}`,
-               //filter: `${context.light ? "blur(30px) brightness(1)" : "blur(30px) brightness(1)"}`,
             }}
          >
             <motion.div
