@@ -1,4 +1,3 @@
-import { granulated } from "../assets/JS/imports";
 import { motion } from "framer-motion";
 
 export default function ScreenEffects({ context }) {
@@ -21,7 +20,7 @@ export default function ScreenEffects({ context }) {
                }}
             />
          </motion.div>
-         <div className={`fixed w-screen h-screen -z-[3] mix-blend-multiply bg-granulated ${context.light ? "opacity-55" : "opacity-100"}`} />
+         <div className={`fixed w-screen h-screen -z-[3] mix-blend-multiply bg-granulated ${context.light ? "opacity-50" : "opacity-100"}`} />
       </div>
    )
 }
