@@ -31,8 +31,10 @@ export default function App() {
 	useEffect(() => {
 		const handleLoad = () => dispatch({ type: 'SET_LOAD' });
 		window.addEventListener('load', handleLoad);
+		window.addEventListener('beforeunload', handleLoad);
       return () => {
 			window.removeEventListener('load', handleLoad);
+			window.removeEventListener('beforeunload', handleLoad);
       };
    }, [context.load]);
 	

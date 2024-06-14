@@ -13,7 +13,7 @@ export default function Layout() {
          <section className={`${context.load ? "hidden" : "block"}`}>
             <Loading />
          </section>
-         <main className={`${context.light ? "" : "dark"} dark:text-gray-50`}>
+         <main className={`${context.load ? "block" : "hidden"} ${context.light ? "" : "dark"} dark:text-gray-50`}>
             <ScreenEffects context={context} />
             <NavBar />
             <Outlet />
