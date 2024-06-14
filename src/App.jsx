@@ -34,7 +34,7 @@ export default function App() {
       return () => {
 			window.removeEventListener('load', handleLoad);
       };
-   }, []);
+   }, [context.load]);
 	
 	useEffect(() => {
 		localStorage.setItem('lang', context.lang);
