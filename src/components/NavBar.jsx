@@ -6,7 +6,7 @@ import { ondas, sad, cool } from "../assets/JS/imports"
 import useFollowPointer from "../assets/Hooks/useFollowPointer"
 
 export default function NavBar() {
-   const { context, setContext } = useContext(ContextProps);
+   const { context, dispatch } = useContext(ContextProps);
    const [isOpen, setOpen] = useState();
    const [isActive, setIsActive] = useState(false);
    const logoRef = useRef(null);
@@ -253,7 +253,7 @@ export default function NavBar() {
                   title="Idioma"
                   name="lang"
                   id="lang"
-                  onChange={e => setContext(context => ({ ...context, lang: e.target.value }))}
+                  onChange={e => dispatch({ type: "SET_LANG", lang: e.target.value })}
                   value={context.lang}
                >
                   <option className="bg-[#374049] appearance-none" value="es">ES</option>
@@ -268,7 +268,7 @@ export default function NavBar() {
             >
                <div 
                   className="rounded-full flex bg-button shadow-lightMode box-border w-[65px] h-[33px] py-[2.4px] relative cursor-pointer"
-                  onClick={() => setContext(context => ({...context, light: context.light ? 0 : 1 }))}
+                  onClick={() => dispatch({ type: "SET_LIGHT" })}
                >
                   <motion.div
                      className="rounded-full box-border bg-[#FFFFFF] w-[44.5%] h-[85%] absolute"
