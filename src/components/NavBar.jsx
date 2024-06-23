@@ -144,7 +144,7 @@ export default function NavBar() {
             </div>
             <motion.div className="flex max-lg:flex-col gap-[15px] items-center" variants={context.lgWidth ? "" : variants.item} style={styles.item}>
                <motion.div
-                  className="relative z-20"
+                  className={`relative z-20 ${!isActive && "hover:cursor-help"}`}
                   animate={isActive ? 
                      null
                      :
@@ -197,7 +197,7 @@ export default function NavBar() {
                            setIsActive(true);
                         } else {
                            document.body.style.setProperty("cursor", "auto");
-                           e.currentTarget.style.setProperty("--cursor", "pointer");
+                           e.currentTarget.style.setProperty("--cursor", "help");
                            setIsActive(false);
                         }
                      }}

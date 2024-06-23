@@ -13,36 +13,16 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       direction: "",
       currentSlide: 0
    });
+
    const [refs, setRefs] = useState({
       slides: [],
       buttons: [],
    });
 
-   const [isDraggable, setIsDraggable] = useState({});
-   const [skillCoords, setSkillCoords] = useState({});
-
-   useEffect(() => {
-      console.log(isDraggable);
-      if (Object.values(isDraggable).includes(false)) {
-         setSlider(slider => ({ ...slider }));
-      }
-   }, [isDraggable])
-   
-   useEffect(() => {
-      if (!playButton) {
-         setIsDraggable(oldValues => {
-            for (let key in oldValues) {
-               oldValues[key] = true
-            }
-            return oldValues;
-         })
-      }
-      setSlider(slider => ({ ...slider }));
-   }, [playButton])
-
-   useEffect(() => {
-      setSlider((slider) => ({ ...slider, end: context.lgWidth ? (endIndex || 3) : 1 }))
-   }, [context.lgWidth]);
+   const [skillFeatures, setSkillFeatures] = useState({
+      draggables: {},
+      coords: {},
+   });
 
    let startXCoord;
 
@@ -52,6 +32,35 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       right: { x: window.innerWidth, scale: 0.1 },
       left: { x: -window.innerWidth, scale: 0.1 }
    };
+
+   useEffect(() => {
+      console.log(skillFeatures);
+   }, [skillFeatures])
+
+   useEffect(() => {
+      if (Object.values(skillFeatures.draggables).includes(false)) {
+         setSlider(slider => ({ ...slider }));
+      }
+   }, [skillFeatures.draggables])
+
+   useEffect(() => {
+      if (!playButton) {
+         setSkillFeatures(skills => {
+            let resetValues = {};
+            for (let key in skills.draggables) {
+               resetValues[key] = true;
+            }
+            return {
+               ...skills, draggables: resetValues
+            };
+         })
+      }
+      setSlider(slider => ({ ...slider }));
+   }, [playButton])
+
+   useEffect(() => {
+      setSlider((slider) => ({ ...slider, end: context.lgWidth ? (endIndex || 3) : 1 }))
+   }, [context.lgWidth]);
 
    useEffect(() => {
       if (skills) {
@@ -70,12 +79,9 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                };
             }
          }
-         setSkillCoords(skillsObjCoords);
+         setSkillFeatures(skills => ({ ...skills, coords: skillsObjCoords }));
       }
    }, [skills, playButton]);
-
-   useEffect(() => console.log(skillCoords), [skillCoords]);
-   
 
    const carouselElements = () => {
       if (!skills && !children) return;
@@ -93,14 +99,16 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
             >
                <div className="flex flex-col" ref={refs.slides[index]}>
                   <h3>{key}:</h3>
-                  <div className="flex flex-wrap gap-[5px] h-full content-start" >
+                  <div className="flex flex-wrap gap-[10px] h-full content-start" >
                      {Array.isArray(value) && value.map((skill, i) => {
-                        if (isDraggable?.[skill] === undefined || !playButton) {
-                           setIsDraggable(oldValues => {
-                              const newValues = {...oldValues};
-                              newValues[skill] = true;
-                              return newValues;
-                           })
+                        if (skillFeatures.draggables?.[skill] === undefined) {
+                           setSkillFeatures(skills => ({
+                              ...skills,
+                              draggables: {
+                                 ...skills.draggables,
+                                 [skill]: true
+                              }
+                           }));
                         }
                         const number = Math.random();
                         if (number < 0.33 && selectedColors[selectedColors.length - 1] !== "bg-[#3E619B]") {
@@ -113,31 +121,42 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                            selectedColors.push("bg-[#FFBE00]");
                         }
                         return (
-                           <div className='relative w-fit h-fit' key={"skill" + skill + i}>
-                              <div className='w-[103%] h-[103%] box-border absolute top-0 left-0 border-[2px] 2xl:border-[3px] border-gray-300 border-dashed rounded-[7px]' />
+                           <motion.div
+                              className={`relative w-fit h-fit outline-[2px] xl:outline-[3px] 2xl:outline-[4px] outline-dashed rounded-[7px]`}
+                              key={"skill" + skill + i}
+                              initial={{
+                                 outlineColor: "#d1d5db",
+                              }}
+                              animate={{
+                                 outlineColor: playButton ? (skillFeatures.draggables[skill] ? "#ef4444" : "#22c55e") : "#d1d5db",
+                                 scale: playButton ? (skillFeatures.draggables[skill] ? 1 : [1.5, 1]) : 1,
+                              }}
+                           >
                               <motion.p
-                                 className={`${selectedColors[i]} relative z-10 font-bold text-[12px] xl:text-[14px] 2xl:text-[16px] p-[5px] cursor-grab rounded-[5px] text-center`}
+                                 className={`${selectedColors[i]} select-none relative z-10 font-bold text-[12px] xl:text-[14px] 2xl:text-[16px] p-[5px] cursor-grab rounded-[5px] text-center`}
                                  onTouchStart={e => e.stopPropagation()}
                                  onDragEnd={e => {
                                     if (playButton) {
                                        const thisRect = e.target.getBoundingClientRect();
-                                       const siblingRect = e.target.previousElementSibling.getBoundingClientRect();
-                                       if ((thisRect.top >= siblingRect.top && thisRect.bottom <= siblingRect.bottom) && (thisRect.left >= siblingRect.left && thisRect.right <= siblingRect.right)) {
-                                          console.log("fitted");
-                                          setIsDraggable(oldValues => {
-                                             const newValues = {...oldValues};
-                                             newValues[skill] = false;
-                                             return newValues;
-                                          })
-                                          
+                                       const parentRect = e.target.parentElement.getBoundingClientRect();
+                                       const verticalFit = Math.ceil(thisRect.top) >= Math.floor(parentRect.top) && Math.floor(thisRect.bottom) <= Math.ceil(parentRect.bottom);
+                                       const horizontalFit = Math.ceil(thisRect.left) >= Math.floor(parentRect.left) && Math.floor(thisRect.right) <= Math.ceil(parentRect.right);
+                                       if (verticalFit && horizontalFit) {
+                                          setSkillFeatures(skills => ({
+                                             ...skills,
+                                             draggables: {
+                                                ...skills.draggables,
+                                                [skill]: false
+                                             }
+                                          }));
                                        }
                                     }
                                  }}
                                  initial={{ x: 0, y: 0 }}
                                  animate={
                                     {
-                                       x: skillCoords?.[key]?.[skill].x,
-                                       y: skillCoords?.[key]?.[skill].y,
+                                       x: skillFeatures.coords?.[key]?.[skill].x,
+                                       y: skillFeatures.coords?.[key]?.[skill].y,
                                        transition: {
                                           type: "spring",
                                           damping: 8,
@@ -145,7 +164,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                                        },
                                     }
                                  }
-                                 drag={isDraggable[skill]}
+                                 drag={skillFeatures.draggables[skill]}
                                  whileTap={{ cursor: "grabbing" }}
                                  dragTransition={{
                                     power: 0.3,
@@ -153,7 +172,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                               >
                                  {skill}
                               </motion.p>
-                           </div>
+                           </motion.div>
                         )
                      })}
                   </div>
@@ -173,7 +192,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       } else {
          return children.slice(slider.start, slider.end).map((value, index) => (
             <motion.div
-               className={slideClasses}
+               className={slideClasses + " select-none"}
                key={"children" + uuidv4()}
                initial={slider.direction === "right" ? animate.right : animate.left}
                animate={{ x: 0, scale: 1 }}
