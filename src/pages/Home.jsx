@@ -6,6 +6,15 @@ import ContactMe from "../components/ContactMe";
 import { renderProjects } from "../assets/JS/functions";
 import * as imports from "../assets/JS/imports";
 
+/**
+ * Function: Home
+ * 
+ * Description:
+ * This function represents the Home component of the application. It displays various sections such as introduction, about me, skills, projects, process, and contact information. The content displayed is based on the context provided.
+ * 
+ * @returns {JSX.Element} The JSX element representing the Home component.
+*/
+
 export default function Home() {
    const { context } = useContext(ContextProps);
    const [playButton, setPlayButton] = useState(false);

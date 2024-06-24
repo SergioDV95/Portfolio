@@ -5,8 +5,24 @@ import ContextProps from '../assets/JS/createContext';
 import * as imports from '../assets/JS/imports';
 import { scatterCoords } from '../assets/JS/functions';
 
+/**
+ * Component for rendering a carousel with sliding elements.
+ * 
+ * @param {Object} props - The props object containing the following properties:
+ * @param {Array} skills - The array of skills to display in the carousel.
+ * @param {string} slideClasses - The CSS classes for the carousel slides.
+ * @param {Array} children - The children elements to display in the carousel.
+ * @param {number} startIndex - The starting index of the carousel.
+ * @param {number} endIndex - The ending index of the carousel.
+ * @param {boolean} cancelButtons - Flag to show or hide carousel navigation buttons.
+ * @param {boolean} playButton - Flag to enable or disable play button functionality.
+ * 
+ * @returns {JSX.Element} A JSX element representing the Carousel component.
+*/
+
 export default function Carousel({ skills, slideClasses, children, startIndex, endIndex, cancelButtons, playButton }) {
    const { context } = useContext(ContextProps);
+   
    const [slider, setSlider] = useState({
       start: startIndex || 0,
       end: context.lgWidth ? (endIndex || 3) : 1,
@@ -32,16 +48,6 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       right: { x: window.innerWidth, scale: 0.1 },
       left: { x: -window.innerWidth, scale: 0.1 }
    };
-
-   useEffect(() => {
-      console.log(skillFeatures);
-   }, [skillFeatures])
-
-   useEffect(() => {
-      if (Object.values(skillFeatures.draggables).includes(false)) {
-         setSlider(slider => ({ ...slider }));
-      }
-   }, [skillFeatures.draggables])
 
    useEffect(() => {
       if (!playButton) {
@@ -97,7 +103,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                animate={{ x: 0, scale: 1 }}
                exit={slider.direction === "left" ? animate.right : animate.left}
             >
-               <div className="flex flex-col" ref={refs.slides[index]}>
+               <div className="flex flex-col gap-[5px]" ref={refs.slides[index]}>
                   <h3>{key}:</h3>
                   <div className="flex flex-wrap gap-[10px] h-full content-start" >
                      {Array.isArray(value) && value.map((skill, i) => {
@@ -111,14 +117,14 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                            }));
                         }
                         const number = Math.random();
-                        if (number < 0.33 && selectedColors[selectedColors.length - 1] !== "bg-[#3E619B]") {
-                           selectedColors.push("bg-[#3E619B]");
-                        } else if (number < 0.66 && selectedColors[selectedColors.length - 1] !== "bg-[#EA4B4C]") {
-                           selectedColors.push("bg-[#EA4B4C]");
-                        } else if (selectedColors[selectedColors.length - 1] !== "bg-[#42506B]") {
-                           selectedColors.push("bg-[#42506B]");
+                        if (number < 0.33 && selectedColors[selectedColors.length - 1] !== "#3E619B") {
+                           selectedColors.push("#3E619B");
+                        } else if (number < 0.66 && selectedColors[selectedColors.length - 1] !== "#EA4B4C") {
+                           selectedColors.push("#EA4B4C");
+                        } else if (selectedColors[selectedColors.length - 1] !== "#42506B") {
+                           selectedColors.push("#42506B");
                         } else {
-                           selectedColors.push("bg-[#FFBE00]");
+                           selectedColors.push("#FFBE00");
                         }
                         return (
                            <motion.div
@@ -133,7 +139,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                               }}
                            >
                               <motion.p
-                                 className={`${selectedColors[i]} select-none relative z-10 font-bold text-[12px] xl:text-[14px] 2xl:text-[16px] p-[5px] cursor-grab rounded-[5px] text-center`}
+                                 className={`select-none relative z-10 font-bold text-[12px] xl:text-[14px] 2xl:text-[16px] p-[5px] cursor-grab rounded-[5px] text-center`}
                                  onTouchStart={e => e.stopPropagation()}
                                  onDragEnd={e => {
                                     if (playButton) {
@@ -152,7 +158,12 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                                        }
                                     }
                                  }}
-                                 initial={{ x: 0, y: 0 }}
+                                 initial={{ 
+                                    x: 0, 
+                                    y: 0,
+                                    backgroundColor: selectedColors[i],
+                                    boxShadow: `0 0 3px 1px ${selectedColors[i]}`
+                                 }}
                                  animate={
                                     {
                                        x: skillFeatures.coords?.[key]?.[skill].x,
@@ -204,21 +215,14 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       }
    };
 
-   const renderedElements = useMemo(() => carouselElements(), [slider, skills, children, context.lgWidth]);
+   const renderedElements = useMemo(() => carouselElements(), [skillFeatures, slider, skills, children, context.lgWidth]);
 
    useEffect(() => {
       setRefs((refs) => {
          const arrayRefs = elements => new Array(elements.length).fill().map(() => createRef());
-         if (!refs.buttons.length) {
-            return {
-               slides: arrayRefs(renderedElements.length),
-               buttons: arrayRefs(carouselButtons.length),
-            }
-         } else {
-            return {
-               ...refs,
-               slides: arrayRefs(renderedElements.length),
-            }
+         return {
+            slides: arrayRefs(renderedElements.length),
+            buttons: refs.buttons.length ? refs.buttons : arrayRefs(carouselButtons.length),
          }
       });
    }, [renderedElements]);
