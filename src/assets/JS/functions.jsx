@@ -91,8 +91,7 @@ export const colorPicker = () => {
    let HEXcolor = '#';
    for (let i = 0; i < 3; i++) {
       const colorFragment = Math.floor(Math.random() * 256).toString(16);
-      if (colorFragment.length < 2) HEXcolor += colorFragment.padEnd(2, colorFragment); 
-      else HEXcolor += colorFragment;
+      HEXcolor += colorFragment.padEnd(2, colorFragment);
    }
    return HEXcolor;
 };
