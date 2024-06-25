@@ -23,16 +23,27 @@ export const renderProjects = (projects, context) => {
                <div className="flex flex-wrap gap-[5px]">
                   {project.technologies?.length && project.technologies.map((tech, i) => {
                      const number = Math.random();
-                     if (number < 0.33 && selectedColors[selectedColors.length - 1] !== "bg-[#3E619B]") {
-                        selectedColors.push("bg-[#3E619B]");
-                     } else if (number < 0.66 && selectedColors[selectedColors.length - 1] !== "bg-[#EA4B4C]") {
-                        selectedColors.push("bg-[#EA4B4C]");
-                     } else if (selectedColors[selectedColors.length - 1] !== "bg-[#42506B]") {
-                        selectedColors.push("bg-[#42506B]");
+                     if (number < 0.33 && selectedColors[selectedColors.length - 1] !== "#3E619B") {
+                        selectedColors.push("#3E619B");
+                     } else if (number < 0.66 && selectedColors[selectedColors.length - 1] !== "#EA4B4C") {
+                        selectedColors.push("#EA4B4C");
+                     } else if (selectedColors[selectedColors.length - 1] !== "#42506B") {
+                        selectedColors.push("#42506B");
                      } else {
-                        selectedColors.push("bg-[#FFBE00]");
+                        selectedColors.push("#FFBE00");
                      }
-                     return <p key={"tech" + tech + i} className={`${selectedColors[i]} font-bold text-[12px] p-[5px] rounded-[5px] text-center`}>{tech}</p>
+                     return (
+                        <p 
+                           key={"tech" + tech + i} 
+                           className="font-bold text-[12px] p-[5px] rounded-[5px] text-center"
+                           style={{
+                              backgroundColor: selectedColors[i],
+                              boxShadow: `0 0 3px 1px ${selectedColors[i]}`
+                           }}
+                        >
+                           {tech}
+                        </p>
+                     )
                   })}
                </div>
                <p>{project.description}</p>

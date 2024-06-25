@@ -134,7 +134,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                                  outlineColor: "#d1d5db",
                               }}
                               animate={{
-                                 outlineColor: playButton ? (skillFeatures.draggables[skill] ? "#ef4444" : "#22c55e") : "#d1d5db",
+                                 outlineColor: playButton ? (skillFeatures.draggables[skill] ? "#8d0c0c" : "#22c55e") : "#d1d5db",
                                  scale: playButton ? (skillFeatures.draggables[skill] ? 1 : [1.5, 1]) : 1,
                               }}
                            >
