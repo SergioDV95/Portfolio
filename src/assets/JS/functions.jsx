@@ -66,7 +66,7 @@ export const renderProjects = (projects, context) => {
    });
 }
 
-export const calcDistance = (element, axis) => {
+export const absoluteDistance = (element, axis) => {
    let distance = 0;
    while (element) {
       if (axis === "x") {

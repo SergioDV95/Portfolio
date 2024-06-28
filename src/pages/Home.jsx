@@ -295,7 +295,7 @@ export default function Home() {
                      className="buttonGlow dark:border-[#FFFFFF80] absolute -right-[35%] text-[1em]"
                      onClick={() => setPlayButton(!playButton)}
                   >
-                     <img className="w-[20px] h-[20px]" src={playButton ? imports.stopIcon : imports.playIcon} alt="start/stop" />
+                     <img className="w-[2em] h-[2em]" src={playButton ? imports.stopIcon : imports.playIcon} alt="start/stop" />
                   </button>
                }
             </figure>
@@ -304,7 +304,7 @@ export default function Home() {
                   className="buttonGlow dark:border-[#FFFFFF80] text-[1em] "
                   onClick={() => setPlayButton(!playButton)}
                >
-                  <img className="w-[20px] h-[20px]" src={playButton ? imports.stopIcon : imports.playIcon} alt="start/stop" />
+                  <img className="w-[2em] h-[2em]" src={playButton ? imports.stopIcon : imports.playIcon} alt="start/stop" />
                </button>
             }
             <div className="dark:bg-[#FFBE00] bg-[#012f4b] w-[20%] h-[2px] rounded-full lg:hidden" />

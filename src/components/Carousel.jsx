@@ -1,4 +1,4 @@
-import { useState, useMemo, useContext, useEffect, createRef, useCallback } from 'react';
+import { useState, useMemo, useContext, useEffect, createRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { motion, AnimatePresence } from "framer-motion";
 import ContextProps from '../assets/JS/createContext';
@@ -22,7 +22,7 @@ import { scatterCoords } from '../assets/JS/functions';
 
 export default function Carousel({ skills, slideClasses, children, startIndex, endIndex, cancelButtons, playButton }) {
    const { context } = useContext(ContextProps);
-   
+
    const [slider, setSlider] = useState({
       start: startIndex || 0,
       end: context.lgWidth ? (endIndex || 3) : 1,
@@ -50,33 +50,19 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
    };
 
    useEffect(() => {
-      if (!playButton) {
-         setSkillFeatures(skills => {
-            let resetValues = {};
-            for (let key in skills.draggables) {
-               resetValues[key] = true;
-            }
-            return {
-               ...skills, draggables: resetValues
-            };
-         })
-      }
-      setSlider(slider => ({ ...slider }));
-   }, [playButton])
-
-   useEffect(() => {
       setSlider((slider) => ({ ...slider, end: context.lgWidth ? (endIndex || 3) : 1 }))
    }, [context.lgWidth]);
 
    useEffect(() => {
+      let changeCoords = {};
+      let changeDraggables = {};
       if (skills) {
-         let skillsObjCoords = {};
          for (let key in skills) {
             for (let values of skills[key]) {
-               skillsObjCoords = {
-                  ...skillsObjCoords,
+               changeCoords = {
+                  ...changeCoords,
                   [key]: {
-                     ...skillsObjCoords[key],
+                     ...changeCoords[key],
                      [values]: {
                         x: playButton ? scatterCoords(-175, 175) + "%" : 0,
                         y: playButton ? scatterCoords(-175, 175) + "%" : 0
@@ -85,9 +71,24 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                };
             }
          }
-         setSkillFeatures(skills => ({ ...skills, coords: skillsObjCoords }));
+      } else {
+         changeCoords = skillFeatures.coords;
       }
+      if (!playButton) {
+         for (let key in skillFeatures.draggables) {
+            changeDraggables[key] = true;
+         }
+      } else {
+         changeDraggables = skillFeatures.draggables;
+      }
+      setSkillFeatures({ draggables: changeDraggables, coords: changeCoords });
    }, [skills, playButton]);
+
+   const toggleDraggables = skill => {
+      let changedDraggables = skillFeatures.draggables;
+      changedDraggables[skill] = !changedDraggables[skill];
+      setSkillFeatures(skills => ({ ...skills, draggables: changedDraggables }));
+   }
 
    const carouselElements = () => {
       if (!skills && !children) return;
@@ -108,13 +109,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                   <div className="flex flex-wrap gap-[10px] h-full content-start" >
                      {Array.isArray(value) && value.map((skill, i) => {
                         if (skillFeatures.draggables?.[skill] === undefined) {
-                           setSkillFeatures(skills => ({
-                              ...skills,
-                              draggables: {
-                                 ...skills.draggables,
-                                 [skill]: true
-                              }
-                           }));
+                           toggleDraggables(skill);
                         }
                         const number = Math.random();
                         if (number < 0.33 && selectedColors[selectedColors.length - 1] !== "#3E619B") {
@@ -148,21 +143,15 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                                        const verticalFit = Math.ceil(thisRect.top) >= Math.floor(parentRect.top) && Math.floor(thisRect.bottom) <= Math.ceil(parentRect.bottom);
                                        const horizontalFit = Math.ceil(thisRect.left) >= Math.floor(parentRect.left) && Math.floor(thisRect.right) <= Math.ceil(parentRect.right);
                                        if (verticalFit && horizontalFit) {
-                                          setSkillFeatures(skills => ({
-                                             ...skills,
-                                             draggables: {
-                                                ...skills.draggables,
-                                                [skill]: false
-                                             }
-                                          }));
+                                          toggleDraggables(skill);
                                        }
                                     }
                                  }}
-                                 initial={{ 
-                                    x: 0, 
+                                 initial={{
+                                    x: 0,
                                     y: 0,
                                     backgroundColor: selectedColors[i],
-                                    boxShadow: `0 0 3px 1px ${selectedColors[i]}`
+                                    boxShadow: `0 0 3px 1.5px ${selectedColors[i]}`
                                  }}
                                  animate={
                                     {
