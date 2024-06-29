@@ -3,7 +3,7 @@ import { useReducer, useEffect, Suspense, lazy } from 'react'
 import { contextReducer } from "./assets/JS/reducers";
 import ContextProps from "./assets/JS/createContext";
 import Layout from "./components/Layout";
-import Home from "./pages/Home"; 
+import Home from "./pages/Home";
 /* import Loading from "./components/Loading";
 const Layout = lazy(() => import("./components/Layout"));
 const Home = lazy(() => import("./pages/Home")); */
@@ -18,24 +18,24 @@ export default function App() {
 		lgWidth: window.innerWidth >= 1024,
 	});
 
-   useEffect(() => {
-      const handleResize = () => dispatch({ type: 'SET_WIDTH', matches: mediaQueryList.matches });
-      const mediaQueryList = window.matchMedia('(min-width: 1024px)');
-      mediaQueryList.addEventListener("change", handleResize);
-      handleResize();
-      return () => {
-         mediaQueryList.removeEventListener("change", handleResize);
-      };
-   }, []);
-   
 	useEffect(() => {
-		const handleLoad = () => dispatch({ type: 'SET_LOAD' });
-		window.addEventListener('load', handleLoad);
-      return () => {
-			window.removeEventListener('load', handleLoad);
-      };
-   }, [context.load]);
-	
+		const handleResize = () => dispatch({ type: 'SET_WIDTH', matches: mediaQueryList.matches });
+		const mediaQueryList = window.matchMedia('(min-width: 1024px)');
+		mediaQueryList.addEventListener("change", handleResize);
+		handleResize();
+		return () => {
+			mediaQueryList.removeEventListener("change", handleResize);
+		};
+	}, []);
+
+	useEffect(() => {
+		const handleLoad = () => { if (document.readyState === 'complete') dispatch({ type: 'SET_LOAD' }); }
+		document.addEventListener('readystatechange', handleLoad);
+		return () => {
+			document.removeEventListener('readystatechange', handleLoad);
+		};
+	}, []);
+
 	useEffect(() => {
 		localStorage.setItem('lang', context.lang);
 		localStorage.setItem('light', context.light.toString());
