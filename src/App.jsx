@@ -22,10 +22,6 @@ export default function App() {
 		lgWidth: window.innerWidth >= 1024,
 	});
 
-	/* useEffect(() => {
-		console.log(context.load);
-	}, [context.load]) */
-
 	useEffect(() => {
 		const handleResize = () => dispatch({ type: 'SET_WIDTH', matches: mediaQueryList.matches });
 		const mediaQueryList = window.matchMedia('(min-width: 1024px)');
