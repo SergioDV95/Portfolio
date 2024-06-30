@@ -1,4 +1,4 @@
-import { useState, useMemo, useContext, useEffect, createRef } from 'react';
+import { useState, useMemo, useContext, useEffect, createRef, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { motion, AnimatePresence } from "framer-motion";
 import ContextProps from '../assets/JS/createContext';
@@ -21,7 +21,7 @@ import { scatterCoords } from '../assets/JS/functions';
 */
 
 export default function Carousel({ skills, slideClasses, children, startIndex, endIndex, cancelButtons, playButton }) {
-   const { context } = useContext(ContextProps);
+   const { context, dispatch } = useContext(ContextProps);
 
    const [slider, setSlider] = useState({
       start: startIndex || 0,
@@ -48,6 +48,24 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       right: { x: window.innerWidth, scale: 0.1 },
       left: { x: -window.innerWidth, scale: 0.1 }
    };
+
+   const resourceRef = useRef([]);
+
+   /* useEffect(() => {
+      if (resourceRef.current.length) {
+         const total = context.load.total;
+         const merged = total.concat(resourceRef.current);
+         dispatch({ type: "SET_LOAD", total: merged })
+      }
+   }, [resourceRef.current]) */
+
+   function handleResourcesRefs(e) {
+      resourceRef.current.push(e);
+   }
+
+   function handleLoadProgress() {
+      dispatch({ type: "SET_LOAD", progress: true });
+   }
 
    useEffect(() => {
       setSlider((slider) => ({ ...slider, end: context.lgWidth ? (endIndex || 3) : 1 }))
@@ -180,10 +198,14 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                <div className="flex flex-col justify-center items-center">
                   <div className="animate-pulse bg-picture p-[20%] md:p-[20px] shadow-button w-full h-[60%] rounded-[8px]">
                      <img
+                        ref={el => handleResourcesRefs(el)}
                         className="w-full h-full max-lg:scale-[1.2]"
                         src={svgs.slice(slider.start, slider.end)[index]}
                         alt="image/svg+xml"
-                        onLoad={e => e.target.parentElement.classList.remove("animate-pulse")}
+                        onLoad={e => {
+                           e.target.parentElement.classList.remove("animate-pulse");
+                           handleLoadProgress();
+                        }}
                      />
                   </div>
                </div>
@@ -262,6 +284,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
             onTouchEnd={e => {
                e.stopPropagation();
                const inputsList = refs.buttons.map(ref => ref.current);
+               console.log(inputsList);
                let xOffset = startXCoord - e.changedTouches[0].clientX;
                if (Math.abs(xOffset) > innerWidth / 4) {
                   if (Math.sign(xOffset) === 1) {

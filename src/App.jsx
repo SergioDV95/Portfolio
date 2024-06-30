@@ -12,11 +12,19 @@ const Home = lazy(() => import("./pages/Home")); */
 
 export default function App() {
 	const [context, dispatch] = useReducer(contextReducer, {
-		load: false,
+		load: { 
+			total: [],
+			progress: 0,
+			complete: false,
+		},
 		lang: localStorage.getItem('lang') || navigator.language.startsWith('es') ? 'es' : 'en',
 		light: Number(localStorage.getItem('light')) || 0,
 		lgWidth: window.innerWidth >= 1024,
 	});
+
+	/* useEffect(() => {
+		console.log(context.load);
+	}, [context.load]) */
 
 	useEffect(() => {
 		const handleResize = () => dispatch({ type: 'SET_WIDTH', matches: mediaQueryList.matches });
@@ -29,11 +37,18 @@ export default function App() {
 	}, []);
 
 	useEffect(() => {
-		const handleLoad = () => { if (document.readyState === 'complete') dispatch({ type: 'SET_LOAD' }); }
+		const handleLoad = e => { 
+			if ((e.target instanceof Document && document.readyState === 'complete') || e.target instanceof Window) {
+				if (!context.load.complete) 
+					dispatch({ type: 'SET_LOAD', complete: true }); 
+			}
+		}
+		window.addEventListener('load', handleLoad);
 		document.addEventListener('readystatechange', handleLoad);
 		return () => {
+			window.removeEventListener('load', handleLoad);
 			document.removeEventListener('readystatechange', handleLoad);
-		};
+		}
 	}, []);
 
 	useEffect(() => {

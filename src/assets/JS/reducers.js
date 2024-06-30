@@ -11,7 +11,15 @@ export function contextReducer(context, action) {
             return { ...context, lgWidth: action.matches };
          }
          case "SET_LOAD": {
-            return { ...context, load: !context.load };
+            const load = { ...context.load };
+            load.total = Array.from(document.querySelectorAll("img, object"));
+            if (action.progress) {
+               load.progress++;
+            }
+            if (action.complete) {
+               load.complete = action.complete;
+            }
+            return { ...context, load: load };
          }
          default: {
             throw TypeError(`Unknown action: ${action.type}`);

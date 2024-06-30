@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useRef } from "react"
+import { useContext, useEffect, useState, useRef, useCallback } from "react"
 import ContextProps from "../assets/JS/createContext"
 import { motion } from "framer-motion"
 import Carousel from "../components/Carousel";
@@ -16,7 +16,7 @@ import * as imports from "../assets/JS/imports";
 */
 
 export default function Home() {
-   const { context } = useContext(ContextProps);
+   const { context, dispatch } = useContext(ContextProps);
    const [playButton, setPlayButton] = useState(false);
    const [text, setText] = useState({
       aboutMe: "",
@@ -47,6 +47,23 @@ export default function Home() {
 
    const refs = useRef({});
    const arrowRef = useRef(null);
+   const resourceRef = useRef([]);
+
+   /* useEffect(() => {
+      if (resourceRef.current.length) {
+         const total = context.load.total;
+         const merged = total.concat(resourceRef.current);
+         dispatch({ type: "SET_LOAD", total: merged })
+      }
+   }, [resourceRef.current]) */
+
+   function handleResourcesRefs(e) {
+      resourceRef.current.push(e);
+   }
+
+   const handleLoadProgress = useCallback(() => {
+      dispatch({ type: "SET_LOAD", progress: true });
+   }, [])
 
    const calcDistance = (element, from) => {
       if (!element) return null;
@@ -193,6 +210,8 @@ export default function Home() {
             <div className="relative ">
                <div className="absolute top-[30%] lg:top-[20%] right-[30%] 4xl:right-[35%]  scale-[0.85] md:scale-[0.5] lg:scale-[0.6] xl:scale-[0.5] w-fit overflow-x-hidden">
                   <motion.img
+                     ref={el => handleResourcesRefs(el)}
+                     onLoad={handleLoadProgress}
                      animate={{ x: [null, "-17.8%"] }}
                      transition={{
                         ease: "linear",
@@ -204,13 +223,19 @@ export default function Home() {
                   />
                </div>
                <img
+                  ref={el => handleResourcesRefs(el)}
+                  onLoad={handleLoadProgress}
                   className="absolute top-[15%] left-[25%] 2xl:left-[35%]  scale-[0.7] 2xl:scale-[0.6] rotate-90"
                   src={imports.puntos}
                   alt="puntos"
                />
                <div className="absolute w-full h-full z-[2]" />
                <motion.img
-                  ref={ref => refs.current.laptop = ref}
+                  ref={ref => {
+                     refs.current.laptop = ref;
+                     handleResourcesRefs(ref);
+                  }}
+                  onLoad={handleLoadProgress}
                   initial={{
                      x: innerWidth / 3,
                   }}
@@ -268,13 +293,13 @@ export default function Home() {
                   <figure
                      className="relative mt-[5vh] lg:mt-[15vh] 3xl:mt-[20vh] w-[175px] h-[175px] lg:scale-[1.2] 2xl:scale-[1.4] 3xl:scale-[1.6] rounded-full bg-picture overflow-visible z-10"
                   >
-                     <img className="scale-[1.20] -rotate-[2deg] absolute bottom-[10%]" src={imports.yo} alt="Yo" />
+                     <img ref={el => handleResourcesRefs(el)} onLoad={handleLoadProgress} className="scale-[1.20] -rotate-[2deg] absolute bottom-[10%]" src={imports.yo} alt="Yo" />
                   </figure>
                </motion.div>
-               <img className="absolute -z-[1] top-0 md:max-lg:top-[15%] -left-[5%] scale-[2] md:scale-[2.5] lg:scale-[1.1]" src={context.lang === "es" ? imports.sobre_mi : imports.about_me} alt="About me" />
+               <img ref={el => handleResourcesRefs(el)} onLoad={handleLoadProgress} className="absolute -z-[1] top-0 md:max-lg:top-[15%] -left-[5%] scale-[2] md:scale-[2.5] lg:scale-[1.1]" src={context.lang === "es" ? imports.sobre_mi : imports.about_me} alt="About me" />
             </div>
             <div className="relative flex flex-col gap-[30px] lg:gap-[15px] max-lg:items-center">
-               {context.lgWidth && <img className="absolute w-[578] h-[10%] -top-[5%] -right-[15%]" src={imports.rectas_horizontales} alt="lines" />}
+               {context.lgWidth && <img ref={el => handleResourcesRefs(el)} onLoad={handleLoadProgress} className="absolute w-[578] h-[10%] -top-[5%] -right-[15%]" src={imports.rectas_horizontales} alt="lines" />}
                <h1 className="main-headings">
                   {context.lang === "es" ? "SOBRE MÍ" : "ABOUT ME"}
                </h1>
@@ -286,7 +311,7 @@ export default function Home() {
          </div>
          <div id={context.lang === "es" ? "HABILIDADES" : "SKILLS"} className="flex z-[0] flex-col relative gap-[30px] lg:gap-[3lh] items-center max-lg:px-[5%] min-h-screen">
             <figure className="relative flex justify-center items-center">
-               <img className={`absolute ${context.lang === "es" ? "-left-[50%] lg:-left-[70%] w-[50%] lg:w-[60%]" : "-left-[100%]"} `} src={imports.flechas_der} alt="Right arrows" />
+               <img ref={el => handleResourcesRefs(el)} onLoad={handleLoadProgress} className={`absolute ${context.lang === "es" ? "-left-[50%] lg:-left-[70%] w-[50%] lg:w-[60%]" : "-left-[100%]"} `} src={imports.flechas_der} alt="Right arrows" />
                <h1 className="main-headings">
                   {context.lang === "es" ? "HABILIDADES" : "SKILLS"}
                </h1>
@@ -295,7 +320,7 @@ export default function Home() {
                      className="buttonGlow dark:border-[#FFFFFF80] absolute -right-[35%] text-[1em]"
                      onClick={() => setPlayButton(!playButton)}
                   >
-                     <img className="w-[2em] h-[2em]" src={playButton ? imports.stopIcon : imports.playIcon} alt="start/stop" />
+                     <img ref={el => handleResourcesRefs(el)} onLoad={handleLoadProgress} className="w-[2em] h-[2em]" src={playButton ? imports.stopIcon : imports.playIcon} alt="start/stop" />
                   </button>
                }
             </figure>
@@ -304,11 +329,11 @@ export default function Home() {
                   className="buttonGlow dark:border-[#FFFFFF80] text-[1em] "
                   onClick={() => setPlayButton(!playButton)}
                >
-                  <img className="w-[2em] h-[2em]" src={playButton ? imports.stopIcon : imports.playIcon} alt="start/stop" />
+                  <img ref={el => handleResourcesRefs(el)} onLoad={handleLoadProgress} className="w-[2em] h-[2em]" src={playButton ? imports.stopIcon : imports.playIcon} alt="start/stop" />
                </button>
             }
             <div className="dark:bg-[#FFBE00] bg-[#012f4b] w-[20%] h-[2px] rounded-full lg:hidden" />
-            <img className="absolute top-[40%] z-[-1] scale-[4] lg:scale-[1.5]" src={context.lang === "es" ? imports.habilidades : imports.skills} alt="Skills" />
+            <img ref={el => handleResourcesRefs(el)} onLoad={handleLoadProgress} className="absolute top-[40%] z-[-1] scale-[4] lg:scale-[1.5]" src={context.lang === "es" ? imports.habilidades : imports.skills} alt="Skills" />
             <motion.div
                initial={{
                   x: -innerWidth / 2,
@@ -329,19 +354,19 @@ export default function Home() {
          </div>
          <div id={context.lang === "es" ? "PROYECTOS" : "PROJECTS"} className="flex z-[0] relative flex-col gap-[30px] items-center px-[5%] lg:min-h-screen lg:pb-[20vh]">
             <figure className="relative flex justify-center items-center">
-               <img className={`absolute ${context.lang === "es" ? "-right-[50%] w-[50%]" : "-right-[60%] w-[60%]"} `} src={imports.flechas_der} alt="Right arrows" />
+               <img ref={el => handleResourcesRefs(el)} onLoad={handleLoadProgress} className={`absolute ${context.lang === "es" ? "-right-[50%] w-[50%]" : "-right-[60%] w-[60%]"} `} src={imports.flechas_der} alt="Right arrows" />
                <h1 className="main-headings">
                   {context.lang === "es" ? "PROYECTOS" : "PROJECTS"}
                </h1>
             </figure>
             <div className="dark:bg-[#FFBE00] bg-[#012f4b] w-[20%] h-[2px] rounded-full lg:hidden" />
-            <img className="absolute top-[15%] lg:top-[40%] z-[-1] scale-[4] lg:scale-[2]" src={context.lang === "es" ? imports.proyectos : imports.projects} alt="Projects" />
+            <img ref={el => handleResourcesRefs(el)} onLoad={handleLoadProgress} className="absolute top-[15%] lg:top-[40%] z-[-1] scale-[4] lg:scale-[2]" src={context.lang === "es" ? imports.proyectos : imports.projects} alt="Projects" />
             <Carousel
                cancelButtons={context.lgWidth}
             >
                {renderProjects(text.projects, context)}
             </Carousel>
-            {context.lgWidth && <img className="absolute w-[578px] scale-[0.8] h-[7%] bottom-0 -left-[15%]" src={imports.rectas_horizontales} alt="lines" />}
+            {context.lgWidth && <img ref={el => handleResourcesRefs(el)} onLoad={handleLoadProgress} className="absolute w-[578px] scale-[0.8] h-[7%] bottom-0 -left-[15%]" src={imports.rectas_horizontales} alt="lines" />}
          </div>
          <div id={context.lang === "es" ? "PROCESO" : "PROCESS"} className="flex relative z-[0] flex-col gap-[30px] items-center px-[5%] lg:h-[80vh] min-h-screen">
             <figure className="relative flex justify-center items-center">
@@ -350,9 +375,11 @@ export default function Home() {
                </h1>
             </figure>
             <div className="dark:bg-[#FFBE00] bg-[#012f4b] w-[20%] h-[2px] rounded-full lg:hidden" />
-            <img className="absolute top-[10%] lg:top-[40%] -left-[35%] z-[-1] lg:scale-[0.3] scale-[0.5]" src={imports.puntos} alt="flechas" />
-            <img className="absolute top-[50%] lg:top-0 lg:right-0 lg:w-[calc(732px/1.2)] z-[-1] max-lg:scale-[1.5]" src={context.lang === "es" ? imports.procesos : imports.processes} alt="Process" />
+            <img ref={el => handleResourcesRefs(el)} onLoad={handleLoadProgress} className="absolute top-[10%] lg:top-[40%] -left-[35%] z-[-1] lg:scale-[0.3] scale-[0.5]" src={imports.puntos} alt="flechas" />
+            <img ref={el => handleResourcesRefs(el)} onLoad={handleLoadProgress} className="absolute top-[50%] lg:top-0 lg:right-0 lg:w-[calc(732px/1.2)] z-[-1] max-lg:scale-[1.5]" src={context.lang === "es" ? imports.procesos : imports.processes} alt="Process" />
             <motion.object
+               ref={el => handleResourcesRefs(el)}
+               onLoad={handleLoadProgress}
                initial={{
                   x: innerWidth / 2,
                }}
@@ -378,10 +405,11 @@ export default function Home() {
                </h1>
             </figure>
             <div className="dark:bg-[#FFBE00] bg-[#012f4b] w-[20%] h-[2px] rounded-full lg:hidden" />
-            <img className="absolute top-[40%] z-[-1] max-lg:scale-[1.5] lg:w-[calc(732px/1.2)] lg:-left-[8%]" src={context.lang === "es" ? imports.contactame : imports.contact} alt="Contact me" />
+            <img ref={el => handleResourcesRefs(el)} onLoad={handleLoadProgress} className="absolute top-[40%] z-[-1] max-lg:scale-[1.5] lg:w-[calc(732px/1.2)] lg:-left-[8%]" src={context.lang === "es" ? imports.contactame : imports.contact} alt="Contact me" />
             <ContactMe lang={context.lang} />
          </div>
          <motion.button
+            type="button"
             ref={arrowRef}
             className="rounded-full bg-white w-fit p-[0.75em] cursor-pointer sticky top-[80%] left-[80%] lg:left-[95%] z-10"
             initial="hidden"
@@ -389,7 +417,9 @@ export default function Home() {
             variants={arrowVariant.figure}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
          >
-            <motion.img 
+            <motion.img
+               ref={el => handleResourcesRefs(el)}
+               onLoad={handleLoadProgress}
                className="w-[2em] h-[2em]" 
                alt="Arrow" 
                src={imports.arrowUp}
