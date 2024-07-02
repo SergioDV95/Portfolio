@@ -30,7 +30,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       currentSlide: 0
    });
 
-   const [refs, setRefs] = useState({
+   const refs = useRef({
       slides: [],
       buttons: [],
    });
@@ -122,7 +122,10 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                animate={{ x: 0, scale: 1 }}
                exit={slider.direction === "left" ? animate.right : animate.left}
             >
-               <div className="flex flex-col gap-[5px]" ref={refs.slides[index]}>
+               <div 
+                  /* ref={ref => refs.current.slides[index] = ref} */
+                  className="flex flex-col gap-[5px]" 
+               >
                   <h3>{key}:</h3>
                   <div className="flex flex-wrap gap-[10px] h-full content-start" >
                      {Array.isArray(value) && value.map((skill, i) => {
@@ -228,16 +231,6 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
 
    const renderedElements = useMemo(() => carouselElements(), [skillFeatures, slider, skills, children, context.lgWidth]);
 
-   useEffect(() => {
-      setRefs((refs) => {
-         const arrayRefs = elements => new Array(elements.length).fill().map(() => createRef());
-         return {
-            slides: arrayRefs(renderedElements.length),
-            buttons: refs.buttons.length ? refs.buttons : arrayRefs(carouselButtons.length),
-         }
-      });
-   }, [renderedElements]);
-
    const carouselButtons = useMemo(() => {
       if (!skills && !children) return;
       const totalElements = children ? children.length : Object.keys(skills).length;
@@ -247,7 +240,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       for (let i = 0; i < slidesNum; i++) {
          slideInputsList.push(
             <motion.input
-               ref={refs.buttons[i]}
+               /* ref={ref => refs.current.buttons[i] = ref} */
                key={"input" + uuidv4()}
                name={"slideDots" + id}
                className={` w-[10px] h-[10px] rounded-full enabled:cursor-pointer`}
@@ -271,7 +264,18 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
          );
       }
       return slideInputsList;
-   }, [slider, skills, children, slider.start, slider.end]);
+   }, [slider, skills, children])
+
+   useEffect(() => {
+      const arrayRefs = elements => new Array(elements.length).fill(null).map(() => createRef());
+      const newRefs = {
+         slides: renderedElements,
+         buttons: refs.buttons?.length ? refs.buttons : carouselButtons,
+      }
+      refs.current = newRefs;
+   }, [renderedElements, carouselButtons])
+
+   useEffect(() => {console.log(refs)}, [refs]);
 
    return (
       <>
