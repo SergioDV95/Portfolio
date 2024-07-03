@@ -134,7 +134,7 @@ export default function Home() {
       <section className="flex flex-col mt-[10%] lg:mt-[5%] px-[5%] pb-[5%] max-lg:gap-[10vh] overflow-hidden">
          <div id="intro" className="flex flex-col lg:grid lg:min-h-screen lg:grid-cols-[2fr_3fr] gap-[30px] max-lg:items-center">
             <div className="flex flex-col lg:pt-[15%] gap-[15px] lg:gap-[30px] max-lg:items-center">
-               <div className="font-dela max-lg:text-center text-[22px] lg:text-[1.7em] xl:text-[2.1em] xl:whitespace-nowrap">
+               <div className="font-dela max-lg:text-center text-[1.4em] lg:text-[1.7em] xl:text-[2.1em] xl:whitespace-nowrap">
                   <p>{context.lang === "es" ? "HOLA, SOY UN" : "HELLO, I'M A"}<br />
                      <motion.span
                         className="text-[1.2em] bg-[length:110%] lg:max-xl:text-[1.1em]"
@@ -348,7 +348,7 @@ export default function Home() {
                <Carousel
                   playButton={playButton}
                   skills={text.skills}
-                  slideClasses={"bg-skills min-h-[150px] relative md:max-lg:min-h-[100px] xl:min-h-[200px] border-[2px] border-white dark:border-[#FFFFFF80] grid grid-cols-[1.5fr_1fr] gap-x-[10px] p-[10px] rounded-[8px] w-full box-border"}
+                  slideClasses={"bg-skills relative md:max-lg:min-h-[100px] min-h-[200px] border-[2px] border-white dark:border-[#FFFFFF80] grid grid-cols-[1.5fr_1fr] gap-x-[10px] p-[10px] rounded-[8px] w-full box-border"}
                />
             </motion.div>
          </div>

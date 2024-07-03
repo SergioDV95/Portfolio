@@ -123,7 +123,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                exit={slider.direction === "left" ? animate.right : animate.left}
             >
                <div 
-                  /* ref={ref => refs.current.slides[index] = ref} */
+                  ref={ref => refs.current.slides[index] = ref}
                   className="flex flex-col gap-[5px]" 
                >
                   <h3>{key}:</h3>
@@ -155,7 +155,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                               }}
                            >
                               <motion.p
-                                 className={`select-none relative z-10 font-bold text-[12px] xl:text-[14px] 2xl:text-[16px] p-[5px] cursor-grab rounded-[5px] text-center`}
+                                 className={`select-none relative z-10 font-bold text-[0.8em] xl:text-[14px] 2xl:text-[16px] p-[5px] cursor-grab rounded-[5px] text-center`}
                                  onTouchStart={e => e.stopPropagation()}
                                  onDragEnd={e => {
                                     if (playButton) {
@@ -240,8 +240,9 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       for (let i = 0; i < slidesNum; i++) {
          slideInputsList.push(
             <motion.input
-               /* ref={ref => refs.current.buttons[i] = ref} */
+               ref={ref => refs.current.buttons[i] = ref}
                key={"input" + uuidv4()}
+               id={uuidv4()}
                name={"slideDots" + id}
                className={` w-[10px] h-[10px] rounded-full enabled:cursor-pointer`}
                initial={{ backgroundColor: "#D9D9D94D", scale: 1 }}
@@ -266,17 +267,6 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       return slideInputsList;
    }, [slider, skills, children])
 
-   useEffect(() => {
-      const arrayRefs = elements => new Array(elements.length).fill(null).map(() => createRef());
-      const newRefs = {
-         slides: renderedElements,
-         buttons: refs.buttons?.length ? refs.buttons : carouselButtons,
-      }
-      refs.current = newRefs;
-   }, [renderedElements, carouselButtons])
-
-   useEffect(() => {console.log(refs)}, [refs]);
-
    return (
       <>
          <div
@@ -287,16 +277,15 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
             }}
             onTouchEnd={e => {
                e.stopPropagation();
-               const inputsList = refs.buttons.map(ref => ref.current);
-               console.log(inputsList);
+               const buttonsList = refs.current.buttons;
                let xOffset = startXCoord - e.changedTouches[0].clientX;
                if (Math.abs(xOffset) > innerWidth / 4) {
                   if (Math.sign(xOffset) === 1) {
-                     if (slider.currentSlide === (inputsList.length - 1)) inputsList[0].click();
-                     else inputsList[slider.currentSlide + 1].click();
+                     if (slider.currentSlide === (buttonsList.length - 1)) buttonsList[0].click();
+                     else buttonsList[slider.currentSlide + 1].click();
                   } else {
-                     if (slider.currentSlide === 0) inputsList[inputsList.length - 1].click();
-                     else inputsList[slider.currentSlide - 1].click();
+                     if (slider.currentSlide === 0) buttonsList[buttonsList.length - 1].click();
+                     else buttonsList[slider.currentSlide - 1].click();
                   }
                }
             }}

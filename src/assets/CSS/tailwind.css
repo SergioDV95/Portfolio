@@ -5,7 +5,7 @@
 @layer base {
 
    body {
-      @apply h-full 2xl:text-[20px] 4xl:text-[24px] box-border font-open text-white
+      @apply h-full text-[17px] 2xl:text-[20px] 4xl:text-[24px] box-border font-open text-white
    }
 
    .light_mode {
