@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { motion, AnimatePresence } from "framer-motion";
 import ContextProps from '../assets/JS/createContext';
 import * as imports from '../assets/JS/imports';
-import { scatterCoords } from '../assets/JS/functions';
+import { scatterCoords, getColor } from '../assets/JS/functions';
 
 /**
  * Component for rendering a carousel with sliding elements.
@@ -29,6 +29,8 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       direction: "",
       currentSlide: 0
    });
+
+   const colorRef = useRef(getColor());
 
    const refs = useRef({
       slides: [],
@@ -111,7 +113,6 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
    const carouselElements = () => {
       if (!skills && !children) return;
       if (!children) {
-         const selectedColors = [];
          const svgs = [imports.lenguajes, imports.frameworks, imports.cms, imports.db, imports.tools];
          return Object.entries(skills).slice(slider.start, slider.end).map(([key, value], index) => (
             <motion.div
@@ -132,16 +133,8 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                         if (skillFeatures.draggables?.[skill] === undefined) {
                            toggleDraggables(skill);
                         }
-                        const number = Math.random();
-                        if (number < 0.33 && selectedColors[selectedColors.length - 1] !== "#3E619B") {
-                           selectedColors.push("#3E619B");
-                        } else if (number < 0.66 && selectedColors[selectedColors.length - 1] !== "#EA4B4C") {
-                           selectedColors.push("#EA4B4C");
-                        } else if (selectedColors[selectedColors.length - 1] !== "#42506B") {
-                           selectedColors.push("#42506B");
-                        } else {
-                           selectedColors.push("#FFBE00");
-                        }
+                        const color = getColor(colorRef.current);
+                        colorRef.current = color;
                         return (
                            <motion.div
                               className={`relative w-fit h-fit outline-[2px] xl:outline-[3px] 2xl:outline-[4px] outline-dashed rounded-[7px]`}
@@ -171,8 +164,8 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                                  initial={{
                                     x: 0,
                                     y: 0,
-                                    backgroundColor: selectedColors[i],
-                                    boxShadow: `0 0 3px 1.5px ${selectedColors[i]}`
+                                    backgroundColor: color,
+                                    boxShadow: `0 0 3px 1.5px ${color}`
                                  }}
                                  animate={
                                     {
@@ -244,7 +237,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                key={"input" + uuidv4()}
                id={uuidv4()}
                name={"slideDots" + id}
-               className={` w-[10px] h-[10px] rounded-full enabled:cursor-pointer`}
+               className={`w-[0.75em] h-[0.75em] rounded-full enabled:cursor-pointer`}
                initial={{ backgroundColor: "#D9D9D94D", scale: 1 }}
                animate={slider.currentSlide === i ? { backgroundColor: "#D9D9D9", scale: 1.4 } : { backgroundColor: "#D9D9D94D", scale: 1 }}
                type="button"
@@ -297,6 +290,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
             </div>
             {!cancelButtons &&
                <motion.div
+                  layout
                   className="flex gap-[10px]"
                >
                   {carouselButtons}
