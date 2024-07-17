@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { motion, AnimatePresence } from "framer-motion";
 import ContextProps from '../assets/JS/createContext';
 import * as imports from '../assets/JS/imports';
-import { scatterCoords, getColor } from '../assets/JS/functions';
+import { scatterCoords, getColor, colorPicker } from '../assets/JS/functions';
 
 /**
  * Component for rendering a carousel with sliding elements.
@@ -192,7 +192,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                   </div>
                </div>
                <div className="flex flex-col justify-center items-center">
-                  <div className="animate-pulse bg-picture p-[20%] md:p-[20px] shadow-button w-full h-[60%] rounded-[8px]">
+                  <motion.div className="animate-pulse bg-picture p-[20%] md:p-[20px] shadow-button w-full h-[60%] rounded-[8px]">
                      <img
                         ref={el => handleResourcesRefs(el)}
                         className="w-full h-full max-lg:scale-[1.2]"
@@ -203,7 +203,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                            handleLoadProgress();
                         }}
                      />
-                  </div>
+                  </motion.div>
                </div>
             </motion.div>
          ));

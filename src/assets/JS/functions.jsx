@@ -80,12 +80,25 @@ export const scatterCoords = (minCoord, maxCoord) => {
 
 //Unused
 export const colorPicker = () => {
-   let HEXcolor = '#';
+   let RGBcolor = 'rgb(';
+   let colorFragment = Math.floor(Math.random() * 256).toString();
    for (let i = 0; i < 3; i++) {
-      const colorFragment = Math.floor(Math.random() * 256).toString(16);
-      HEXcolor += colorFragment.padEnd(2, colorFragment);
+      if (i != 2) RGBcolor += colorFragment + ', ';
+      else RGBcolor += colorFragment + ')';
+      switch (true) {
+         case Number(colorFragment) < 100:
+            colorFragment = Math.floor(Math.random() * (200 - 101 + 1) + 101).toString();
+            break;
+         case Number(colorFragment) >= 100 && Number(colorFragment) <= 200:
+            colorFragment = Math.floor(Math.random() * (255 - 201 + 1) + 201).toString();
+            break;
+         case Number(colorFragment) > 200:
+            colorFragment = Math.floor(Math.random() * 100).toString();
+            break;
+      }
    }
-   return HEXcolor;
+   console.log(RGBcolor);
+   return RGBcolor;
 };
 
 export const getColor = (prev = null) => {
