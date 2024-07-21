@@ -1,4 +1,4 @@
-import { useState, useMemo, useContext, useEffect, createRef, useRef } from 'react';
+import { useState, useMemo, useContext, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { motion, AnimatePresence } from "framer-motion";
 import ContextProps from '../assets/JS/createContext';
@@ -46,7 +46,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
 
    const id = useMemo(() => uuidv4(), []);
 
-   const animate = {
+   const animation = {
       right: { x: window.innerWidth, scale: 0.1 },
       left: { x: -window.innerWidth, scale: 0.1 }
    };
@@ -119,13 +119,13 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                className={slideClasses}
                key={"key" + key + index}
                transition={{ delay: index * 0.1 }}
-               initial={slider.direction === "right" ? animate.right : animate.left}
+               initial={slider.direction === "right" ? animation.right : animation.left}
                animate={{ x: 0, scale: 1 }}
-               exit={slider.direction === "left" ? animate.right : animate.left}
+               exit={slider.direction === "left" ? animation.right : animation.left}
             >
-               <div 
+               <div
                   ref={ref => refs.current.slides[index] = ref}
-                  className="flex flex-col gap-[5px]" 
+                  className="flex flex-col gap-[5px]"
                >
                   <h3>{key}:</h3>
                   <div className="flex flex-wrap gap-[10px] h-full content-start" >
@@ -191,8 +191,22 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                      })}
                   </div>
                </div>
-               <div className="flex flex-col justify-center items-center">
-                  <motion.div className="animate-pulse bg-picture p-[20%] md:p-[20px] shadow-button w-full h-[60%] rounded-[8px]">
+               <div className="flex flex-col justify-center items-center" style={{ perspective: 300 }}>
+                  <motion.div
+                     className="animate-pulse bg-picture p-[20%] md:p-[20px] shadow-button w-full h-[60%] rounded-[8px]"
+                     onMouseMove={e => {
+                        const { width, height, top, left } = e.currentTarget.getBoundingClientRect();
+                        const x = (e.clientX - left) / width - 0.5;
+                        const y = (e.clientY - top) / height - 0.5;
+                        const rotateX = y * 30;
+                        const rotateY = x * 30;
+
+                        e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                     }}
+                     onMouseLeave={e => {
+                        e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                     }}
+                  >
                      <img
                         ref={el => handleResourcesRefs(el)}
                         className="w-full h-full max-lg:scale-[1.2]"
@@ -212,9 +226,9 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
             <motion.div
                className={slideClasses + " select-none"}
                key={"children" + uuidv4()}
-               initial={slider.direction === "right" ? animate.right : animate.left}
+               initial={slider.direction === "right" ? animation.right : animation.left}
                animate={{ x: 0, scale: 1 }}
-               exit={slider.direction === "left" ? animate.right : animate.left}
+               exit={slider.direction === "left" ? animation.right : animation.left}
             >
                {value}
             </motion.div>
