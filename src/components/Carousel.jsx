@@ -1,6 +1,6 @@
 import { useState, useMemo, useContext, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, animate } from "framer-motion";
 import ContextProps from '../assets/JS/createContext';
 import * as imports from '../assets/JS/imports';
 import { scatterCoords, getColor, colorPicker } from '../assets/JS/functions';
@@ -198,13 +198,31 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                         const { width, height, top, left } = e.currentTarget.getBoundingClientRect();
                         const x = (e.clientX - left) / width - 0.5;
                         const y = (e.clientY - top) / height - 0.5;
-                        const rotateX = y * 30;
+                        const rotateX = y * -30;
                         const rotateY = x * 30;
 
-                        e.currentTarget.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                        animate(e.currentTarget, 
+                           {
+                              rotateX: rotateX,
+                              rotateY: rotateY,
+                              scale: 1.1,
+                           }, 
+                           {
+                              duration: 0.1,
+                           }
+                        );
                      }}
                      onMouseLeave={e => {
-                        e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                        animate(e.currentTarget, 
+                           {
+                              rotateX: 0,
+                              rotateY: 0,
+                              scale: 1,
+                           }, 
+                           {
+                              duration: 0.1,
+                           }
+                        );
                      }}
                   >
                      <img
