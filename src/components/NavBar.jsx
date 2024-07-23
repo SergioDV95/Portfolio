@@ -143,7 +143,7 @@ export default function NavBar() {
    };
    return (
       <header className="flex max-lg:justify-end lg:text-[0.9em] 2xl:text-[0.8em] justify-between text-end gap-[30px] w-full max-lg:p-[5%] lg:px-[5%] lg:pt-[4%] relative">
-         <img ref={el => handleResourcesRefs(el)} onLoad={handleLoadProgress} className="absolute z-[-1] -rotate-[20deg] max-lg:scale-[2] -left-[65%] lg:-left-[50%] lg:-top-[125%] 4xl:-top-[150%]" src={ondas} alt="ondas" />
+         <img className="absolute z-[-1] -rotate-[20deg] max-lg:scale-[2] -left-[65%] lg:-left-[50%] lg:-top-[125%] 4xl:-top-[150%]" /* src={ondas} */ alt="ondas" />
          <motion.nav
             className="flex max-lg:z-50 max-lg:flex-col w-[80%] rounded-[8px] px-[1.5%] max-lg:p-[1.5%] lg:items-center justify-center lg:justify-between font-semibold bg-[#42506BE6] lg:bg-navbarDesktop border-[2px] border-[white] dark:border-[#FFFFFF80] box-border"
             variants={variants.list}

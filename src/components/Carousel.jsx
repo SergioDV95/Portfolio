@@ -1,9 +1,10 @@
 import { useState, useMemo, useContext, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { motion, AnimatePresence, animate } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ContextProps from '../assets/JS/createContext';
 import * as imports from '../assets/JS/imports';
-import { scatterCoords, getColor, colorPicker } from '../assets/JS/functions';
+import { scatterCoords, getColor } from '../assets/JS/functions';
+import ParticlesAnim from './ParticlesAnim';
 
 /**
  * Component for rendering a carousel with sliding elements.
@@ -51,23 +52,122 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       left: { x: -window.innerWidth, scale: 0.1 }
    };
 
-   const resourceRef = useRef([]);
-
-   /* useEffect(() => {
-      if (resourceRef.current.length) {
-         const total = context.load.total;
-         const merged = total.concat(resourceRef.current);
-         dispatch({ type: "SET_LOAD", total: merged })
+   const options = useMemo(
+      () => ({
+         fullScreen: {
+            zIndex: 1
+         },
+         particles: {
+            number: {
+               value: 300
+            },
+            color: {
+               value: [
+                  '#00FFFC',
+                  '#FC00FF',
+                  '#fffc00'
+               ]
+            },
+            shape: {
+               type: [
+                  'square'
+               ],
+               options: {}
+            },
+            opacity: {
+               value: {
+                  min: 0,
+                  max: 1
+               },
+               animation: {
+                  enable: true,
+                  speed: 2,
+                  startValue: 'max',
+                  destroy: 'min'
+               }
+            },
+            size: {
+               value: {
+                  min: 2,
+                  max: 4
+               }
+            },
+            links: {
+               enable: false
+            },
+            life: {
+               duration: {
+                  sync: true,
+                  value: 5
+               },
+               count: 1
+            },
+            move: {
+               enable: true,
+               gravity: {
+                  enable: true,
+                  acceleration: 10
+               },
+               speed: {
+                  min: 10,
+                  max: 20
+               },
+               decay: 0.1,
+               direction: 'none',
+               straight: false,
+               outModes: {
+                  default: 'destroy',
+                  top: 'none'
+               }
+            },
+            rotate: {
+               value: {
+                  min: 0,
+                  max: 360
+               },
+               direction: 'random',
+               move: true,
+               animation: {
+                  enable: true,
+                  speed: 60
+               }
+            },
+            tilt: {
+               direction: 'random',
+               enable: true,
+               move: true,
+               value: {
+                  min: 0,
+                  max: 360
+               },
+               animation: {
+                  enable: true,
+                  speed: 60
+               }
+            },
+            roll: {
+               darken: {
+                  enable: true,
+                  value: 25
+               },
+               enable: true,
+               speed: {
+                  min: 15,
+                  max: 25
+               }
+            },
+            wobble: {
+               distance: 30,
+               enable: true,
+               move: true,
+               speed: {
+                  min: -15,
+                  max: 15
+               }
+            }
+         },
       }
-   }, [resourceRef.current]) */
-
-   function handleResourcesRefs(e) {
-      resourceRef.current.push(e);
-   }
-
-   function handleLoadProgress() {
-      dispatch({ type: "SET_LOAD", progress: true });
-   }
+   ), []);
 
    useEffect(() => {
       setSlider((slider) => ({ ...slider, end: context.lgWidth ? (endIndex || 3) : 1 }))
@@ -94,6 +194,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       } else {
          changeCoords = skillFeatures.coords;
       }
+      
       if (!playButton) {
          for (let key in skillFeatures.draggables) {
             changeDraggables[key] = true;
@@ -101,7 +202,9 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
       } else {
          changeDraggables = skillFeatures.draggables;
       }
+
       setSkillFeatures({ draggables: changeDraggables, coords: changeCoords });
+
    }, [skills, playButton]);
 
    const toggleDraggables = skill => {
@@ -201,38 +304,19 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                         const rotateX = y * -30;
                         const rotateY = x * 30;
 
-                        animate(e.currentTarget, 
-                           {
-                              rotateX: rotateX,
-                              rotateY: rotateY,
-                              scale: 1.1,
-                           }, 
-                           {
-                              duration: 0.1,
-                           }
-                        );
+                        e.currentTarget.style.transform = `scale(1.1) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
                      }}
                      onMouseLeave={e => {
-                        animate(e.currentTarget, 
-                           {
-                              rotateX: 0,
-                              rotateY: 0,
-                              scale: 1,
-                           }, 
-                           {
-                              duration: 0.1,
-                           }
-                        );
+                        e.currentTarget.style.transform = null;
                      }}
+                     whileHover={{ scale: 1.1 }}
                   >
                      <img
-                        ref={el => handleResourcesRefs(el)}
                         className="w-full h-full max-lg:scale-[1.2]"
                         src={svgs.slice(slider.start, slider.end)[index]}
                         alt="image/svg+xml"
                         onLoad={e => {
                            e.target.parentElement.classList.remove("animate-pulse");
-                           handleLoadProgress();
                         }}
                      />
                   </motion.div>
@@ -328,6 +412,7 @@ export default function Carousel({ skills, slideClasses, children, startIndex, e
                   {carouselButtons}
                </motion.div>
             }
+            {playButton && Object.values(skillFeatures.draggables).every(isItTruthy => !isItTruthy) && <ParticlesAnim options={options} />}
          </div>
       </>
    )

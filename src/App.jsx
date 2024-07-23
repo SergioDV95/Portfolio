@@ -23,28 +23,18 @@ export default function App() {
 	});
 
 	useEffect(() => {
+		const handleLoad = () => !context.load.complete && dispatch({ type: 'SET_LOAD', complete: true }) ;
 		const handleResize = () => dispatch({ type: 'SET_WIDTH', matches: mediaQueryList.matches });
 		const mediaQueryList = window.matchMedia('(min-width: 1024px)');
+
+		window.addEventListener('load', handleLoad);
 		mediaQueryList.addEventListener("change", handleResize);
+
 		handleResize();
 		return () => {
+			window.removeEventListener('load', handleLoad);
 			mediaQueryList.removeEventListener("change", handleResize);
 		};
-	}, []);
-
-	useEffect(() => {
-		const handleLoad = e => { 
-			if ((e.target instanceof Document && document.readyState === 'complete') || e.target instanceof Window) {
-				if (!context.load.complete) 
-					dispatch({ type: 'SET_LOAD', complete: true }); 
-			}
-		}
-		window.addEventListener('load', handleLoad);
-		document.addEventListener('readystatechange', handleLoad);
-		return () => {
-			window.removeEventListener('load', handleLoad);
-			document.removeEventListener('readystatechange', handleLoad);
-		}
 	}, []);
 
 	useEffect(() => {

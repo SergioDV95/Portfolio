@@ -109,3 +109,10 @@ export const getColor = (prev = null) => {
    }
    return selectedColor;
 }
+
+export const calcDistance = (element, from) => {
+   if (!element) return null;
+   const rect = element.getBoundingClientRect();
+   const offset = from === "right" ? innerWidth - rect.right : rect.left - innerWidth;
+   return offset;
+}
