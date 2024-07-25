@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import ParticlesAnim from "./ParticlesAnim";
+import Particles from "@tsparticles/react";
 
 export default function ScreenEffects({ context }) {
    
@@ -94,7 +94,7 @@ export default function ScreenEffects({ context }) {
             "connect": {
                "distance": 80,
                "links": {
-                  "opacity": 0.5
+                  "opacity": 0
                },
                "radius": 60
             },
@@ -103,7 +103,7 @@ export default function ScreenEffects({ context }) {
                "links": {
                   "blink": false,
                   "consent": false,
-                  "opacity": 1
+                  "opacity": 0
                }
             },
             "push": {
@@ -261,7 +261,21 @@ export default function ScreenEffects({ context }) {
                   "value": 0
                },
                "enable": false,
-               "options": {}
+               "options": {
+                  "addAtBack": false,
+                  "addAtFront": false,
+                  "avoid": false,
+                  "avoidanceBias": 0,
+                  "avoidancePathLength": 0,
+                  "avoidanceZone": [],
+                  "curviness": 10,
+                  "damping": 0,
+                  "enable": false,
+                  "pathLength": 0,
+                  "resolutions": 30,
+                  "reverse": false,
+                  "size": false
+               }
             },
             "outModes": {
                "default": "out",
@@ -272,7 +286,7 @@ export default function ScreenEffects({ context }) {
             },
             "random": false,
             "size": false,
-            "speed": 1,
+            "speed": 0.5,
             "spin": {
                "acceleration": 0,
                "enable": false
@@ -294,12 +308,12 @@ export default function ScreenEffects({ context }) {
             },
             "limit": {
                "mode": "delete",
-               "value": 200
+               "value": 160
             },
-            "value": 120
+            "value": 100
          },
          "opacity": {
-            "value": 0.5,
+            "value": 0.25,
             "animation": {
                "count": 0,
                "enable": false,
@@ -465,7 +479,7 @@ export default function ScreenEffects({ context }) {
             "distance": 150,
             "enable": true,
             "frequency": 1,
-            "opacity": 0.4,
+            "opacity": 0.25,
             "shadow": {
                "blur": 5,
                "color": {
@@ -505,6 +519,7 @@ export default function ScreenEffects({ context }) {
          }
       }
    };
+   
    return (
       <>
          <motion.div
@@ -525,7 +540,7 @@ export default function ScreenEffects({ context }) {
          </motion.div>
          <div className={`fixed w-screen h-screen -z-[3] mix-blend-multiply bg-granulated ${context.light ? "opacity-50" : "opacity-100"}`} />
          <div className="fixed -z-[1]">
-            <ParticlesAnim options={options} />
+            <Particles id="linkParticles" options={options} />
          </div>
       </>
    )

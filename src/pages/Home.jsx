@@ -195,11 +195,11 @@ export default function Home() {
                      alt="flechas"
                   /> */}
                </div>
-               {/* <img
+               <img
                   className="absolute top-[15%] left-[25%] 2xl:left-[35%]  scale-[0.7] 2xl:scale-[0.6] rotate-90"
                   src={imports.puntos}
                   alt="puntos"
-               /> */}
+               />
                <div className="absolute w-full h-full z-[2]" />
                <motion.img
                   initial={{
@@ -257,7 +257,7 @@ export default function Home() {
                <img className="absolute -z-[1] top-0 md:max-lg:top-[15%] -left-[5%] scale-[2] md:scale-[2.5] lg:scale-[1.1]" src={context.lang === "es" ? imports.sobre_mi : imports.about_me} alt="About me" />
             </div>
             <div className="relative flex flex-col gap-[30px] lg:gap-[15px] max-lg:items-center">
-               {/* {context.lgWidth && <img className="absolute w-[578] h-[10%] -top-[5%] -right-[15%]" src={imports.rectas_horizontales} alt="lines" /> } */}
+               {context.lgWidth && <img className="absolute w-[578] h-[10%] -top-[5%] -right-[15%]" src={imports.rectas_horizontales} alt="lines" /> }
                <h1 className="main-headings">
                   {context.lang === "es" ? "SOBRE MÍ" : "ABOUT ME"}
                </h1>
@@ -324,7 +324,7 @@ export default function Home() {
             >
                {renderProjects(text.projects, context)}
             </Carousel>
-            {/* {context.lgWidth && <img className="absolute w-[578px] scale-[0.8] h-[7%] bottom-0 -left-[15%]" src={imports.rectas_horizontales} alt="lines" />} */}
+            {context.lgWidth && <img className="absolute w-[578px] scale-[0.8] h-[7%] bottom-0 -left-[15%]" src={imports.rectas_horizontales} alt="lines" />}
          </div>
          <div id={context.lang === "es" ? "PROCESO" : "PROCESS"} className="flex relative z-[0] flex-col gap-[30px] items-center px-[5%] lg:h-[80vh] min-h-screen">
             <figure className="relative flex justify-center items-center">
