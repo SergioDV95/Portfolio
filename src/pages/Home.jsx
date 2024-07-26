@@ -106,7 +106,7 @@ export default function Home() {
    };
 
    return (
-      <section className="flex flex-col mt-[10%] lg:mt-[5%] px-[5%] pb-[5%] max-lg:gap-[10vh] overflow-hidden">
+      <section className="flex flex-col mt-[10%] lg:mt-[5%] px-[5%] z-[1] pb-[5%] max-lg:gap-[10vh] overflow-hidden">
          <div id="intro" className="flex flex-col lg:grid lg:min-h-screen lg:grid-cols-[2fr_3fr] gap-[30px] max-lg:items-center">
             <div className="flex flex-col lg:pt-[15%] gap-[15px] lg:gap-[30px] max-lg:items-center">
                <div className="font-dela max-lg:text-center text-[1.4em] lg:text-[1.7em] xl:text-[2.1em] xl:whitespace-nowrap">
