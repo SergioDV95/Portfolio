@@ -4,6 +4,9 @@ import { motion } from "framer-motion"
 import Carousel from "../components/Carousel";
 import ContactMe from "../components/ContactMe";
 import { renderProjects } from "../assets/JS/functions";
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import LaptopModel from "../components/LaptopModel";
 import * as imports from "../assets/JS/imports";
 
 /**
@@ -130,18 +133,18 @@ export default function Home() {
                               "linear-gradient(to right, #012f4b 90%, #FFFFFF 100%, #012f4b)",
                               "linear-gradient(to right, #012f4b 100%, #FFFFFF, #012f4b)",
                            ]
-                           :
-                           [
-                              "linear-gradient(to right, #FFBE00, #FFFFFF, #FFBE00 0%)",
-                              "linear-gradient(to right, #FFBE00, #FFFFFF 0%, #FFBE00 10%)",
-                              "linear-gradient(to right, #FFBE00 0%, #FFFFFF, #FFBE00 20%)",
-                              "linear-gradient(to right, #FFBE00 20%, #FFFFFF, #FFBE00 40%)",
-                              "linear-gradient(to right, #FFBE00 40%, #FFFFFF, #FFBE00 60%)",
-                              "linear-gradient(to right, #FFBE00 60%, #FFFFFF, #FFBE00 80%)",
-                              "linear-gradient(to right, #FFBE00 80%, #FFFFFF, #FFBE00 100%)",
-                              "linear-gradient(to right, #FFBE00 90%, #FFFFFF 100%, #FFBE00)",
-                              "linear-gradient(to right, #FFBE00 100%, #FFFFFF, #FFBE00)",
-                           ],
+                              :
+                              [
+                                 "linear-gradient(to right, #FFBE00, #FFFFFF, #FFBE00 0%)",
+                                 "linear-gradient(to right, #FFBE00, #FFFFFF 0%, #FFBE00 10%)",
+                                 "linear-gradient(to right, #FFBE00 0%, #FFFFFF, #FFBE00 20%)",
+                                 "linear-gradient(to right, #FFBE00 20%, #FFFFFF, #FFBE00 40%)",
+                                 "linear-gradient(to right, #FFBE00 40%, #FFFFFF, #FFBE00 60%)",
+                                 "linear-gradient(to right, #FFBE00 60%, #FFFFFF, #FFBE00 80%)",
+                                 "linear-gradient(to right, #FFBE00 80%, #FFFFFF, #FFBE00 100%)",
+                                 "linear-gradient(to right, #FFBE00 90%, #FFFFFF 100%, #FFBE00)",
+                                 "linear-gradient(to right, #FFBE00 100%, #FFFFFF, #FFBE00)",
+                              ],
                         }}
                         transition={{
                            duration: 0.65,
@@ -216,6 +219,20 @@ export default function Home() {
                   onContextMenu={e => e.preventDefault()}
                   alt="Laptop"
                />
+               {/* <Canvas
+                  gl={{ antialias: true, failIfMajorPerformanceCaveat: true }}
+                  onCreated={({ gl }) => {
+                     if (!gl.getContext()) {
+                        console.error('WebGL not supported, falling back to CanvasRenderer');
+                        // Fallback logic here
+                     }
+                  }}
+               >
+                  <ambientLight />
+                  <pointLight position={[10, 10, 10]} />
+                  <LaptopModel />
+                  <OrbitControls />
+               </Canvas> */}
             </div>
             <h4 className="text-center lg:hidden">
                {context.lang === "es" ?
@@ -257,7 +274,7 @@ export default function Home() {
                <img className="absolute -z-[1] top-0 md:max-lg:top-[15%] -left-[5%] scale-[2] md:scale-[2.5] lg:scale-[1.1]" src={context.lang === "es" ? imports.sobre_mi : imports.about_me} alt="About me" />
             </div>
             <div className="relative flex flex-col gap-[30px] lg:gap-[15px] max-lg:items-center">
-               {context.lgWidth && <img className="absolute w-[578] h-[10%] -top-[5%] -right-[15%]" src={imports.rectas_horizontales} alt="lines" /> }
+               {context.lgWidth && <img className="absolute w-[578] h-[10%] -top-[5%] -right-[15%]" src={imports.rectas_horizontales} alt="lines" />}
                <h1 className="main-headings">
                   {context.lang === "es" ? "SOBRE MÍ" : "ABOUT ME"}
                </h1>
@@ -374,8 +391,8 @@ export default function Home() {
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
          >
             <motion.img
-               className="w-[2em] h-[2em]" 
-               alt="Arrow" 
+               className="w-[2em] h-[2em]"
+               alt="Arrow"
                src={imports.arrowUp}
                variants={arrowVariant.img}
             />
