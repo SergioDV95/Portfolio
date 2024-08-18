@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useRef } from "react"
+import { useContext, useEffect, useState, useRef, Suspense } from "react"
 import ContextProps from "../assets/JS/createContext"
 import { motion } from "framer-motion"
 import Carousel from "../components/Carousel";
@@ -203,7 +203,7 @@ export default function Home() {
                   src={imports.puntos}
                   alt="puntos"
                />
-               <div className="absolute w-full h-full z-[2]" />
+               {/* <div className="absolute w-full h-full z-[2]" />
                <motion.img
                   initial={{
                      x: innerWidth / 3,
@@ -218,21 +218,40 @@ export default function Home() {
                   src={imports.laptop}
                   onContextMenu={e => e.preventDefault()}
                   alt="Laptop"
-               />
-               {/* <Canvas
-                  gl={{ antialias: true, failIfMajorPerformanceCaveat: true }}
-                  onCreated={({ gl }) => {
-                     if (!gl.getContext()) {
-                        console.error('WebGL not supported, falling back to CanvasRenderer');
-                        // Fallback logic here
-                     }
-                  }}
-               >
-                  <ambientLight />
-                  <pointLight position={[10, 10, 10]} />
-                  <LaptopModel />
-                  <OrbitControls />
-               </Canvas> */}
+               /> */}
+               <Suspense fallback={
+                  <motion.img
+                     initial={{
+                        x: innerWidth / 3,
+                     }}
+                     whileInView={{
+                        x: 0,
+                        transition: {
+                           type: "spring",
+                        },
+                        scale: 1.25,
+                     }}
+                     src={imports.laptop}
+                     onContextMenu={e => e.preventDefault()}
+                     alt="Laptop"
+                  />
+               }>
+                  <Canvas
+                     gl={{ antialias: true, failIfMajorPerformanceCaveat: true }}
+                     onCreated={({ gl }) => {
+                        if (!gl.getContext()) {
+                           console.error('WebGL not supported, falling back to CanvasRenderer');
+                           // Fallback logic here
+                        }
+                     }}
+                     camera={{ position: [0, 0, 15] }}
+                  >
+                     <ambientLight />
+                     <pointLight position={[10, 10, 10]} />
+                     <LaptopModel />
+                     <OrbitControls />
+                  </Canvas>
+               </Suspense>
             </div>
             <h4 className="text-center lg:hidden">
                {context.lang === "es" ?

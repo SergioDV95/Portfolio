@@ -34,6 +34,10 @@ import playIcon from "/SVG/play-solid.svg"
 import stopIcon from "/SVG/stop-solid.svg"
 import arrowUp from "/SVG/arrow-up-solid.svg"
 import granulated from "/SVG/Granulated.svg"
+import keyboard from "/textures/keyboard.png"
+import laptop_base from "/textures/laptop_base.png"
+import laptop_screen from "/textures/laptop_screen.png"
+import touchpad from "/textures/touchpad.png"
 
 export { 
    logo,
@@ -72,4 +76,8 @@ export {
    stopIcon,
    arrowUp,
    granulated,
+   keyboard,
+   laptop_base,
+   laptop_screen,
+   touchpad,
 };
