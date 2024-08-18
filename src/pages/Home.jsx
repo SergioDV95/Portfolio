@@ -50,6 +50,18 @@ export default function Home() {
 
    const arrowRef = useRef(null);
 
+   const [isWebGLSupported, setIsWebGLSupported] = useState(false);
+
+   useEffect(() => {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (gl && gl instanceof WebGLRenderingContext) {
+         setIsWebGLSupported(true);
+      } else {
+         setIsWebGLSupported(false);
+      }
+   }, []);
+
    useEffect(() => {
       let projectDescription;
       let aboutMe;
@@ -219,39 +231,37 @@ export default function Home() {
                   onContextMenu={e => e.preventDefault()}
                   alt="Laptop"
                /> */}
-               <Suspense fallback={
-                  <motion.img
-                     initial={{
-                        x: innerWidth / 3,
-                     }}
-                     whileInView={{
-                        x: 0,
-                        transition: {
-                           type: "spring",
-                        },
-                        scale: 1.25,
-                     }}
-                     src={imports.laptop}
-                     onContextMenu={e => e.preventDefault()}
-                     alt="Laptop"
-                  />
-               }>
-                  <Canvas
-                     gl={{ antialias: true, failIfMajorPerformanceCaveat: true }}
-                     onCreated={({ gl }) => {
-                        if (!gl.getContext()) {
-                           console.error('WebGL not supported, falling back to CanvasRenderer');
-                           // Fallback logic here
-                        }
-                     }}
-                     camera={{ position: [0, 0, 15] }}
-                  >
-                     <ambientLight />
-                     <pointLight position={[10, 10, 10]} />
-                     <LaptopModel />
-                     <OrbitControls />
-                  </Canvas>
-               </Suspense>
+               <div className="w-full h-full">
+                  {isWebGLSupported ? (
+                     <Suspense fallback={null}>
+                        <Canvas
+                           gl={{ antialias: true, failIfMajorPerformanceCaveat: true }}
+                           camera={{ position: [0, 0, 15] }}
+                        >
+                           <ambientLight />
+                           <pointLight position={[10, 10, 10]} />
+                           <LaptopModel />
+                           <OrbitControls />
+                        </Canvas>
+                     </Suspense>
+                  ) : (
+                     <motion.img
+                        initial={{
+                           x: innerWidth / 3,
+                        }}
+                        whileInView={{
+                           x: 0,
+                           transition: {
+                              type: "spring",
+                           },
+                           scale: 1.25,
+                        }}
+                        src={imports.laptop}
+                        onContextMenu={e => e.preventDefault()}
+                        alt="Laptop"
+                     />
+                  )}
+               </div>
             </div>
             <h4 className="text-center lg:hidden">
                {context.lang === "es" ?
