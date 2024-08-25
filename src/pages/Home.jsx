@@ -236,12 +236,13 @@ export default function Home() {
                      <Suspense fallback={null}>
                         <Canvas
                            gl={{ antialias: true, failIfMajorPerformanceCaveat: true }}
-                           camera={{ position: [0, 0, 15] }}
+                           camera={{ position: [0, 0, 12] }}
+                           shadows
                         >
-                           <ambientLight />
-                           <pointLight position={[10, 10, 10]} />
+                           <ambientLight intensity={1.5} />
+                           <directionalLight position={[0, 0, 5]} intensity={1} castShadow />
                            <LaptopModel />
-                           <OrbitControls />
+                           <OrbitControls enableZoom={true} />
                         </Canvas>
                      </Suspense>
                   ) : (

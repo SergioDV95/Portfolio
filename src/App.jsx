@@ -24,7 +24,25 @@ export default function App() {
 		lgWidth: window.innerWidth >= 1024,
 	});
 
+	const particlesLoaded = useCallback(container => {
+      console.log(container);
+   }, []);
+
 	useEffect(() => {
+		const handleLoad = (e) => {
+         if ((e.target instanceof Document && e.target.readyState == 'complete') || e.target instanceof Window) {
+            !context.load.complete && dispatch({ type: 'SET_LOAD', complete: true })
+         };
+      };
+		const handleResize = () => dispatch({ type: 'SET_WIDTH', matches: mediaQueryList.matches });
+		const mediaQueryList = window.matchMedia('(min-width: 1024px)');
+
+		window.addEventListener('load', handleLoad);
+      document.addEventListener('readystatechange ', handleLoad);
+		mediaQueryList.addEventListener("change", handleResize);
+
+		handleResize();
+
       initParticlesEngine(async (engine) => {
          // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
          // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
@@ -34,23 +52,10 @@ export default function App() {
          await loadSlim(engine);
          //await loadBasic(engine);
       }).then(() => {});
-   }, []);
 
-	const particlesLoaded = useCallback(container => {
-      console.log(container);
-   }, []);
-
-	useEffect(() => {
-		const handleLoad = () => !context.load.complete && dispatch({ type: 'SET_LOAD', complete: true }) ;
-		const handleResize = () => dispatch({ type: 'SET_WIDTH', matches: mediaQueryList.matches });
-		const mediaQueryList = window.matchMedia('(min-width: 1024px)');
-
-		window.addEventListener('load', handleLoad);
-		mediaQueryList.addEventListener("change", handleResize);
-
-		handleResize();
 		return () => {
 			window.removeEventListener('load', handleLoad);
+         document.removeEventListener('readystatechange ', handleLoad);
 			mediaQueryList.removeEventListener("change", handleResize);
 		};
 	}, []);
