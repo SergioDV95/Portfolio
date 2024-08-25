@@ -23,7 +23,7 @@ import { confettiOptions } from '../assets/JS/particles';
 */
 
 export default function Carousel({ skills, slideClasses, children, startIndex, endIndex, cancelButtons, playButton }) {
-   const { context, dispatch } = useContext(ContextProps);
+   const { context } = useContext(ContextProps);
 
    const [slider, setSlider] = useState({
       start: startIndex || 0,

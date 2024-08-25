@@ -8,6 +8,7 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import LaptopModel from "../components/LaptopModel";
 import * as imports from "../assets/JS/imports";
+import WebGL from 'three/addons/capabilities/WebGL.js';
 
 /**
  * Function: Home
@@ -53,9 +54,7 @@ export default function Home() {
    const [isWebGLSupported, setIsWebGLSupported] = useState(false);
 
    useEffect(() => {
-      const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-      if (gl && gl instanceof WebGLRenderingContext) {
+      if (WebGL.isWebGL2Available()) {
          setIsWebGLSupported(true);
       } else {
          setIsWebGLSupported(false);
@@ -121,7 +120,7 @@ export default function Home() {
    };
 
    return (
-      <section className="flex flex-col mt-[10%] lg:mt-[5%] px-[5%] z-[1] pb-[5%] max-lg:gap-[10vh] overflow-hidden">
+      <section className="flex flex-col mt-[10%] lg:mt-[5%] px-[5%] z-[1] pb-[5%] max-lg:gap-[10vh] overflow-x-hidden">
          <div id="intro" className="flex flex-col lg:grid lg:min-h-screen lg:grid-cols-[2fr_3fr] gap-[30px] max-lg:items-center">
             <div className="flex flex-col lg:pt-[15%] gap-[15px] lg:gap-[30px] max-lg:items-center">
                <div className="font-dela max-lg:text-center text-[1.4em] lg:text-[1.7em] xl:text-[2.1em] xl:whitespace-nowrap">
@@ -215,23 +214,7 @@ export default function Home() {
                   src={imports.puntos}
                   alt="puntos"
                />
-               {/* <div className="absolute w-full h-full z-[2]" />
-               <motion.img
-                  initial={{
-                     x: innerWidth / 3,
-                  }}
-                  whileInView={{
-                     x: 0,
-                     transition: {
-                        type: "spring",
-                     },
-                     scale: 1.25,
-                  }}
-                  src={imports.laptop}
-                  onContextMenu={e => e.preventDefault()}
-                  alt="Laptop"
-               /> */}
-               <div className="w-full h-full">
+               <div className="lg:w-[50vw] w-screen lg:h-full max-lg:h-[50vh]">
                   {isWebGLSupported ? (
                      <Suspense fallback={null}>
                         <Canvas
