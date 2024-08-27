@@ -31,7 +31,7 @@ export default function App() {
 	useEffect(() => {
 		const handleLoad = (e) => {
          if ((e.target instanceof Document && e.target.readyState == 'complete') || e.target instanceof Window) {
-            !context.load.complete && dispatch({ type: 'SET_LOAD', complete: true })
+            dispatch({ type: 'SET_LOAD', complete: true })
          };
       };
 		const handleResize = () => dispatch({ type: 'SET_WIDTH', matches: mediaQueryList.matches });
