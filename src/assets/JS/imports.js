@@ -38,6 +38,8 @@ import keyboard from "/textures/keyboard.png"
 import laptop_base from "/textures/laptop_base.png"
 import laptop_screen from "/textures/laptop_screen.png"
 import touchpad from "/textures/touchpad.png"
+import vite from "/SVG/vite.svg"
+import react from "/SVG/react.svg"
 
 export { 
    logo,
@@ -80,4 +82,6 @@ export {
    laptop_base,
    laptop_screen,
    touchpad,
+   vite,
+   react
 };
