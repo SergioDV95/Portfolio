@@ -1,13 +1,15 @@
+import { useContext } from "react"
 import { vite, react } from "../assets/JS/imports"
 import { motion } from "framer-motion"
+import ContextProps from "../assets/JS/createContext"
 
 
 export default function Footer() {
-
+   const { context } = useContext(ContextProps);
    return (
       <footer className="flex justify-center w-full pt-[15%]">
          <h5 className="flex flex-col items-center gap-5">
-            <span className="text-[12px]">POWERED BY</span>
+            <span className="text-[12px]">{context.lang === "es" ? "IMPULSADO POR" : "POWERED BY"}</span>
             <span className="flex items-center gap-5">
                <a href="https://vitejs.dev/" target="_blank" rel="noreferrer">
                   <motion.img 
