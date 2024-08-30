@@ -39,7 +39,7 @@
    }
 
    .main-headings {
-      @apply font-dela max-lg:text-center text-[2em] lg:text-[3em] text-[#012f4b] dark:text-[#FFBE00]
+      @apply font-dela max-lg:text-center max-[360px]:text-[1.5em] text-[2em] lg:text-[3em] text-[#012f4b] dark:text-[#FFBE00]
    }
 
    .card {
