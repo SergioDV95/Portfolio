@@ -29,16 +29,16 @@ export default function App() {
    }, []);
 
 	useEffect(() => {
-		const handleLoad = (e) => {
-         if ((e.target instanceof Document && e.target.readyState == 'complete') || e.target instanceof Window) {
-            dispatch({ type: 'SET_LOAD', complete: true })
-         };
-      };
+		const handleLoad = () => dispatch({ type: 'SET_LOAD', complete: true });
 		const handleResize = () => dispatch({ type: 'SET_WIDTH', matches: mediaQueryList.matches });
 		const mediaQueryList = window.matchMedia('(min-width: 1024px)');
 
-		window.addEventListener('load', handleLoad);
-      document.addEventListener('readystatechange ', handleLoad);
+		if (document.readyState === 'complete') {
+			handleLoad();
+		} else {
+			window.addEventListener('load', handleLoad);
+		}
+		
 		mediaQueryList.addEventListener("change", handleResize);
 
 		handleResize();
@@ -55,7 +55,6 @@ export default function App() {
 
 		return () => {
 			window.removeEventListener('load', handleLoad);
-         document.removeEventListener('readystatechange ', handleLoad);
 			mediaQueryList.removeEventListener("change", handleResize);
 		};
 	}, []);
