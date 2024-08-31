@@ -7,7 +7,7 @@ import { renderProjects } from "../assets/JS/functions";
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import LaptopModel from "../components/LaptopModel";
-import * as imports from "../assets/JS/imports";
+import * as imports from "../assets/JS/images";
 import WebGL from 'three/addons/capabilities/WebGL.js';
 import Footer from "../components/Footer";
 

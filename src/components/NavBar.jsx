@@ -2,7 +2,7 @@ import { useContext, useRef, useState, useEffect } from "react"
 import ContextProps from "../assets/JS/createContext"
 import { Squash as Hamburger } from 'hamburger-react'
 import { motion } from "framer-motion"
-import { ondas, sad, cool } from "../assets/JS/imports"
+import { ondas, sad, cool } from "../assets/JS/images"
 import useFollowPointer from "../assets/Hooks/useFollowPointer"
 
 export default function NavBar() {

@@ -7,7 +7,7 @@ import {
    laptop_base,
    laptop_screen,
    touchpad,
-} from "../assets/JS/imports";
+} from "../assets/JS/images";
 import { useSpring, animated } from "@react-spring/three";
 import * as THREE from "three";
 

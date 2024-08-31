@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { vite, react } from "../assets/JS/imports"
+import { vite, react } from "../assets/JS/images"
 import { motion } from "framer-motion"
 import ContextProps from "../assets/JS/createContext"
 
