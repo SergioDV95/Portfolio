@@ -8,6 +8,14 @@
       @apply h-full text-[17px] 2xl:text-[20px] 4xl:text-[24px] box-border font-open text-white
    }
 
+   ::selection {
+      all: unset;
+   }
+
+   p, span, h1, h2, h3, h4, h5, h6, label {
+      cursor: default;
+   }
+
    .light_mode {
       background-image: url('/png/fondo_light.png');
       background-size: cover;
