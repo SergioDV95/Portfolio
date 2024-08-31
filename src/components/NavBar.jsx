@@ -209,12 +209,12 @@ export default function NavBar() {
                      }}
                      onClick={e => {
                         if (!isActive) {
-                           document.body.style.setProperty("cursor", `url(${sad}) 16 16, auto`);
-                           e.currentTarget.style.setProperty("--cursor", `url(${cool}) 16 16, pointer`);
+                           /* document.body.style.setProperty("cursor", `url(${sad}) 16 16, auto`);
+                           e.currentTarget.style.setProperty("--cursor", `url(${cool}) 16 16, pointer`); */
                            setIsActive(true);
                         } else {
-                           document.body.style.setProperty("cursor", "auto");
-                           e.currentTarget.style.setProperty("--cursor", "help");
+                           /* document.body.style.setProperty("cursor", "auto");
+                           e.currentTarget.style.setProperty("--cursor", "help"); */
                            setIsActive(false);
                         }
                      }}

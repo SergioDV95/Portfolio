@@ -197,8 +197,7 @@
 @layer utilities {
 
    #logo-gradient {
-      --cursor: auto;
-      cursor: var(--cursor);
+      --cursor: pointer;
       -webkit-mask-image: url("/SVG/Logo(1).svg");
       mask-image: url("/SVG/Logo(1).svg");
       -webkit-mask-repeat: no-repeat;
