@@ -45,7 +45,7 @@ export default function Home() {
             name: "POLAR ECOMMERCE",
             description: "",
             technologies: ["Node.js", "Express.js", "React", "MongoDB"],
-            link: "https://sergio.lexpin.online/",
+            link: "",
          },
       ],
    });
