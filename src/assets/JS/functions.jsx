@@ -39,18 +39,20 @@ export const renderProjects = (projects, context) => {
                   })}
                </div>
                <p>{project.description}</p>
-               <div className="flex max-lg:justify-center mt-[10px]">
-                  <button className="buttonGlow dark:border-[#FFFFFF80]" type="button" >
-                     <a 
-                        className="px-[0.5em] py-[0.5em] text-[0.9em] w-full h-full"
-                        href={project.link}
-                        target="_blank"
-                        rel="external"
-                     >
-                     {context.lang === "es" ? "VISITAR WEB" : "VISIT WEBSITE"}
-                     </a>
-                  </button>
-               </div>
+               {project?.link && 
+                  <div className="flex max-lg:justify-center mt-[10px]">
+                     <button className="buttonGlow dark:border-[#FFFFFF80]" type="button" >
+                        <a 
+                           className="px-[0.5em] py-[0.5em] text-[0.9em] w-full h-full"
+                           href={project.link}
+                           target="_blank"
+                           rel="external"
+                        >
+                        {context.lang === "es" ? "VISITAR" : "VISIT"}
+                        </a>
+                     </button>
+                  </div>
+               }
             </div>
             {context.lgWidth && (index % 2 != 0) && <img className="scale-x-[1.2] scale-y-[1.3] lg:w-[50%]" src={project.image} alt={project.name} />}
          </motion.div>

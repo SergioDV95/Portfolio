@@ -2,7 +2,7 @@ import { useContext, useRef, useState, useEffect } from "react"
 import ContextProps from "../assets/JS/createContext"
 import { Squash as Hamburger } from 'hamburger-react'
 import { motion } from "framer-motion"
-import { ondas, sad, cool } from "../assets/JS/imports"
+import { ondas, sad, cool } from "../assets/JS/images"
 import useFollowPointer from "../assets/Hooks/useFollowPointer"
 
 export default function NavBar() {
@@ -209,12 +209,12 @@ export default function NavBar() {
                      }}
                      onClick={e => {
                         if (!isActive) {
-                           document.body.style.setProperty("cursor", `url(${sad}) 16 16, auto`);
-                           e.currentTarget.style.setProperty("--cursor", `url(${cool}) 16 16, pointer`);
+                           /* document.body.style.setProperty("cursor", `url(${sad}) 16 16, auto`);
+                           e.currentTarget.style.setProperty("--cursor", `url(${cool}) 16 16, pointer`); */
                            setIsActive(true);
                         } else {
-                           document.body.style.setProperty("cursor", "auto");
-                           e.currentTarget.style.setProperty("--cursor", "help");
+                           /* document.body.style.setProperty("cursor", "auto");
+                           e.currentTarget.style.setProperty("--cursor", "help"); */
                            setIsActive(false);
                         }
                      }}

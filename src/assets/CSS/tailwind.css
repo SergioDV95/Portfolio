@@ -8,6 +8,14 @@
       @apply h-full text-[17px] 2xl:text-[20px] 4xl:text-[24px] box-border font-open text-white
    }
 
+   ::selection {
+      all: unset;
+   }
+
+   p, span, h1, h2, h3, h4, h5, h6, label {
+      cursor: default;
+   }
+
    .light_mode {
       background-image: url('/png/fondo_light.png');
       background-size: cover;
@@ -39,7 +47,7 @@
    }
 
    .main-headings {
-      @apply font-dela max-lg:text-center text-[2em] lg:text-[3em] text-[#012f4b] dark:text-[#FFBE00]
+      @apply font-dela max-lg:text-center max-[360px]:text-[1.5em] text-[2em] lg:text-[3em] text-[#012f4b] dark:text-[#FFBE00]
    }
 
    .card {
@@ -189,8 +197,7 @@
 @layer utilities {
 
    #logo-gradient {
-      --cursor: auto;
-      cursor: var(--cursor);
+      --cursor: pointer;
       -webkit-mask-image: url("/SVG/Logo(1).svg");
       mask-image: url("/SVG/Logo(1).svg");
       -webkit-mask-repeat: no-repeat;

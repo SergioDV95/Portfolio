@@ -2,7 +2,7 @@ import { useState, useMemo, useContext, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { motion, AnimatePresence } from "framer-motion";
 import ContextProps from '../assets/JS/createContext';
-import * as imports from '../assets/JS/imports';
+import * as imports from '../assets/JS/images';
 import { scatterCoords, getColor } from '../assets/JS/functions';
 import Particles from "@tsparticles/react";
 import { confettiOptions } from '../assets/JS/particles';
@@ -23,7 +23,7 @@ import { confettiOptions } from '../assets/JS/particles';
 */
 
 export default function Carousel({ skills, slideClasses, children, startIndex, endIndex, cancelButtons, playButton }) {
-   const { context, dispatch } = useContext(ContextProps);
+   const { context } = useContext(ContextProps);
 
    const [slider, setSlider] = useState({
       start: startIndex || 0,
