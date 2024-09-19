@@ -24,18 +24,6 @@ export default function App() {
 		lgWidth: window.innerWidth >= 1024,
 	});
 
-	useEffect(() => {
-      initParticlesEngine(async (engine) => {
-         // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
-         // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-         // starting from v2 you can add only the features you need reducing the bundle size
-         //await loadAll(engine);
-         //await loadFull(engine);
-         await loadSlim(engine);
-         //await loadBasic(engine);
-      }).then(() => {});
-   }, []);
-
 	const particlesLoaded = useCallback(container => {
       console.log(container);
    }, []);
@@ -44,11 +32,22 @@ export default function App() {
 		const handleLoad = () => !context.load.complete && dispatch({ type: 'SET_LOAD', complete: true }) ;
 		const handleResize = () => dispatch({ type: 'SET_WIDTH', matches: mediaQueryList.matches });
 		const mediaQueryList = window.matchMedia('(min-width: 1024px)');
-
+		
 		window.addEventListener('load', handleLoad);
 		mediaQueryList.addEventListener("change", handleResize);
-
+		
 		handleResize();
+		
+		initParticlesEngine(async (engine) => {
+         // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
+         // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+         // starting from v2 you can add only the features you need reducing the bundle size
+         //await loadAll(engine);
+         //await loadFull(engine);
+         await loadSlim(engine);
+         //await loadBasic(engine);
+      }).then(() => {});
+
 		return () => {
 			window.removeEventListener('load', handleLoad);
 			mediaQueryList.removeEventListener("change", handleResize);
