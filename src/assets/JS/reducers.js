@@ -22,7 +22,7 @@ export function contextReducer(context, action) {
             return { ...context, load: load };
          }
          default: {
-            throw TypeError(`Unknown action: ${action.type}`);
+            throw new Error(`Unknown action: ${action.type}`);
          }
       }
    } catch (error) {
